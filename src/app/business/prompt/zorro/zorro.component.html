@@ -1,0 +1,200 @@
+<div class="panel">
+  <div class="panel-body">
+    <div class="profile-desk">
+      <h1>Zorro prompt</h1>
+      <span class="designation">Zorro 提示及弹框</span>
+      <p class="bio-graph-heading">
+        <code>Zorro </code>提示及弹框
+      </p>
+    </div>
+  </div>
+</div>
+
+<section class="panel">
+  <div class="panel-body bio-graph-info">
+    <h1>
+      NG-ZORRO ...
+    </h1>
+    <div class="row">
+      <div class="bio-row">
+        <p><span>名称</span>
+          : NG-ZORRO
+        </p>
+      </div>
+      <div class="bio-row">
+        <p><span>官网</span>
+          : <code>https://ng.ant.design/</code>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="panel with-nav-tabs panel-primary panel-square panel-no-border">
+        <div>
+          <tabset>
+            <tab>
+              <ng-template tabHeading>
+                <i class="fa fa-home">NG-ZORRO</i>
+              </ng-template>
+              <div class="panel-body">
+                <div class="tab-content">
+                  <div class="panel-body no-padding" style="background-color: #fbfffb">
+                    <ul style="list-style-type: disc"><h4>NG ZORRO 致力于提供给 Angular 开发者愉悦的开发体验。</h4>
+                      <li>这里是 <code>Ant Design</code> 的 <code>Angular^5.0.0</code> 实现，开发和服务于企业级后台产品。</li>
+                      <li>如果要您使用的是 <code>Angular 4.x</code> 版本，请使用 <code>0.5.x</code> 版本的 <code>NG-ZORRO</code></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </tab>
+            <tab>
+              <ng-template tabHeading>
+                <i class="fa fa-bars">预备</i>
+              </ng-template>
+              <div class="tab-content">
+                <div class="panel">
+                  <div class="panel-body">
+                    <ul style="list-style-type: disc"><h4>BootStrap Modal:</h4>
+                      <p>使用</p>
+                      <li>1. 在所需加载模态框组价的<code>Module</code>中，导入<code>NgZorroAntdModule</code></li>
+                      <li>
+                        <div class="well">
+                          import &#123;NgZorroAntdModule&#125; from 'ng-zorro-antd';<br/>
+                          import &#123;NZ_NOTIFICATION_CONFIG&#125; from 'ng-zorro-antd';<br/
+                          ...<br/>
+                          imports: [<br/>
+                          ...<br/>
+                          NgZorroAntdModule.forRoot(),<br/>
+                          ...<br/>
+                          ],<br/>
+                          providers: [<br/>
+                          &#123; provide: NZ_NOTIFICATION_CONFIG, useValue: &#123; nzTop: '80px' &#125; &#125;<br/>
+                          ]
+                        </div>
+                      </li>
+                      <li>
+                        2. 在<code>component.ts</code>注入<code>NzNotificationService</code>
+                      </li>
+                      <li>
+                        <div class="well">
+                          constructor(private _notification: NzNotificationService) &#123;<br/>
+                          &#125;
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </tab>
+          </tabset>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="panel with-nav-tabs panel-primary panel-square panel-no-border">
+        <div>
+          <tabset>
+            <tab>
+              <ng-template tabHeading>
+                <i class="fa fa-home">提示</i>
+              </ng-template>
+              <div class="panel-body">
+                <div class="tab-content">
+                  <div class="panel-body no-padding" style="background-color: #fbfffb">
+                    <button nz-button (click)="createNotification('success')">成 功</button>
+                    <button nz-button (click)="createNotification('info')">消 息</button>
+                    <button nz-button (click)="createNotification('warning')">警 告</button>
+                    <button nz-button (click)="createNotification('error')">错 误</button>
+                  </div>
+                </div>
+              </div>
+            </tab>
+            <tab>
+              <ng-template tabHeading>
+                <i class="fa fa-bars">预备</i>
+              </ng-template>
+              <div class="tab-content">
+                <div class="panel">
+                  <div class="panel-body">
+                    <ul style="list-style-type: disc"><h4>BootStrap Modal:</h4>
+                      <li>4. 使用<code>NzNotificationService</code>打开交互窗口</li>
+                      <li>
+                        <div class="well">
+                          this._notification.create(type,<br/>
+                          '这是标题',<br/>
+                          '这是提示框的文案这是提示框示框的文案这是提示是提示框的文案这是提示框的文案'<br/>
+                          );
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </tab>
+          </tabset>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="panel with-nav-tabs panel-primary panel-square panel-no-border">
+        <div>
+          <tabset>
+            <tab>
+              <ng-template tabHeading>
+                <i class="fa fa-home">对话框</i>
+              </ng-template>
+              <div class="panel-body">
+                <div class="tab-content">
+                  <div class="panel-body no-padding row" style="background-color: #fbfffb">
+                    <div class="col-lg-4"><button nz-button [nzType]="'primary'" (click)="showModal()">
+                      <span>显示对话框</span>
+                    </button>
+                      <nz-modal [nzVisible]="isVisible" [nzTitle]="'第一个 Modal'" [nzContent]="modalContent" (nzOnCancel)="handleCancel($event)" (nzOnOk)="handleOk($event)">
+                        <ng-template #modalContent>
+                          <p>对话框的内容</p>
+                          <p>对话框的内容</p>
+                          <p>对话框的内容</p>
+                        </ng-template>
+                      </nz-modal></div>
+
+                    <div class="col-lg-4">
+                      <button nz-button [nzType]="'primary'" (click)="showSyncModal()">
+                        <span>显示异步关闭</span>
+                      </button>
+                      <nz-modal
+                        [nzVisible]="isSyncVisible"
+                        [nzTitle]="'显示异步关闭'"
+                        [nzContent]="modalContent"
+                        (nzOnCancel)="handleCancel($event)"
+                        (nzOnOk)="handleOkAsync($event)"
+                        [nzConfirmLoading]="isConfirmLoading">
+                        <ng-template #modalContent>
+                          <p>对话框的内容</p>
+                        </ng-template>
+                      </nz-modal>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </tab>
+          </tabset>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

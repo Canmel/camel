@@ -19,9 +19,27 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.css"
+        "styles.css",
+        "../node_modules/_bootstrap@3.3.7@bootstrap/dist/css/bootstrap.css",
+        "../src/assets/css/bootstrap-reset.css",
+        "../src/assets/css/font-awesome.min.css",
+        "../src/assets/css/style.css",
+        "../src/assets/css/morris.css",
+        "../src/assets/css/clndr.css",
+        "../src/assets/css/style-responsive.css"
       ],
-      "scripts": [],
+      "scripts": [
+        "../node_modules/jquery/dist/jquery.js",
+        "../node_modules/_bootstrap@3.3.7@bootstrap/dist/js/bootstrap.js",
+        "../src/assets/js/esl.js",
+        "../src/assets/js/jquery.knob.js",
+        "../src/assets/js/toastr.min.js",
+        "../src/assets/js/scripts.js",
+        "../src/assets/js/echarts.js",
+        "../src/assets/js/initEcharts.js",
+        "../src/assets/js/map.js",
+        "../src/assets/js/skel.min.js"
+      ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",

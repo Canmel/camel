@@ -1,0 +1,198 @@
+<div class="panel">
+  <div class="panel-body">
+    <div class="profile-desk">
+      <h1>Echarts</h1>
+      <span class="designation">Echart图表</span>
+      <p class="bio-graph-heading">
+        ECharts is a free, powerful charting and visualization library offering an easy way of adding intuitive, interactive, and highly customizable charts to your commercial products. It is written in pure JavaScript and based on zrender, which is a whole new lightweight canvas library.
+      </p>
+    </div>
+  </div>
+</div>
+
+<section class="panel">
+  <div class="panel-body bio-graph-info">
+    <h1>
+      Echarts Info ...
+    </h1>
+    <div class="row">
+      <div class="bio-row">
+        <p><span>名称</span>
+          : Echarts
+        </p>
+      </div>
+      <div class="bio-row">
+        <p><span>官网</span>
+          : <code>http://echarts.baidu.com/</code>
+        </p>
+      </div>
+      <div class="bio-row">
+        <p><span>开源</span>
+          : 是
+        </p>
+      </div>
+      <div class="bio-row">
+        <p><span>收费</span>
+          : 否
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="panel with-nav-tabs panel-primary panel-square panel-no-border">
+        <div>
+          <tabset>
+            <tab>
+              <ng-template tabHeading>
+                <i class="fa fa-home">SVG地图</i>
+              </ng-template>
+              <div class="panel-body">
+                <div class="tab-content">
+                  <div class="svg-map-area">
+                    <app-svg-map
+                      [option]="option"
+                      [divClass]="divClass"
+                      [svg]="svgRoute"
+                      [selector]="echartMapArea"
+                      (clickCallBack)="mapClickCallBack($event)"></app-svg-map>
+                  </div>
+                </div>
+              </div>
+            </tab>
+            <tab>
+              <ng-template tabHeading>
+                <i class="fa fa-bars">使用</i>
+              </ng-template>
+              <div class="tab-content">
+                <div class="panel">
+                  <div class="panel-body">
+                    <ul style="list-style-type: disc">Echarts SVG地图扩展:
+                      <p>使用</p>
+                      <li>1. 在要使用的模块中导入模块<code>SvgMapModule</code></li>
+                      <li>
+                        <div class="well">
+                          @NgModule(&#123;<br/>
+                          imports: [<br/>
+                          ...<br/>
+                          SvgMapModule<br/>
+                          ],<br/>
+                          declarations: [<br/>
+                          EchartsComponent<br/>
+                          ]<br/>
+                          &#125;)
+                        </div>
+                      </li>
+                      <li>2. 在要创建svgMap的<code>Component.ts</code>中创建所需的属性和回调</li>
+                      <li>
+                        <div class="well">
+                          public svgRoute = 'assets/svg/ningbo.svg';<br />
+                          public echartMapArea = 'echarts-render-area';<br />
+                          public divClass = 'text-ee';<br />
+                          public option;<br />
+                        </div>
+                      </li>
+                      <li>3. 在Init方法或构造器中通过网路请求或其他方式给<code>otion</code>赋值</li>
+                      <li>
+                        <div class="well">
+                          ngOnInit() &#123; <br />
+                          this.option = &#123;<br />
+                          backgroundColor: '#eee',<br />
+                          height: '100px',<br />
+                          ...<br />
+                          &#125;<br />
+                          &#125;<br />
+                        </div>
+                      </li>
+                      <li>3. 在需要加载<code>MAP</code>的html模板，添加:</li>
+                      <li>
+                        <div class="well">
+                          &#60;app-svg-map<br />
+                            [option]="option"<br />
+                            [divClass]="divClass"<br />
+                            [svg]="svgRoute"<br />
+                            [selector]="echartMapArea"<br />
+                            (clickCallBack)="mapClickCallBack($event)"&#62;&#60;/app-svg-map&#62;
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </tab>
+            <tab>
+              <ng-template tabHeading>
+                <i class="fa fa-wrench">组件构建</i>
+              </ng-template>
+              <div class="tab-content">
+                <div class="panel">
+                  <div class="panel-body">
+                  <ul style="list-style-type: disc" class="info-panel-content">Echarts SVG地图扩展:
+                    <p>组件构建</p>
+                    <li>
+                      1. 导入文件<code>assets/js/esl.js</code><code>assets/js/echarts.js</code><code>assets/svg/ningbo.svg</code><br />
+                    </li>
+                    <li>
+                      2. 创建<code>assets/js/scripts.js</code>文件，并声明js全局变量
+                    </li>
+                    <li>
+                      3. 创建<code>assets/js/scripts.d.ts</code>文件，声明init对象
+                    </li>
+                    <li>
+                      4. 创建组件 <code>svg-map</code> 组件
+                    </li>
+                    <li>
+                      <div class="well"><p>ng g c svg-map</p></div>
+                    </li>
+                    <li>
+                      4. 创建组件 <code>svg-map</code> module,在<code>module</code>中<code>declarations</code> 并导出 <code>SvgMapComponent</code>
+                    </li>
+                    <li>
+                      <div class="well">
+                        @NgModule(&#123;<br />
+                        imports: [<br />
+                        CommonModule,<br />
+                        FormsModule<br />
+                        ],<br />
+                        declarations: [<br />
+                        SvgMapComponent<br />
+                        ],<br />
+                        exports: [<br />
+                        SvgMapComponent<br />
+                        ]<br />
+                        &#125;)<br />
+                      </div>
+                    </li>
+                    <li>
+                      <h3><b>## 这是angular创建通用组件的方法</b></h3>
+                    </li>
+                    <li>
+                      5. 在需要使用的模块中直接导入上面的模块就可以使用了
+                    </li>
+                    <li>
+                      <div class="well">
+                        @NgModule(&#123;<br/>
+                        imports: [<br/>
+                        ...<br/>
+                        SvgMapModule<br/>
+                        ],<br/>
+                        declarations: [<br/>
+                        EchartsComponent<br/>
+                        ]<br/>
+                        &#125;)
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                </div>
+              </div>
+            </tab>
+          </tabset>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

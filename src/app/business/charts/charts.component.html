@@ -1,0 +1,34 @@
+<div class="row">
+  <aside class="profile-nav col-lg-3">
+    <section class="panel">
+      <div class="user-heading round">
+        <a href="#">
+          <i class="fa fa-bar-chart-o fa-3x" style="color: #ffffff"></i>
+        </a>
+        <h1>
+          {{title}}
+        </h1>
+        <p>
+          {{subTitle}}
+        </p>
+      </div>
+      <ul class="nav nav-pills nav-stacked">
+        <li>
+          <a routerLinkActive="active" routerLink="/app/charts/funsionchart" (click)="changeTitle('FunsionCharts', '柱状图|符合图')">
+            <img src="../../../assets/images/business/funsionchart.png" style="max-height: 30px; max-width: 65px" alt="">
+            Funsioncharts
+          </a>
+        </li>
+        <li>
+          <a routerLinkActive="active" routerLink="/app/charts/echarts" (click)="changeTitle('Echarts', '地图svg拓展')">
+            <img src="../../../assets/images/business/echarts.png" style="max-height: 30px; min-width: 63px; max-width: 65px" alt="">
+            Echarts
+          </a>
+        </li>
+      </ul>
+    </section>
+  </aside>
+  <aside class="profile-info col-lg-9">
+    <router-outlet></router-outlet>
+  </aside>
+</div>

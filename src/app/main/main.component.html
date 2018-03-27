@@ -1,0 +1,46 @@
+<section id="container">
+  <header class="header white-bg">
+    <div class="sidebar-toggle-box">
+      <div data-placement="right" class="fa fa-bars tooltips">
+      </div>
+    </div>
+    <a href="index.html" class="logo">
+      Olive<span>Admin</span>
+    </a>
+    <ul class="nav pull-right top-menu" style="margin-top: 15px;">
+      <li class="dropdown">
+        <a data-toggle="dropdown" class="dropdown-toggle" href="#" aria-expanded="true">
+          <img alt="" src="../../assets/images/avatar-mini.jpg">
+          <span class="username">{{currentUser.name}}</span>
+          <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu extended logout">
+          <li><a routerLinkActive="active" routerLink="/app/charts"><i class=" fa fa-suitcase"></i>图表</a></li>
+          <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
+          <li><a routerLinkActive="active" routerLink="/login"><i class=" fa fa-key"></i>注销</a></li>
+        </ul>
+      </li>
+    </ul>
+
+  </header>
+  <aside>
+    <app-left></app-left>
+  </aside>
+  <section id="main-content">
+    <section class="wrapper">
+      <router-outlet></router-outlet>
+    </section>
+  </section>
+  <footer class="site-footer" style="position: fixed;width: -webkit-fill-available; bottom: 0;">
+    <div class="text-center">
+      2018 &copy; Canmel Admin by
+      <a href="" target="_blank">
+        Meedesidy
+      </a>
+      <a href="#" class="go-top">
+        <i class="fa fa-angle-up">
+        </i>
+      </a>
+    </div>
+  </footer>
+</section>

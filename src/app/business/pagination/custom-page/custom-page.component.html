@@ -1,0 +1,94 @@
+<div class="panel">
+  <div class="panel-body">
+    <div class="profile-desk">
+      <h1>
+        Custom Pagination
+      </h1>
+      <span class="designation">
+                      自定义分页
+                    </span>
+      <p class="bio-graph-heading">
+        自定义分页组件
+      </p>
+    </div>
+  </div>
+</div>
+
+<section class="panel">
+  <div class="panel-body bio-graph-info">
+    <h1>
+      自定义分页组件
+    </h1>
+    <div class="row">
+      <div class="bio-row">
+        <p><span>名称</span>
+          : 自定义分页组件
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="panel with-nav-tabs panel-primary panel-square panel-no-border">
+        <div>
+          <tabset>
+            <tab>
+              <ng-template tabHeading>
+                <i class="fa fa-home">自定义分页组件</i>
+              </ng-template>
+              <div class="panel-body">
+                <div class="tab-content">
+                  <app-pagination [pageSize]="paginationParams.pageSize" [totalNum]="paginationParams.totalCount"
+                                  [curPage]="paginationParams.curPage" [totalPage]="paginationParams.totalPage"
+                                  (changeCurPage)="getPageData($event)"></app-pagination>
+                </div>
+              </div>
+            </tab>
+            <tab>
+              <ng-template tabHeading>
+                <i class="fa fa-bars">使用</i>
+              </ng-template>
+              <div class="tab-content">
+                <div class="panel">
+                  <div class="panel-body">
+                    <ul><h4>自定义分页插件</h4>
+
+                      <li>1. 在需要分页组件的模块<code>module.ts</code>文件中，导入<code>PaginationModule</code></li>
+                      <li>2. 在component中定义<code>paginationParams</code></li>
+                      <li>
+                        <div class="well">
+                          paginationParams = &#123;<br/>
+                          totalCount: 66,<br/>
+                          pageSize: 10,<br/>
+                          totalPage: 7,<br/>
+                          curPage: 1,<br/>
+                          totalCount: 69<br/>
+                          &#125;;
+                        </div>
+                      </li>
+                      <li>3. 在template中使用<code>app-pagination</code>标签，渲染分页组件</li>
+                      <li>
+                        <div class="well">
+                          &#60;app-pagination<br/>
+                          &nbsp;&nbsp;[pageSize]="paginationParams.pageSize"<br/>
+                          &nbsp;&nbsp;[totalNum]="paginationParams.totalCount"<br/>
+                          &nbsp;&nbsp;[curPage]="paginationParams.curPage"<br/>
+                          &nbsp;&nbsp;[totalPage]="paginationParams.totalPage"<br/>
+                          &nbsp;&nbsp;(changeCurPage)="getPageData($event)"&#62;
+                          &#60;/app-pagination&#62;
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </tab>
+          </tabset>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

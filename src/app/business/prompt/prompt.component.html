@@ -1,0 +1,34 @@
+<div class="row">
+  <aside class="profile-nav col-lg-3">
+    <section class="panel">
+      <div class="user-heading round">
+        <a href="#">
+          <i class="fa fa-bar-chart-o fa-3x" style="color: #ffffff"></i>
+        </a>
+        <h1>
+          {{title}}
+        </h1>
+        <p>
+          {{subTitle}}
+        </p>
+      </div>
+      <ul class="nav nav-pills nav-stacked">
+        <li>
+          <a routerLinkActive="active" routerLink="/app/prompt/modal" (click)="changeTitle('BootStrap Modal', '模态框')">
+            <img src="../../../assets/images/business/bt.ico" style="max-height: 30px; min-width: 63px; max-width: 65px" alt="">
+            Modal（模态框）
+          </a>
+        </li>
+        <li>
+          <a routerLinkActive="active" routerLink="/app/prompt/zorro" (click)="changeTitle('Zorro', 'zorro提示')">
+            <img src="../../../assets/images/business/ant.svg" style="max-height: 30px; min-width: 63px; max-width: 65px" alt="">
+            Zerro
+          </a>
+        </li>
+      </ul>
+    </section>
+  </aside>
+  <aside class="profile-info col-lg-9">
+    <router-outlet></router-outlet>
+  </aside>
+</div>
