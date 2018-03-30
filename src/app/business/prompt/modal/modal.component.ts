@@ -20,7 +20,7 @@ export class ModalComponent implements OnInit {
   }
 
   openModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
+    this.modalRef = this.modalService.show(template, {class: 'modal-md'});
   }
 
   openModalWithTemplate(template: TemplateRef<any>) {
@@ -35,5 +35,26 @@ export class ModalComponent implements OnInit {
   decline(): void {
     this.comfirm_message = 'Declined!';
     this.modalRef.hide();
+  }
+
+  openModalWithClasslg(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(
+      template,
+      Object.assign({}, { class: 'gray modal-lg' })
+    );
+  }
+
+  openModalWithClasssm(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(
+      template,
+      Object.assign({}, { class: 'gray modal-sm' })
+    );
+  }
+
+  openModalWithClassmd(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(
+      template,
+      Object.assign({}, { class: 'gray modal-md' })
+    );
   }
 }

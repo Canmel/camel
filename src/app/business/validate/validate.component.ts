@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-
+import * as $ from 'jquery';
 @Component({
   selector: 'app-validate',
   templateUrl: './validate.component.html',
@@ -14,7 +14,7 @@ export class ValidateComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    $('body').css('background-color', '#e5e6e6');
   }
 
   changeTitle(title, sub) {

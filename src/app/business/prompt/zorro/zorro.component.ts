@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {NzNotificationService} from 'ng-zorro-antd';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-zorro',
@@ -53,6 +54,7 @@ export class ZorroComponent implements OnInit {
   }
 
   ngOnInit() {
+    $('body').css('background-color', '#e5e6e6');
   }
 
 }

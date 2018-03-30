@@ -93,7 +93,16 @@
               <div class="panel-body">
                 <div class="tab-content">
                   <div class="panel-body no-padding" style="background-color: #fbfffb">
-                    ...
+                    <button type="button" class="btn btn-primary" (click)="openModal(template)">Confirm</button>
+                    <br><br>
+                    <pre>{{comfirm_message}}</pre>
+                    <ng-template #template>
+                      <div class="modal-body text-center">
+                        <p>Do you want to confirm?</p>
+                        <button type="button" class="btn btn-default" (click)="confirm()">Yes</button>
+                        <button type="button" class="btn btn-primary" (click)="decline()">No</button>
+                      </div>
+                    </ng-template>
                   </div>
                 </div>
               </div>
@@ -122,6 +131,109 @@
                           this.modalRef = this.modalService.show(template, &#123;class: 'modal-sm'&#125;);<br/>
                           &#125;<br/>
                           ...
+                        </div>
+                      </li>
+                      <li>4. <code>ng-template</code>中定义<code>button</code>并设置点击事件，获取点击的事件，进行业务判断</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </tab>
+          </tabset>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="panel with-nav-tabs panel-primary panel-square panel-no-border">
+        <div>
+          <tabset>
+            <tab>
+              <ng-template tabHeading>
+                <i class="fa fa-home">模态框样式</i>
+              </ng-template>
+              <div class="panel-body">
+                <div class="tab-content">
+                  <div class="panel-body no-padding row" style="background-color: #fbfffb">
+
+                    <div class="col-md-4">
+                      <button type="button" class="btn btn-primary" (click)="openModalWithClasslg(template_lg)">
+                        模态框（lg）
+                      </button>
+                      <br>
+
+                      <ng-template #template_lg>
+                        <div class="modal-header">
+                          <h4 class="modal-title pull-left">Modal</h4>
+                          <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          Just a modal with a bunch of words inside, nothing serious.
+                        </div>
+                      </ng-template>
+                    </div>
+                    <div class="col-md-4">
+                      <button type="button" class="btn btn-primary" (click)="openModalWithClassmd(template_md)">
+                        模态框（md）
+                      </button>
+                      <br>
+
+                      <ng-template #template_md>
+                        <div class="modal-header">
+                          <h4 class="modal-title pull-left">Modal</h4>
+                          <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          Just a modal with a bunch of words inside, nothing serious.
+                        </div>
+                      </ng-template>
+                    </div>
+                    <div class="col-md-4">
+                      <button type="button" class="btn btn-primary" (click)="openModalWithClasssm(template_sm)">
+                        模态框（sm）
+                      </button>
+                      <br>
+                      <ng-template #template_sm>
+                        <div class="modal-header">
+                          <h4 class="modal-title pull-left">Modal</h4>
+                          <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          Just a modal with a bunch of words inside, nothing serious.
+                        </div>
+                      </ng-template>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </tab>
+            <tab>
+              <ng-template tabHeading>
+                <i class="fa fa-bars">使用</i>
+              </ng-template>
+              <div class="tab-content">
+                <div class="panel">
+                  <div class="panel-body">
+                    <ul style="list-style-type: disc"><h4>BootStrap Confirm</h4>:
+                      <p>使用</p>
+                      <li>1. 在调用的时候加上样式即可</li>
+                      <li>
+                        <div class="well">
+                          this.modalRef = this.modalService.show(<br/>
+                          template,<br/>
+                          Object.assign(&#123;&#125;, &#123; class: 'gray modal-md' &#125;)<br/>
+                          );
                         </div>
                       </li>
                     </ul>
