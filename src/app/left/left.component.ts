@@ -15,15 +15,15 @@ export class LeftComponent implements OnInit {
   }
 
   showOrHideMenu($event): void {
-    const alist = $('.sidebar-menu').children('a');
-    if ($($event.target).hasClass('active')) {
-      $('.sub').slideUp();
-      $($event.target).removeClass('active');
-      return;
+    $($event.target).parents('.sub-menu').siblings().removeClass('active');
+    if ($($event.target).parents('.sub-menu').hasClass('active')) {
+      $($event.target).parents('.sub-menu').find('.sub').slideUp();
+      $($event.target).parents('.sub-menu').removeClass('active');
+    } else {
+      $($event.target).parents('.sub-menu').siblings().find('ul').slideUp();
+      $($event.target).parents('.sub-menu').find('.sub').slideDown();
+      $($event.target).parents('.sub-menu').addClass('active');
     }
-    $('.sub').slideDown();
-    $('.sub-menu').addClass('active');
-    $($event.target).addClass('active');
   }
 
 }

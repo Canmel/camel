@@ -1620,3 +1620,7 @@ footer.page-footer {
     font-size: 0.8rem;
   }
 }
+
+.panel-font {
+  font-weight: 900;
+}

@@ -1,12 +1,17 @@
 import {host} from './HOST';
 
 export const Urls = {
-  GetBillTypes: host + `return/thumbnail`,
-  PROJECTS: host + `project`,
-  USERS: host + `users.json`,
-  USER: host + `users`,
+  GetBillTypes: `/return/thumbnail`,
+  PROJECTS: `/project`,
+  USERS: {
+    ME: `/api/users/me`,
+    PAGEQUERY: `/api/users`,
+    CURRENT: `/api/users/current`,
+    SAVE: `/api/users`
+  },
+  USER: `/users`,
   SESSION: {
-    LOGIN: host + `auth/login`,
-    QRCODE: host + `code/image`
+    LOGIN: `/auth/login`,
+    QRCODE: `/code/image`
   }
 };

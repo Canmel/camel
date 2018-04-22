@@ -20,5 +20,18 @@
         <li><a routerLinkActive="active" routerLink="/app/validate">表单&nbsp;&nbsp;验证</a></li>
       </ul>
     </li>
+
+    <li class="sub-menu">
+      <a href="javascript:;" (click)="showOrHideMenu($event)">
+        <i class="fa fa-cog"></i>
+        <span>系统管理</span>
+      </a>
+      <ul class="sub">
+        <li><a routerLinkActive="active" routerLink="/app/users">用户管理</a></li>
+        <li><a routerLinkActive="active" routerLink="/app/tables/easy">角色管理</a></li>
+        <li><a routerLinkActive="active" routerLink="/app/pagination/custom">菜单管理</a></li>
+        <li><a routerLinkActive="active" routerLink="/app/prompt/modal">图标</a></li>
+      </ul>
+    </li>
   </ul>
 </div>

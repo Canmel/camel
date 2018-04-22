@@ -8,7 +8,7 @@ Project:	OLIVE ADMIN
 Version:	1.1
 Last change:	[INITIAL RELEASE]
 Assigned to:	Olive Enterprise (Surat,IN)
-Primary use:	Admin Side Used Template. 
+Primary use:	Admin Side Used Template.
 -------------------------------------------------------------------*/
 
 
@@ -33,7 +33,7 @@ a:hover {
     border-color: #eff2f7;
     font-size: 16px;
     font-weight: 300;
-	border-top: 2px solid #2a8ba7;
+	border-top: 1px solid #2a8ba7;
 }
 
 .panel-title {

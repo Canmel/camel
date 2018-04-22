@@ -2,8 +2,11 @@ export class User {
   id: number;
   username: string;
   email: string;
-  tel: string;
+  mobile: string;
   status: number;
+  description: string;
+  created_at: Date;
+  updated_at: Date;
 }
 
 export const USERVALIDRULE: Object = {

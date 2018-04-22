@@ -5,7 +5,8 @@ export const Properties = {
       AUTHORITIES: `AUTHORITIES`,
       AUTHENTICATED: `AUTHENTICATED`,
       PRINCIPAL: `PRINCIPAL`,
-      NAME: `NAME`
+      NAME: `NAME`,
+      NICKNAME: `NICKNAME`
     }
   }
 };

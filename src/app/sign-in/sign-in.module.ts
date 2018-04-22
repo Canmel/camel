@@ -6,6 +6,8 @@ import {ImageCodeComponent} from '../public/image-code/image-code.component';
 import {HttpClientModule} from '@angular/common/http';
 import {SignInRoutingModule} from './sign-in-routing.module';
 import {SignInComponent} from './sign-in.component';
+import {HttpService} from '../public/http.service';
+import {Https} from '../public/https.service';
 
 @NgModule({
   imports: [
@@ -20,7 +22,7 @@ import {SignInComponent} from './sign-in.component';
     ImageCodeComponent
   ],
   exports: [],
-  providers: []
+  providers: [Https]
 })
 export class SignInModule {
 }

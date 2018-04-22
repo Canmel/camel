@@ -1,6 +1,7 @@
 import {NgModule, OnInit} from '@angular/core';
 import {RouterModule, Routes, Router} from '@angular/router';
 import {MainComponent} from './main.component';
+import {Https} from '../public/https.service';
 
 /**
  * 主体路由
@@ -31,6 +32,9 @@ const mainRoutes: Routes =
       }, {
         path: 'validate',
         loadChildren: 'app/business/validate/validate.module#ValidateModule'
+      }, {
+        path: 'users',
+        loadChildren: 'app/business/users/users.module#UsersModule'
       }
     ]
   }];
@@ -41,7 +45,8 @@ const mainRoutes: Routes =
   ],
   exports: [
     RouterModule
-  ]
+  ],
+  providers: [Https]
 })
 export class MainRoutingModule {
 }

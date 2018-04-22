@@ -1,0 +1,121 @@
+<section>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="panel with-nav-tabs panel-primary panel-square panel-no-border">
+        <div>
+          <form nz-form [formGroup]="validateForm" class="login-form form-center" (ngSubmit)="_submitForm()" id="addUserForm">
+            <div nz-form-item>
+              <div nz-form-control>
+                <nz-input formControlName="userName" [(ngModel)]="formData.username" [nzPlaceHolder]="'用户名'" [nzSize]="'large'">
+                  <ng-template #prefix>
+                    <i class="anticon anticon-user"></i>
+                  </ng-template>
+                </nz-input>
+                <div nz-form-explain
+                     *ngIf="validateForm.controls.userName.dirty&&validateForm.controls.userName.hasError('required')">
+                  用户名不能为空!
+                </div>
+                <div nz-form-explain
+                     *ngIf="validateForm.controls.userName.hasError('minlength')||validateForm.controls.userName.hasError('maxlength')">
+                  用户名长度在6-12个字符之间!
+                </div>
+              </div>
+            </div>
+            <div nz-form-item>
+              <div nz-form-control>
+                <nz-input formControlName="password" [(ngModel)]="formData.password" [nzType]="'password'" [nzPlaceHolder]="'密码'"
+                          [nzSize]="'large'">
+                  <ng-template #prefix>
+                    <i class="anticon anticon-lock"></i>
+                  </ng-template>
+                </nz-input>
+                <div nz-form-explain
+                     *ngIf="validateForm.controls.password.dirty&&validateForm.controls.password.hasError('required')">
+                  密码不能为空!
+                </div>
+                <div nz-form-explain
+                     *ngIf="validateForm.controls.password.hasError('minlength')||validateForm.controls.password.hasError('maxlength')">
+                  密码长度在6-12个字符之间！
+                </div>
+              </div>
+            </div>
+            <div nz-form-item>
+              <div nz-form-control>
+                <nz-input formControlName="email" [(ngModel)]="formData.email" [nzPlaceHolder]="'邮箱'" [nzSize]="'large'">
+                  <ng-template #prefix>
+                    <i class="anticon anticon-mail"></i>
+                  </ng-template>
+                </nz-input>
+                <div nz-form-explain
+                     *ngIf="validateForm.controls.email.dirty&&validateForm.controls.email.hasError('required')">
+                  邮箱不能为空!
+                </div>
+                <div nz-form-explain
+                     *ngIf="validateForm.controls.email.dirty&&!validateForm.controls.email.hasError('required')&&validateForm.controls.email.hasError('email')">
+                  邮箱格式不正确!
+                </div>
+              </div>
+            </div>
+            <div nz-form-item>
+              <div nz-form-control>
+                <nz-input formControlName="nickname" [(ngModel)]="formData.nickname" [nzPlaceHolder]="'昵称'" [nzSize]="large">
+                  <ng-template #prefix>
+                    <i class="anticon anticon-smile-o"></i>
+                  </ng-template>
+                </nz-input>
+                <div nz-form-explain
+                     *ngIf="validateForm.controls.password.dirty&&validateForm.controls.password.hasError('required')">
+                  昵称不能为空!
+                </div>
+                <div nz-form-explain
+                     *ngIf="validateForm.controls.password.hasError('maxlength')">
+                  长度在6个字符之内！
+                </div>
+              </div>
+            </div>
+            <div nz-form-item>
+              <div nz-form-control>
+                <nz-input formControlName="mobile" [(ngModel)]="formData.mobile" [nzPlaceHolder]="'手机'" [nzSize]="large">
+                  <ng-template #prefix>
+                    <i class="anticon anticon-phone"></i>
+                  </ng-template>
+                </nz-input>
+                <div nz-form-explain
+                     *ngIf="validateForm.controls.mobile.dirty&&validateForm.controls.mobile.hasError('required')">
+                  手机不能为空!
+                </div>
+                <div nz-form-explain
+                     *ngIf="validateForm.controls.mobile.dirty&&validateForm.controls.mobile.hasError('pattern')">
+                  手机号格式不正确！
+                </div>
+              </div>
+            </div>
+            <div nz-form-item>
+              <div nz-form-control>
+                <nz-input formControlName="description" [(ngModel)]="formData.description" [nzPlaceHolder]="'备注'" [nzSize]="large">
+                  <ng-template #prefix>
+                    <i class="anticon anticon-trademark"></i>
+                  </ng-template>
+                </nz-input>
+                <div nz-form-explain
+                     *ngIf="validateForm.controls.description.dirty&&validateForm.controls.description.hasError('maxlength')">
+                  备注过长！
+                </div>
+              </div>
+            </div>
+
+            <div class="btn-center" nz-form-control>
+              <div nz-form-item>
+                <button nz-button [nzType]="'primary'" [nzSize]="''">保存
+                </button>
+
+                <a class="btn btn-default btn-sm" (click)="backToList()">返回
+                </a>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

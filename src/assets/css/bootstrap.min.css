@@ -5131,6 +5131,10 @@ a.list-group-item-danger.active,a.list-group-item-danger.active:hover,a.list-gro
     padding: 15px;
 }
 
+.panel-body-min {
+  padding: 1px;
+}
+
 .panel>.list-group {
     margin-bottom: 0;
 }
@@ -6637,7 +6641,7 @@ h6,.h6 {
 
 p {
     margin: 0 0 10px;
-	
+
 }
 
 .lead {
@@ -10089,7 +10093,7 @@ textarea.input-group-sm>.form-control,textarea.input-group-sm>.input-group-addon
 
 .nav-stacked>li {
     float: none;
-	
+
 }
 
 .nav-stacked>li+li {
@@ -10690,7 +10694,7 @@ textarea.input-group-sm>.form-control,textarea.input-group-sm>.input-group-addon
 
 .breadcrumb>li {
     display: inline-block;
-	
+
 }
 .breadcrumb>li  a{
     color:#586573;
@@ -10698,7 +10702,7 @@ textarea.input-group-sm>.form-control,textarea.input-group-sm>.input-group-addon
 
 .breadcrumb>li+li:before {
 	content: "\f101";
-    
+
     color: #ccc;
 }
 
@@ -11493,7 +11497,7 @@ a.list-group-item-danger.active,a.list-group-item-danger.active:hover,a.list-gro
 }
 .panel-body {
     padding: 15px;
-	
+
 }
 
 .panel>.list-group {
