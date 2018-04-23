@@ -34,20 +34,23 @@ export class Https {
     const headers: HttpHeaders = new HttpHeaders();
     headers.append('Content-type', 'application/x-www-form-urlencoded; charset=utf-8');
     headers.append('x-auth-token', token);
-
     return this.http.post<T>(url, params, {
       headers: headers
     });
   }
 
-  postByMap<T>(url: string, map: Map<string, string>, token?: string): Observable<T> {
+  postByObj<T>(url: string, obj: Object, token?: string): Observable<T> {
     const headers: HttpHeaders = new HttpHeaders();
     headers.append('Content-type', 'application/x-www-form-urlencoded; charset=utf-8');
     headers.append('x-auth-token', token);
-    const p = this.object2Param(map);
-    return this.http.post<T>(url, p, {
-      headers: headers
+    const params = new HttpParams();
+    const keys = Object.keys(obj);
+    keys.forEach(function (value, index) {
+      params.set(value, obj[value]);
     });
+    params.set('121', '212');
+    console.log(obj);
+    return this.http.post<T>(url, params, obj);
   }
 
   generateUrlParams(url: string, params: Map<string, any>): string {
@@ -57,13 +60,5 @@ export class Https {
       url += param + '&';
     });
     return url;
-  }
-
-  object2Param(obj: Map<string, string>) {
-    const params = new HttpParams();
-    obj.forEach(function (value, key) {
-      params.set(key, value);
-    });
-    return params;
   }
 }

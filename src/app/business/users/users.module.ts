@@ -10,6 +10,7 @@ import {TabsModule} from 'ngx-bootstrap';
 import {NgZorroAntdModule} from 'ng-zorro-antd';
 import {PaginationModule} from 'ngx-bootstrap';
 import {NZ_NOTIFICATION_CONFIG} from 'ng-zorro-antd';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
   imports: [
@@ -18,6 +19,7 @@ import {NZ_NOTIFICATION_CONFIG} from 'ng-zorro-antd';
     FormsModule,
     ReactiveFormsModule,
     TabsModule.forRoot(),
+    ModalModule.forRoot(),
     NgZorroAntdModule.forRoot(),
     PaginationModule.forRoot()
   ],

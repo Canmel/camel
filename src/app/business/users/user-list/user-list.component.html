@@ -58,9 +58,10 @@
                           </span>
                         </td>
                         <td class="actions-hover actions-fade">
-                          <a class="operation-links" (click)='renderForm({data: user, title: "编辑用户", dom: $event})'><i
-                            class="fa fa-pencil"></i></a>
-                          <a class="delete-row operation-links"><i class="fa fa-trash-o"></i></a>
+                          <a class="operation-links" (click)='edit({"id": user.id})'><i
+                            class="fa fa-pencil fa-fw"></i></a>
+                          <a class="delete-row operation-links" (click)="delete(template, user.id, user.nickname)">
+                            <i class="fa fa-trash-o fa-fw"></i></a>
                         </td>
                       </tr>
                       <tr class="text-center" *ngIf="!users">
@@ -70,6 +71,14 @@
                       </tr>
                       </tbody>
                     </table>
+
+                    <ng-template #template>
+                      <div class="modal-body text-center">
+                        <p>你确定要删除 <b>{{preDelete.name}}</b> 吗？</p>
+                        <button type="button" class="btn btn-primary" (click)="confirm()">是</button>
+                        <button type="button" class="btn btn-default" (click)="decline()">否</button>
+                      </div>
+                    </ng-template>
                   </div>
                 </div>
                 <div style="text-align: center">
@@ -84,9 +93,9 @@
             </tab>
             <tab (click)="toAddUser()">
               <div (click)="toAddUser()">
-              <ng-template tabHeading>
-                <a (click)="toAddUser()"><i class=" fa fa-bars">&nbsp;新建</i></a>
-              </ng-template>
+                <ng-template tabHeading>
+                  <a (click)="toAddUser()"><i class=" fa fa-bars">&nbsp;新建</i></a>
+                </ng-template>
               </div>
             </tab>
           </tabset>

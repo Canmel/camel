@@ -3,11 +3,14 @@ import {MainComponent} from './main.component';
 
 import {MainRoutingModule} from './main-routing.module';
 import {LeftComponent} from '../left/left.component';
+import {HttpClientModule} from '@angular/common/http';
+
 import * as $ from 'Jquery';
 
 @NgModule({
   imports: [
-    MainRoutingModule
+    MainRoutingModule,
+    HttpClientModule
   ],
   declarations: [
     MainComponent,

@@ -16,8 +16,8 @@
                   用户名不能为空!
                 </div>
                 <div nz-form-explain
-                     *ngIf="validateForm.controls.userName.hasError('minlength')||validateForm.controls.userName.hasError('maxlength')">
-                  用户名长度在6-12个字符之间!
+                     *ngIf="validateForm.controls.userName.dirty&&validateForm.controls.userName.hasError('maxlength')">
+                  用户名长度在1-6个字符之间!
                 </div>
               </div>
             </div>
@@ -34,8 +34,8 @@
                   密码不能为空!
                 </div>
                 <div nz-form-explain
-                     *ngIf="validateForm.controls.password.hasError('minlength')||validateForm.controls.password.hasError('maxlength')">
-                  密码长度在6-12个字符之间！
+                     *ngIf="validateForm.controls.password.dirty&&validateForm.controls.password.hasError('maxlength')">
+                  密码长度在1-6个字符之间！
                 </div>
               </div>
             </div>
@@ -64,11 +64,11 @@
                   </ng-template>
                 </nz-input>
                 <div nz-form-explain
-                     *ngIf="validateForm.controls.password.dirty&&validateForm.controls.password.hasError('required')">
+                     *ngIf="validateForm.controls.nickname.dirty&&validateForm.controls.nickname.hasError('required')">
                   昵称不能为空!
                 </div>
                 <div nz-form-explain
-                     *ngIf="validateForm.controls.password.hasError('maxlength')">
+                     *ngIf="validateForm.controls.nickname.dirty&&validateForm.controls.nickname.hasError('maxlength')">
                   长度在6个字符之内！
                 </div>
               </div>

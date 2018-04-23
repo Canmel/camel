@@ -1,5 +1,3 @@
-import {host} from './HOST';
-
 export const Urls = {
   GetBillTypes: `/return/thumbnail`,
   PROJECTS: `/project`,
@@ -7,7 +5,10 @@ export const Urls = {
     ME: `/api/users/me`,
     PAGEQUERY: `/api/users`,
     CURRENT: `/api/users/current`,
-    SAVE: `/api/users`
+    SAVE: `/api/users`,
+    DETAILS: `/api/users/`,
+    EDIT: `/api/users/`,
+    DELETE: `/api/users/`
   },
   USER: `/users`,
   SESSION: {
