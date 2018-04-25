@@ -1,4 +1,7 @@
 export class Role {
   id: number;
-  name: string;
+  status: number;
+  description: string;
+  created_at: Date;
+  updated_at: Date;
 }

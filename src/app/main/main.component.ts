@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import * as $ from 'jquery';
 import {Https} from '../public/https.service';
 import {Urls} from '../public/url';
+import {HttpclientService} from '../public/httpclient.service';
 
 @Component({
   selector: 'app-main',
@@ -15,7 +16,7 @@ export class MainComponent implements OnInit {
   public localStorage: any;
   currentUser = {name: '张小凡'};
 
-  constructor(public router: Router, public http: Https) {
+  constructor(public router: Router, public http: Https, public httpClient: HttpclientService) {
     if (!sessionStorage.getItem(Properties.STRING.SESSION.AUTHENTICATED)) {
       this.router.navigate(['login']);
     }
@@ -27,5 +28,11 @@ export class MainComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  toLogOut() {
+    this.httpClient.get(Urls.SESSION.LOGOUT, {}).then(data => {
+      console.log('ss', data);
+    });
   }
 }

@@ -1,0 +1,100 @@
+<section class="panel">
+  <div class="panel-body bio-graph-info">
+    <h1>
+      <i class="fa fa-search fa-1x fa-fw"></i>查询
+    </h1>
+    <div class="row">
+      <form class="form-inline" role="form" id="searchForm">
+        <div class="form-group">
+          <input name="name" class="form-control" id="name" placeholder="名称">
+        </div>
+        <div class="form-group">
+          <input name="description" class="form-control" id="email" placeholder="备注">
+        </div>
+        <button type="submit" (click)="query()" class="btn btn-success">查询</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="panel with-nav-tabs panel-primary panel-square panel-no-border">
+        <div>
+          <tabset>
+            <tab>
+              <ng-template tabHeading>
+                <i class="fa fa-home">&nbsp;用户列表</i>
+              </ng-template>
+              <div class="panel-body-min">
+                <div class="tab-content">
+                  <div class="panel-body-min no-padding">
+                    <table class="table no-margin">
+                      <thead>
+                      <tr>
+                        <th>名称</th>
+                        <th>备注</th>
+                        <th>状态</th>
+                        <th class="col-md-2">操作</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr *ngFor="let role of roles">
+                        <td>{{role.name}}</td>
+                        <td>{{role.description}}</td>
+                        <td>
+                          <span class="label label-success label-mini" *ngIf="role.status == '1'">
+                            <i class="fa fa-check"></i>
+                          </span>
+                          <span class="label label-danger label-mini" *ngIf="role.status == '2'">
+                            <i class="fa fa-lock"></i>
+                          </span>
+                        </td>
+                        <td class="actions-hover actions-fade">
+                          <a class="operation-links" (click)='edit({"id": role.id})'><i
+                            class="fa fa-pencil fa-fw"></i></a>
+                          <a class="delete-row operation-links" (click)="delete(template, role.id, role.nickname)">
+                            <i class="fa fa-trash-o fa-fw"></i></a>
+                        </td>
+                      </tr>
+                      <tr class="text-center" *ngIf="!roles">
+                        <td colspan="4">
+                          <p class="error-tip-color">暂无数据</p>
+                        </td>
+                      </tr>
+                      </tbody>
+                    </table>
+
+                    <ng-template #template>
+                      <div class="modal-body text-center">
+                        <p>你确定要删除 <b>{{preDelete.name}}</b> 吗？</p>
+                        <button type="button" class="btn btn-primary" (click)="confirm()">是</button>
+                        <button type="button" class="btn btn-default" (click)="decline()">否</button>
+                      </div>
+                    </ng-template>
+                  </div>
+                </div>
+                <div style="text-align: center">
+                  <pagination
+                    [totalItems]="paginationParams.totalCount"
+                    [nextText]="paginationParams.nextText"
+                    [previousText]="paginationParams.previousText"
+                    [(ngModel)]="paginationParams.currentPage"
+                    (pageChanged)="pageChanged($event)"></pagination>
+                </div>
+              </div>
+            </tab>
+            <tab (click)="toAddRole()">
+              <div (click)="toAddRole()">
+                <ng-template tabHeading>
+                  <a (click)="toAddRole()"><i class=" fa fa-bars">&nbsp;新建</i></a>
+                </ng-template>
+              </div>
+            </tab>
+          </tabset>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -10,9 +10,13 @@ export const Urls = {
     EDIT: `/api/users/`,
     DELETE: `/api/users/`
   },
+  ROLES: {
+    PAGEQUERY: `/api/roles`
+  },
   USER: `/users`,
   SESSION: {
     LOGIN: `/auth/login`,
-    QRCODE: `/code/image`
+    QRCODE: `/code/image`,
+    LOGOUT: `/signOut`
   }
 };
