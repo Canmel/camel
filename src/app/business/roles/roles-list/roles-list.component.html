@@ -6,10 +6,10 @@
     <div class="row">
       <form class="form-inline" role="form" id="searchForm">
         <div class="form-group">
-          <input name="name" class="form-control" id="name" placeholder="名称">
+          <input name="name" class="form-control" id="name" placeholder="名称" [(ngModel)]="params.name">
         </div>
         <div class="form-group">
-          <input name="description" class="form-control" id="email" placeholder="备注">
+          <input name="description" class="form-control" id="description" placeholder="备注" [(ngModel)]="params.description">
         </div>
         <button type="submit" (click)="query()" class="btn btn-success">查询</button>
       </form>
@@ -85,7 +85,7 @@
                 </div>
               </div>
             </tab>
-            <tab (click)="toAddRole()">
+            <tab>
               <div (click)="toAddRole()">
                 <ng-template tabHeading>
                   <a (click)="toAddRole()"><i class=" fa fa-bars">&nbsp;新建</i></a>

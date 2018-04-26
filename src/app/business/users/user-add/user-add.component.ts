@@ -4,7 +4,6 @@ import {NzNotificationService} from 'ng-zorro-antd';
 import {Router} from '@angular/router';
 import {Https} from '../../../public/https.service';
 import {Urls} from '../../../public/url';
-import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-user-add',
@@ -15,7 +14,7 @@ export class UserAddComponent implements OnInit {
 
   validateForm: FormGroup;
 
-  formData: Map<string, string>;
+  formData: Object;
 
   _submitForm() {
     // this.doSubmit();
@@ -36,8 +35,11 @@ export class UserAddComponent implements OnInit {
     }
   }
 
-  constructor(private httpClient: HttpClient, private fb: FormBuilder, private _notification: NzNotificationService, public route: Router) {
-    this.formData = new Map<string, string>();
+  constructor(private http: Https,
+              private fb: FormBuilder,
+              private _notification: NzNotificationService,
+              public route: Router) {
+    this.formData = {};
   }
 
   ngOnInit() {
@@ -60,17 +62,17 @@ export class UserAddComponent implements OnInit {
   }
 
   backToList() {
-    this.route.navigate(['/app/users']);
+    this.route.navigate([Urls.BUSINESS.USERS.LIST]);
   }
 
   doSubmit() {
     console.log(this.formData);
-    this.httpClient.post(Urls.USERS.SAVE,
+    this.http.post(Urls.USERS.SAVE,
       this.formData)
-      .subscribe(
+      .then(
         (val) => {
           this._notification.success('成功', val['msg']);
-          this.route.navigate(['/app/users']);
+          this.route.navigate([Urls.BUSINESS.USERS.LIST]);
         },
         response => {
           this._notification.error('失败', response['msg']);

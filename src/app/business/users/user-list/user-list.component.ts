@@ -21,7 +21,7 @@ export class UserListComponent implements OnInit {
 
   modalRef: BsModalRef;
 
-  params: Map<string, any>;
+  params: {};
 
   preDelete = {};
 
@@ -29,7 +29,7 @@ export class UserListComponent implements OnInit {
     totalCount: 66,
     pageSize: 10,
     totalPage: 7,
-    curPage: 1,
+    currentPage: 1,
     nextText: '下一页',
     previousText: '上一页'
   };
@@ -38,33 +38,30 @@ export class UserListComponent implements OnInit {
               private httpClient: HttpClient,
               private _notification: NzNotificationService,
               private modalService: BsModalService) {
-    this.params = new Map<string, any>();
+    this.params = {};
   }
 
   ngOnInit() {
-    this.https.get(Urls.USERS.PAGEQUERY, new HttpParams()).subscribe(data => {
+    this.https.get(Urls.USERS.PAGEQUERY, {}).then(data => {
       this.configParams(data);
     });
   }
 
   toAddUser() {
-    this.route.navigate(['/app/users/add']);
+    this.route.navigate([Urls.BUSINESS.USERS.ADD]);
   }
 
   query() {
-    this.params.clear();
-    if ($('input[name="username"]').val() !== '') {
-      this.params.set('username', $('input[name="username"]').val());
-    }
-    if ($('input[name="email"]').val() !== '') {
-      this.params.set('email', $('input[name="email"]').val());
-    }
-    this.doQuery();
+    console.log('params是', this.params);
+    this.params['currentPage'] = 1;
+    this.https.get(Urls.USERS.PAGEQUERY, this.params).then(data => {
+      this.configParams(data);
+    });
   }
 
   edit(obj: Object) {
     console.log(obj);
-    this.route.navigate(['/app/users/edit'], {queryParams: obj});
+    this.route.navigate([Urls.BUSINESS.ROLES.EDIT], {queryParams: obj});
   }
 
   delete(template: TemplateRef<any>, id, name) {
@@ -74,7 +71,7 @@ export class UserListComponent implements OnInit {
   }
 
   confirm() {
-    this.httpClient.delete(Urls.USERS.DELETE + this.preDelete['id']).subscribe(resp => {
+    this.https.delete(Urls.USERS.DELETE, this.preDelete['id']).then(resp => {
       this.modalRef.hide();
       console.log(resp['code']);
       console.log(resp['code'] !== 200);
@@ -83,7 +80,7 @@ export class UserListComponent implements OnInit {
       } else {
         this._notification.success('提示', '用户 ' + this.preDelete['name'] + ' 已被删除！');
       }
-      this.doQuery();
+      this.query();
     });
   }
 
@@ -93,14 +90,8 @@ export class UserListComponent implements OnInit {
 
   pageChanged($event) {
     console.log($event);
-    this.params.set('currentPage', $event['page']);
-    this.https.getBySearchParams(Urls.USERS.PAGEQUERY, this.params).subscribe(data => {
-      this.configParams(data);
-    });
-  }
-
-  doQuery() {
-    this.https.getBySearchParams(Urls.USERS.PAGEQUERY, this.params).subscribe(data => {
+    this.params['currentPage'] = $event['page'];
+    this.https.get(Urls.USERS.PAGEQUERY, this.params).then(data => {
       this.configParams(data);
     });
   }
@@ -111,7 +102,7 @@ export class UserListComponent implements OnInit {
     let totalPage = this.paginationParams.totalCount / this.paginationParams.pageSize;
     totalPage = Math.trunc(totalPage) === totalPage ? totalPage : totalPage + 1;
     this.paginationParams.totalPage = totalPage;
-    this.paginationParams.curPage = data['pageNum'];
+    this.paginationParams.currentPage = data['pageNum'];
   }
 
 }

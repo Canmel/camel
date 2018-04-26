@@ -2,10 +2,11 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes, ActivatedRoute} from '@angular/router';
 
 import {PageNotFoundComponent} from './error-page/page-not-found/page-not-found.component';
+import {Urls} from './public/url';
 
 const routes: Routes = [{
   path: '',
-  redirectTo: '/app/home',
+  redirectTo: Urls.BUSINESS.MAIN.HOME,
   pathMatch: 'full'
   },
   {

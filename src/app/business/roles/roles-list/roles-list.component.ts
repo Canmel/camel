@@ -25,7 +25,7 @@ export class RolesListComponent implements OnInit {
     totalCount: 66,
     pageSize: 10,
     totalPage: 7,
-    curPage: 1,
+    currentPage: 1,
     nextText: '下一页',
     previousText: '上一页'
   };
@@ -37,28 +37,21 @@ export class RolesListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.https.get(Urls.ROLES.PAGEQUERY, new HttpParams()).subscribe(data => {
+    this.https.get(Urls.ROLES.PAGEQUERY, {}).then(data => {
       this.configParams(data);
     });
   }
 
   query() {
-    this.params.clear();
-    if ($('input[name="name"]').val() !== '') {
-      this.params.set('name', $('input[name="name"]').val());
-    }
-    if ($('input[name="description"]').val() !== '') {
-      this.params.set('description', $('input[name="description"]').val());
-    }
-    this.doQuery();
-  }
-
-
-  doQuery() {
-    console.log(this.params);
-    this.https.getBySearchParams(Urls.ROLES.PAGEQUERY, this.params).subscribe(data => {
+    this.params['currentPage'] = 1;
+    this.https.get(Urls.ROLES.PAGEQUERY, this.params).then(data => {
       this.configParams(data);
     });
+  }
+
+  edit(obj: Object) {
+    console.log(obj);
+    this.route.navigate([Urls.BUSINESS.ROLES.EDIT], {queryParams: obj});
   }
 
   configParams(data) {
@@ -67,7 +60,11 @@ export class RolesListComponent implements OnInit {
     let totalPage = this.paginationParams.totalCount / this.paginationParams.pageSize;
     totalPage = Math.trunc(totalPage) === totalPage ? totalPage : totalPage + 1;
     this.paginationParams.totalPage = totalPage;
-    this.paginationParams.curPage = data['pageNum'];
+    this.paginationParams.currentPage = data['pageNum'];
+  }
+
+  toAddRole() {
+    this.route.navigate([Urls.BUSINESS.ROLES.ADD]);
   }
 
 

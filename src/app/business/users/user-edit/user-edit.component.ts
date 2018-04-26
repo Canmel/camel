@@ -15,7 +15,7 @@ export class UserEditComponent implements OnInit {
 
   validateForm: FormGroup;
 
-  formData: Map<string, string>;
+  formData = {};
 
   _submitForm() {
     // this.doSubmit();
@@ -36,7 +36,7 @@ export class UserEditComponent implements OnInit {
     }
   }
 
-  constructor(private httpClient: HttpClient,
+  constructor(public https: Https,
               private fb: FormBuilder,
               private activatedRoute: ActivatedRoute,
               private _notification: NzNotificationService,
@@ -57,9 +57,9 @@ export class UserEditComponent implements OnInit {
       }
     );
     this.activatedRoute.queryParams.subscribe(queryParams => {
-      this.formData.set('id', queryParams['id']);
+      this.formData['id'] = queryParams['id'];
     });
-    this.httpClient.get(Urls.USERS.DETAILS + this.formData.get('id')).subscribe(resp => {
+    this.https.get(Urls.USERS.DETAILS + this.formData['id']).then(resp => {
       const userDetails = resp['obj'];
       this.formData = userDetails;
     });
@@ -73,17 +73,17 @@ export class UserEditComponent implements OnInit {
   }
 
   backToList() {
-    this.route.navigate(['/app/users']);
+    this.route.navigate([Urls.BUSINESS.USERS.LIST]);
   }
 
   doSubmit() {
     console.log(this.formData);
-    this.httpClient.put(Urls.USERS.EDIT + this.formData['id'],
+    this.https.put(Urls.USERS.EDIT + this.formData['id'],
       this.formData
-    ).subscribe(
+    ).then(
       (val) => {
         this._notification.success('成功', val['msg']);
-        this.route.navigate(['/app/users']);
+        this.route.navigate([Urls.BUSINESS.USERS.LIST]);
       },
       response => {
         this._notification.error('失败', response['msg']);

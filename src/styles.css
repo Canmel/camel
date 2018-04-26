@@ -1624,3 +1624,11 @@ footer.page-footer {
 .panel-font {
   font-weight: 900;
 }
+
+.form-center {
+  margin: auto;
+}
+
+.btn-center {
+  text-align: center;
+}

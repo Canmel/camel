@@ -27,9 +27,9 @@ export class HttpclientService {
     return Promise.reject(resp);
   }
 
-  private handleError(error: any): Promise<any> {
-    console.error('error messages -----> : ', error);
-    return Promise.reject(error);
+  private handleError(error: any) {
+    console.error('error me1ssages -----> : ', error);
+    this.router.navigate(['login']);
   }
 
   private checkPrams(url: string, params: any): string {
