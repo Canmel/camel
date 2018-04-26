@@ -7,11 +7,11 @@ import {Urls} from '../../../public/url';
 import {HttpClient} from '@angular/common/http';
 
 @Component({
-  selector: 'app-user-edit',
-  templateUrl: './user-edit.component.html',
-  styleUrls: ['./user-edit.component.css']
+  selector: 'app-roles-edit',
+  templateUrl: './roles-edit.component.html',
+  styleUrls: ['./roles-edit.component.css']
 })
-export class UserEditComponent implements OnInit {
+export class RolesEditComponent implements OnInit {
 
   validateForm: FormGroup;
 
@@ -46,20 +46,14 @@ export class UserEditComponent implements OnInit {
 
   ngOnInit() {
     this.validateForm = this.fb.group({
-        userName: [null, [Validators.required, Validators.maxLength(6)]],
-        email: [null, [Validators.required, Validators.email]],
-        nickname: [null, [Validators.required, Validators.maxLength(6)]],
-        mobile: [null, [
-          Validators.required,
-          Validators.pattern('^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\\d{8}$')
-        ]],
+        rolename: [null, [Validators.required, Validators.maxLength(6)]],
         description: [null, [Validators.maxLength(20)]]
       }
     );
     this.activatedRoute.queryParams.subscribe(queryParams => {
       this.formData['id'] = queryParams['id'];
     });
-    this.https.get(Urls.USERS.DETAILS + this.formData['id']).then(resp => {
+    this.https.get(Urls.ROLES.DETAILS + this.formData['id']).then(resp => {
       const userDetails = resp['obj'];
       this.formData = userDetails;
     });
@@ -73,7 +67,7 @@ export class UserEditComponent implements OnInit {
   }
 
   backToList() {
-    this.route.navigate([Urls.BUSINESS.USERS.LIST]);
+    this.route.navigate([Urls.BUSINESS.ROLES.LIST]);
   }
 
   doSubmit() {
@@ -83,11 +77,10 @@ export class UserEditComponent implements OnInit {
     ).then(
       (val) => {
         this._notification.success('成功', val['msg']);
-        this.route.navigate([Urls.BUSINESS.USERS.LIST]);
+        this.route.navigate([Urls.BUSINESS.ROLES.LIST]);
       },
       response => {
         this._notification.error('失败', response['msg']);
       });
   }
-
 }

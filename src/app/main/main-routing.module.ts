@@ -2,6 +2,7 @@ import {NgModule, OnInit} from '@angular/core';
 import {RouterModule, Routes, Router} from '@angular/router';
 import {MainComponent} from './main.component';
 import {Https} from '../public/https.service';
+import {HttpclientService} from '../public/httpclient.service';
 
 /**
  * 主体路由
@@ -35,6 +36,9 @@ const mainRoutes: Routes =
       }, {
         path: 'users',
         loadChildren: 'app/business/users/users.module#UsersModule'
+      }, {
+        path: 'roles',
+        loadChildren: 'app/business/roles/roles.module#RolesModule'
       }
     ]
   }];
@@ -46,7 +50,7 @@ const mainRoutes: Routes =
   exports: [
     RouterModule
   ],
-  providers: [Https]
+  providers: [Https, HttpclientService]
 })
 export class MainRoutingModule {
 }

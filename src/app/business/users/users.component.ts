@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import * as $ from 'jquery';
+import {HttpclientService} from '../../public/httpclient.service';
 
 @Component({
   selector: 'app-users',
@@ -8,7 +9,8 @@ import * as $ from 'jquery';
 })
 export class UsersComponent implements OnInit {
 
-  constructor() { }
+  constructor(private http: HttpclientService) {
+  }
 
   ngOnInit() {
     $('body').css('background-color', '#e5e6e6');

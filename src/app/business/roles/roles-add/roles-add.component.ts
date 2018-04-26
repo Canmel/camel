@@ -6,11 +6,11 @@ import {Https} from '../../../public/https.service';
 import {Urls} from '../../../public/url';
 
 @Component({
-  selector: 'app-user-add',
-  templateUrl: './user-add.component.html',
-  styleUrls: ['./user-add.component.css']
+  selector: 'app-roles-add',
+  templateUrl: './roles-add.component.html',
+  styleUrls: ['./roles-add.component.css']
 })
-export class UserAddComponent implements OnInit {
+export class RolesAddComponent implements OnInit {
 
   validateForm: FormGroup;
 
@@ -44,11 +44,7 @@ export class UserAddComponent implements OnInit {
 
   ngOnInit() {
     this.validateForm = this.fb.group({
-        userName: [null, [Validators.required, Validators.maxLength(6)]],
-        password: [null, [Validators.required, Validators.maxLength(6)]],
-        email: [null, [Validators.required, Validators.email]],
-        nickname: [null, [Validators.required, Validators.maxLength(6)]],
-        mobile: [null, [Validators.required, Validators.pattern('^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\\d{8}$')]],
+        rolename: [null, [Validators.required, Validators.maxLength(6)]],
         description: [null, [Validators.maxLength(20)]]
       }
     );
@@ -62,17 +58,16 @@ export class UserAddComponent implements OnInit {
   }
 
   backToList() {
-    this.route.navigate([Urls.BUSINESS.USERS.LIST]);
+    this.route.navigate([Urls.BUSINESS.ROLES.LIST]);
   }
 
   doSubmit() {
-    console.log(this.formData);
-    this.http.post(Urls.USERS.SAVE,
+    this.http.post(Urls.ROLES.SAVE,
       this.formData)
       .then(
         (val) => {
           this._notification.success('成功', val['msg']);
-          this.route.navigate([Urls.BUSINESS.USERS.LIST]);
+          this.route.navigate([Urls.BUSINESS.ROLES.LIST]);
         },
         response => {
           this._notification.error('失败', response['msg']);

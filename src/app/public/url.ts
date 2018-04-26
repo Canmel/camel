@@ -10,9 +10,37 @@ export const Urls = {
     EDIT: `/api/users/`,
     DELETE: `/api/users/`
   },
-  USER: `/users`,
+  ROLES: {
+    PAGEQUERY: `/api/roles`,
+    SAVE: `/api/roles`,
+    DETAILS: `/api/roles/`,
+    DELETE: `/api/roles/`
+  },
+  MENUS: {
+    PAGEQUERY: `/api/menus`,
+    SAVE: `/api/menus`,
+    DETAILS: `/api/menus/`,
+    DELETE: `/api/menus/`
+  },
   SESSION: {
     LOGIN: `/auth/login`,
-    QRCODE: `/code/image`
+    QRCODE: `/code/image`,
+    LOGOUT: `/signOut`,
+    REJECTED: `/anth/require`
+  },
+  BUSINESS: {
+    USERS: {
+      LIST: `/app/users`,
+      ADD: `/app/users/add`,
+      EDIT: `/app/users/edit`
+    },
+    ROLES: {
+      LIST: `/app/roles`,
+      ADD: `/app/roles/add`,
+      EDIT: `/app/roles/edit`
+    },
+    MAIN: {
+      HOME: `/app/home`
+    }
   }
 };

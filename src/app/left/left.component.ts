@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import * as $ from 'Jquery';
+import {Urls} from '../public/url';
 
 @Component({
   selector: 'app-left',
@@ -8,7 +9,9 @@ import * as $ from 'Jquery';
 })
 export class LeftComponent implements OnInit {
 
+  menus = {};
   constructor() {
+    this.menus = Urls.BUSINESS;
   }
 
   ngOnInit() {

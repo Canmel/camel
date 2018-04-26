@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import * as $ from 'jquery';
 import {Https} from '../public/https.service';
 import {Urls} from '../public/url';
+import {HttpclientService} from '../public/httpclient.service';
 
 @Component({
   selector: 'app-main',
@@ -13,19 +14,30 @@ import {Urls} from '../public/url';
 export class MainComponent implements OnInit {
 
   public localStorage: any;
+
+  homeUrl: string;
+
   currentUser = {name: '张小凡'};
 
-  constructor(public router: Router, public http: Https) {
+  constructor(public router: Router, public http: Https, public httpClient: HttpclientService) {
+    this.homeUrl = Urls.BUSINESS.MAIN.HOME;
     if (!sessionStorage.getItem(Properties.STRING.SESSION.AUTHENTICATED)) {
       this.router.navigate(['login']);
     }
     this.currentUser.name = sessionStorage.getItem(Properties.STRING.SESSION.NAME);
-    http.get(Urls.USERS.CURRENT, null).subscribe(data => {
+    http.get(Urls.USERS.CURRENT, null).then(data => {
+      console.log('获取用户详情', data);
       this.currentUser.name = data['nickname'];
     });
 
   }
 
   ngOnInit() {
+  }
+
+  toLogOut() {
+    this.httpClient.get(Urls.SESSION.LOGOUT, {}).then(data => {
+      console.log('ss', data);
+    });
   }
 }
