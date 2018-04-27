@@ -9,14 +9,14 @@
           <input name="name" class="form-control" id="name" placeholder="名称" [(ngModel)]="params.name">
         </div>
         <div class="form-group">
-          <input name="description" class="form-control" id="description" placeholder="备注" [(ngModel)]="params.name">
+          <input name="description" class="form-control" id="description" placeholder="备注"
+                 [(ngModel)]="params.description">
         </div>
         <button type="submit" (click)="query()" class="btn btn-success">查询</button>
       </form>
     </div>
   </div>
 </section>
-
 <section>
   <div class="row">
     <div class="col-lg-12">
@@ -35,30 +35,41 @@
                       <tr>
                         <th>名称</th>
                         <th>备注</th>
+                        <th>地址</th>
+                        <th>等级</th>
                         <th>状态</th>
                         <th class="col-md-2">操作</th>
                       </tr>
                       </thead>
                       <tbody>
-                      <tr *ngFor="let role of roles">
-                        <td>{{role.name}}</td>
-                        <td>{{role.description}}</td>
+                      <tr *ngFor="let menu of menus">
+                        <td>{{menu.name}}</td>
+                        <td>{{menu.description}}</td>
+                        <td>{{menu.target}}</td>
                         <td>
-                          <span class="label label-success label-mini" *ngIf="role.status == '1'">
+                          <span class="label label-success label-mini" *ngIf="menu.level == '1'">
+                            一级菜单
+                          </span>
+                          <span class="label label-danger label-mini" *ngIf="menu.level == '2'">
+                            二级菜单
+                          </span>
+                        </td>
+                        <td>
+                          <span class="label label-success label-mini" *ngIf="menu.status == '1'">
                             <i class="fa fa-check"></i>
                           </span>
-                          <span class="label label-danger label-mini" *ngIf="role.status == '2'">
+                          <span class="label label-danger label-mini" *ngIf="menu.status == '2'">
                             <i class="fa fa-lock"></i>
                           </span>
                         </td>
                         <td class="actions-hover actions-fade">
-                          <a class="operation-links" (click)='edit({"id": role.id})'><i
+                          <a class="operation-links" (click)='edit({"id": menu.id})'><i
                             class="fa fa-pencil fa-fw"></i></a>
-                          <a class="delete-row operation-links" (click)="delete(template, role.id, role.nickname)">
+                          <a class="delete-row operation-links" (click)="delete(template, menu.id, menu.name)">
                             <i class="fa fa-trash-o fa-fw"></i></a>
                         </td>
                       </tr>
-                      <tr class="text-center" *ngIf="!roles">
+                      <tr class="text-center" *ngIf="!menus">
                         <td colspan="4">
                           <p class="error-tip-color">暂无数据</p>
                         </td>
@@ -85,10 +96,10 @@
                 </div>
               </div>
             </tab>
-            <tab (click)="toAddRole()">
-              <div (click)="toAddRole()">
+            <tab>
+              <div (click)="toAddMenu()">
                 <ng-template tabHeading>
-                  <a (click)="toAddRole()"><i class=" fa fa-bars">&nbsp;新建</i></a>
+                  <a (click)="toAddMenu()"><i class=" fa fa-bars">&nbsp;新建</i></a>
                 </ng-template>
               </div>
             </tab>

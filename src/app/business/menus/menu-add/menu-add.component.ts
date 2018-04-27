@@ -6,15 +6,16 @@ import {Https} from '../../../public/https.service';
 import {Urls} from '../../../public/url';
 
 @Component({
-  selector: 'app-roles-add',
-  templateUrl: './roles-add.component.html',
-  styleUrls: ['./roles-add.component.css']
+  selector: 'app-menu-add',
+  templateUrl: './menu-add.component.html',
+  styleUrls: ['./menu-add.component.css']
 })
-export class RolesAddComponent implements OnInit {
-
+export class MenuAddComponent implements OnInit {
   validateForm: FormGroup;
 
   formData: Object;
+
+  menuStatuses: {};
 
   _submitForm() {
     // this.doSubmit();
@@ -43,9 +44,15 @@ export class RolesAddComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.http.get(Urls.OPTIONS.MENUS.LEVEL).then(data => {
+      this.menuStatuses = data['root'];
+      console.log(this.menuStatuses);
+    });
     this.validateForm = this.fb.group({
-        rolename: [null, [Validators.required, Validators.maxLength(6)]],
-        description: [null, [Validators.maxLength(20)]]
+        name: [null, [Validators.required, Validators.maxLength(6)]],
+        menuStatus: [null, Validators.required],
+        description: [null, [Validators.maxLength(20)]],
+        target: [null, [Validators.required, Validators.maxLength(24)]]
       }
     );
   }
@@ -58,7 +65,11 @@ export class RolesAddComponent implements OnInit {
   }
 
   backToList() {
-    this.route.navigate([Urls.BUSINESS.ROLES.LIST]);
+    this.route.navigate([Urls.BUSINESS.MENUS.LIST]);
+  }
+
+  changeMenuLevel() {
+    alert(this.formData['level']);
   }
 
   doSubmit() {
