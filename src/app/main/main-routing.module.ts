@@ -39,6 +39,9 @@ const mainRoutes: Routes =
       }, {
         path: 'roles',
         loadChildren: 'app/business/roles/roles.module#RolesModule'
+      }, {
+        path: 'menus',
+        loadChildren: 'app/business/menus/menus.module#MenusModule'
       }
     ]
   }];

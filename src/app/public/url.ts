@@ -22,6 +22,12 @@ export const Urls = {
     DETAILS: `/api/menus/`,
     DELETE: `/api/menus/`
   },
+  OPTIONS: {
+    MENUS: {
+      STATUS: `/api/options/menus/statuses`,
+      LEVEL: `/api/options/menus/levels`
+    }
+  },
   SESSION: {
     LOGIN: `/auth/login`,
     QRCODE: `/code/image`,
@@ -38,6 +44,11 @@ export const Urls = {
       LIST: `/app/roles`,
       ADD: `/app/roles/add`,
       EDIT: `/app/roles/edit`
+    },
+    MENUS: {
+      LIST: `/app/menus`,
+      ADD: `/app/menus/add`,
+      EDIT: `/app/menus/edit`
     },
     MAIN: {
       HOME: `/app/home`
