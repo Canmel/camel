@@ -14,13 +14,18 @@ export const Urls = {
     PAGEQUERY: `/api/roles`,
     SAVE: `/api/roles`,
     DETAILS: `/api/roles/`,
-    DELETE: `/api/roles/`
+    EDIT: `/api/roles/`,
+    DELETE: `/api/roles/`,
+    UPDATEMENUS: `/api/roles/menus`
   },
   MENUS: {
     PAGEQUERY: `/api/menus`,
     SAVE: `/api/menus`,
     DETAILS: `/api/menus/`,
-    DELETE: `/api/menus/`
+    DELETE: `/api/menus/`,
+    EDIT: `/api/menus/`,
+    TOPMENUS: `/api/menus/tops`,
+    SUBS: `/api/menus/subs`
   },
   OPTIONS: {
     MENUS: {

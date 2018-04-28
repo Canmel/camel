@@ -3,6 +3,7 @@ import {RouterModule, Routes, Router} from '@angular/router';
 import {MainComponent} from './main.component';
 import {Https} from '../public/https.service';
 import {HttpclientService} from '../public/httpclient.service';
+import {MenusModule} from '../business/menus/menus.module';
 
 /**
  * 主体路由
@@ -16,8 +17,8 @@ const mainRoutes: Routes =
         path: 'home',
         loadChildren: 'app/business/home/home.module#HomeModule'
       }, {
-        path: 'menu',
-        loadChildren: 'app/business/menus/menus.module#MenuModule'
+        path: 'menus',
+        loadChildren: 'app/business/menus/menus.module#MenusModule'
       }, {
         path: 'charts',
         loadChildren: 'app/business/charts/charts.module#ChartsModule'
@@ -39,9 +40,6 @@ const mainRoutes: Routes =
       }, {
         path: 'roles',
         loadChildren: 'app/business/roles/roles.module#RolesModule'
-      }, {
-        path: 'menus',
-        loadChildren: 'app/business/menus/menus.module#MenusModule'
       }
     ]
   }];

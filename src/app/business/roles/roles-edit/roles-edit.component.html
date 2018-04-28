@@ -34,16 +34,29 @@
                 </div>
               </div>
             </div>
-
             <div class="btn-center" nz-form-control>
               <div nz-form-item>
                 <button nz-button [nzType]="'primary'" [nzSize]="''">保存
                 </button>
-
+                <a class="btn btn-success btn-sm" (click)="addMenus(template)">添加菜单
+                </a>
                 <a class="btn btn-default btn-sm" (click)="backToList()">返回
                 </a>
               </div>
             </div>
+            <ng-template #template>
+              <div class="modal-body text-center">
+                <nz-transfer
+                  [nzDataSource]="list"
+                  [nzTitles]="['已装配', '未装配']"
+                  (nzSelectChange)="select($event)"
+                  (nzChange)="change($event)">
+                </nz-transfer>
+                <br/>
+                <button type="button" class="btn btn-primary" (click)="confirm()">保存</button>
+                <button type="button" class="btn btn-default" (click)="decline()">取消</button>
+              </div>
+            </ng-template>
           </form>
         </div>
       </div>

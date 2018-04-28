@@ -40,18 +40,34 @@
             </div>
             <div nz-form-item>
               <div nz-form-control>
-                <nz-select formControlName="menuStatus" [(ngModel)]="formData.level"
+                <nz-select formControlName="menuLevel" [(ngModel)]="formData.level"
                            [nzPlaceHolder]="'选择菜单级别'" nzAllowClear
-                           (ngModelChange)="changeMenuLevel()">
+                           (ngModelChange) = "changeMenuLevel()">
                   <nz-option
-                    *ngFor="let option of menuStatuses"
+                    *ngFor="let option of menuLevels"
                     [nzLabel]="option.label"
                     [nzValue]="option.value">
                   </nz-option>
                 </nz-select>
                 <div nz-form-explain
-                     *ngIf="validateForm.controls.menuStatus.dirty&&validateForm.controls.menuStatus.hasError('required')">
+                     *ngIf="validateForm.controls.menuLevel.dirty&&validateForm.controls.menuLevel.hasError('required')">
                   请选择菜单级别
+                </div>
+              </div>
+            </div>
+            <div nz-form-item id="topMenu" style="display: none;">
+              <div nz-form-control>
+                <nz-select formControlName="topMenu" [(ngModel)]="formData.parentId"
+                           [nzPlaceHolder]="'选择一级菜单'" nzAllowClear>
+                  <nz-option
+                    *ngFor="let option of tops"
+                    [nzLabel]="option.name"
+                    [nzValue]="option.id">
+                  </nz-option>
+                </nz-select>
+                <div nz-form-explain
+                     *ngIf="validateForm.controls.topMenu.dirty&&validateForm.controls.topMenu.hasError('required')">
+                  请选择二级菜单级别
                 </div>
               </div>
             </div>

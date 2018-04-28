@@ -4,6 +4,8 @@ import {NzNotificationService} from 'ng-zorro-antd';
 import {Router} from '@angular/router';
 import {Https} from '../../../public/https.service';
 import {Urls} from '../../../public/url';
+import {Menu} from '../../../public/entity/menu';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-menu-add',
@@ -15,10 +17,12 @@ export class MenuAddComponent implements OnInit {
 
   formData: Object;
 
-  menuStatuses: {};
+  menuLevels: {};
+
+  tops: Array<Menu>;
+
 
   _submitForm() {
-    // this.doSubmit();
     let isValid = true;
     for (const i in this.validateForm.controls) {
       if (this.validateForm.controls[i]) {
@@ -41,16 +45,17 @@ export class MenuAddComponent implements OnInit {
               private _notification: NzNotificationService,
               public route: Router) {
     this.formData = {};
+    this.http.get(Urls.OPTIONS.MENUS.LEVEL).then(data => {
+      this.menuLevels = data['root'];
+      console.log(this.menuLevels);
+    });
   }
 
   ngOnInit() {
-    this.http.get(Urls.OPTIONS.MENUS.LEVEL).then(data => {
-      this.menuStatuses = data['root'];
-      console.log(this.menuStatuses);
-    });
     this.validateForm = this.fb.group({
         name: [null, [Validators.required, Validators.maxLength(6)]],
-        menuStatus: [null, Validators.required],
+        menuLevel: [null, Validators.required],
+        topMenu: [null, Validators.required],
         description: [null, [Validators.maxLength(20)]],
         target: [null, [Validators.required, Validators.maxLength(24)]]
       }
@@ -69,16 +74,27 @@ export class MenuAddComponent implements OnInit {
   }
 
   changeMenuLevel() {
-    alert(this.formData['level']);
+    console.log(this.formData['level']);
+    if (this.formData['level'] === 0) {
+      this.http.get(Urls.MENUS.TOPMENUS).then(resp => {
+        this.tops = resp['root'];
+      });
+      $('#topMenu').show();
+      this.validateForm.setControl('topMenu', this.fb.control(null, Validators.required));
+
+    } else {
+      $('#topMenu').hide();
+      this.validateForm.setControl('topMenu', this.fb.control(null));
+    }
   }
 
   doSubmit() {
-    this.http.post(Urls.ROLES.SAVE,
+    this.http.post(Urls.MENUS.SAVE,
       this.formData)
       .then(
         (val) => {
           this._notification.success('成功', val['msg']);
-          this.route.navigate([Urls.BUSINESS.ROLES.LIST]);
+          this.route.navigate([Urls.BUSINESS.MENUS.LIST]);
         },
         response => {
           this._notification.error('失败', response['msg']);

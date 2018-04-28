@@ -21,6 +21,10 @@ export class RolesListComponent implements OnInit {
 
   params: Map<string, any>;
 
+  modalRef: BsModalRef;
+
+  preDelete = {};
+
   paginationParams = {
     totalCount: 66,
     pageSize: 10,
@@ -54,6 +58,29 @@ export class RolesListComponent implements OnInit {
     this.route.navigate([Urls.BUSINESS.ROLES.EDIT], {queryParams: obj});
   }
 
+  delete(template: TemplateRef<any>, id, name) {
+    console.log('');
+    this.preDelete['name'] = name;
+    this.preDelete['id'] = id;
+    this.modalRef = this.modalService.show(template, {class: 'modal-sm modal-position'});
+  }
+
+  confirm() {
+    this.https.delete(Urls.ROLES.DELETE, this.preDelete['id']).then(resp => {
+      this.modalRef.hide();
+      if (resp['code'] !== 200) {
+        this._notification.error('提示', '删除角色 ' + this.preDelete['name'] + ' 失败！');
+      } else {
+        this._notification.success('提示', '角色 ' + this.preDelete['name'] + ' 已被删除！');
+      }
+      this.query();
+    });
+  }
+
+  decline() {
+    this.modalRef.hide();
+  }
+
   configParams(data) {
     this.roles = data['root'];
     this.paginationParams.totalCount = data['totalProperty'];
@@ -66,6 +93,4 @@ export class RolesListComponent implements OnInit {
   toAddRole() {
     this.route.navigate([Urls.BUSINESS.ROLES.ADD]);
   }
-
-
 }
