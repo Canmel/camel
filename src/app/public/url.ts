@@ -8,7 +8,8 @@ export const Urls = {
     SAVE: `/api/users`,
     DETAILS: `/api/users/`,
     EDIT: `/api/users/`,
-    DELETE: `/api/users/`
+    DELETE: `/api/users/`,
+    UPDATEROLES: `/api/users/roles`
   },
   ROLES: {
     PAGEQUERY: `/api/roles`,
@@ -16,7 +17,8 @@ export const Urls = {
     DETAILS: `/api/roles/`,
     EDIT: `/api/roles/`,
     DELETE: `/api/roles/`,
-    UPDATEMENUS: `/api/roles/menus`
+    UPDATEMENUS: `/api/roles/menus`,
+    ALL: `/api/roles/all`
   },
   MENUS: {
     PAGEQUERY: `/api/menus`,

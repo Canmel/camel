@@ -4,6 +4,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TabsModule} from 'ngx-bootstrap';
 import {NgZorroAntdModule} from 'ng-zorro-antd';
 import {PaginationModule} from 'ngx-bootstrap';
+import {TooltipModule} from 'ngx-bootstrap';
 import {NZ_NOTIFICATION_CONFIG} from 'ng-zorro-antd';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import {RolesComponent} from './roles.component';
@@ -18,6 +19,7 @@ import {RolesRoutingModule} from './roles-routing.module';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    TooltipModule.forRoot(),
     TabsModule.forRoot(),
     ModalModule.forRoot(),
     NgZorroAntdModule.forRoot(),
