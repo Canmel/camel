@@ -7,6 +7,7 @@ import {UserListComponent} from './user-list/user-list.component';
 import {UserEditComponent} from './user-edit/user-edit.component';
 import {UserAddComponent} from './user-add/user-add.component';
 import {TabsModule} from 'ngx-bootstrap';
+import {TooltipModule} from 'ngx-bootstrap';
 import {NgZorroAntdModule} from 'ng-zorro-antd';
 import {PaginationModule} from 'ngx-bootstrap';
 import {NZ_NOTIFICATION_CONFIG} from 'ng-zorro-antd';
@@ -21,6 +22,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     TabsModule.forRoot(),
     ModalModule.forRoot(),
     NgZorroAntdModule.forRoot(),
+    TooltipModule.forRoot(),
     PaginationModule.forRoot()
   ],
   declarations: [

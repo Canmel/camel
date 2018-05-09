@@ -67,13 +67,13 @@ export class UserListComponent implements OnInit {
 
   edit(obj: Object) {
     console.log(obj);
-    this.route.navigate([Urls.BUSINESS.ROLES.EDIT], {queryParams: obj});
+    this.route.navigate([Urls.BUSINESS.USERS.EDIT], {queryParams: obj});
   }
 
   delete(template: TemplateRef<any>, id, name) {
     this.preDelete['name'] = name;
     this.preDelete['id'] = id;
-    this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
+    this.modalRef = this.modalService.show(template, {class: 'modal-sm modal-position'});
   }
 
   addRoles(template: TemplateRef<any>, id) {

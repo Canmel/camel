@@ -86,7 +86,6 @@ export class RolesListComponent implements OnInit {
         if (this.roleDetail['menus']) {
           this.roleDetail['menus'].forEach(menu => {
             sd.forEach(function (value, index) {
-              console.log('111');
               if (value['key'] === menu['id']) {
                 sd[index].direction = 'left';
               }

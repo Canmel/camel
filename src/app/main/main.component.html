@@ -7,19 +7,17 @@
     <a routerLinkActive="active" class="logo" routerLink="{{homeUrl}}">
       ANGULAR<span>UI</span>
     </a>
-    <ul class="nav pull-right top-menu" style="margin-top: 15px;">
-      <li class="dropdown">
-        <a data-toggle="dropdown" class="dropdown-toggle" href="#" aria-expanded="true">
-          <img alt="" src="../../assets/images/avatar-mini.jpg">
-          <span class="username">{{currentUser.name}}</span>
-          <b class="caret"></b>
-        </a>
-        <ul class="dropdown-menu extended logout">
-          <li><a routerLinkActive="active" routerLink="/app/charts"><i class=" fa fa-suitcase"></i>个人资料</a></li>
-          <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
-          <li><a (click)="toLogOut()"><i class=" fa fa-key"></i>注销</a></li>
-        </ul>
-      </li>
+    <ul class="nav pull-right top-menu">
+      <a data-toggle="dropdown" class="dropdown-toggle" href="#" aria-expanded="true">
+        <nz-avatar nzText="{{currentUser.name}}" nzSize="large"
+                   style="color:#f56a00; background-color:#fde3cf;"></nz-avatar>
+        <b class="caret"></b>
+      </a>
+      <ul class="dropdown-menu extended logout" style="top:100%;">
+        <li><a routerLinkActive="active" routerLink="/app/charts"><i class=" fa fa-suitcase"></i>个人资料</a></li>
+        <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
+        <li><a (click)="toLogOut()"><i class=" fa fa-key"></i>注销</a></li>
+      </ul>
     </ul>
   </header>
   <aside>

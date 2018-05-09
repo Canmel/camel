@@ -57,6 +57,11 @@ export const Urls = {
       ADD: `/app/menus/add`,
       EDIT: `/app/menus/edit`
     },
+    FLOWS: {
+      LIST: `/app/flows`,
+      ADD: `/app/flows/add`,
+      EDIT: `/app/flows/edit`
+    },
     MAIN: {
       HOME: `/app/home`
     }

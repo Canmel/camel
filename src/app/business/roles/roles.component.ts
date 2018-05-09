@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, OnChanges} from '@angular/core';
 import * as $ from 'jquery';
 import {HttpclientService} from '../../public/httpclient.service';
 
@@ -7,12 +7,17 @@ import {HttpclientService} from '../../public/httpclient.service';
   templateUrl: './roles.component.html',
   styleUrls: ['./roles.component.css']
 })
-export class RolesComponent implements OnInit {
+export class RolesComponent implements OnInit, OnChanges {
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
     $('body').css('background-color', '#e5e6e6');
+  }
+
+  ngOnChanges() {
+    alert('change');
   }
 
 }
