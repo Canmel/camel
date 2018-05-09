@@ -10,6 +10,9 @@ import {Urls} from '../public/url';
 export class LeftComponent implements OnInit {
 
   menus = {};
+
+  storage = window.sessionStorage;
+
   constructor() {
     this.menus = Urls.BUSINESS;
   }

@@ -4,7 +4,7 @@
       <a routerLinkActive="active" routerLink="/app/home">
         <i class="fa fa-dashboard">
         </i>
-        <span>Dashboard</span>
+        <span>首页</span>
       </a>
     </li>
     <li class="sub-menu">
@@ -31,6 +31,16 @@
         <li><a routerLinkActive="active" routerLink="{{menus.ROLES.LIST}}">角色管理</a></li>
         <li><a routerLinkActive="active" routerLink="{{menus.MENUS.LIST}}">菜单管理</a></li>
         <li><a routerLinkActive="active" routerLink="/app/prompt/modal">图标</a></li>
+      </ul>
+    </li>
+
+    <li class="sub-menu">
+      <a href="javascript:;" (click)="showOrHideMenu($event)">
+        <i class="fa fa-cog"></i>
+        <span>工作流</span>
+      </a>
+      <ul class="sub">
+        <li><a routerLinkActive="active" routerLink="{{menus.FLOWS.LIST}}">工作流程</a></li>
       </ul>
     </li>
   </ul>

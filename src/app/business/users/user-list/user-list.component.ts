@@ -25,6 +25,12 @@ export class UserListComponent implements OnInit {
 
   preDelete = {};
 
+  userDetail = {};
+
+  allRoles = [];
+
+  list: any[] = [];
+
   paginationParams = {
     totalCount: 66,
     pageSize: 10,
@@ -61,13 +67,66 @@ export class UserListComponent implements OnInit {
 
   edit(obj: Object) {
     console.log(obj);
-    this.route.navigate([Urls.BUSINESS.ROLES.EDIT], {queryParams: obj});
+    this.route.navigate([Urls.BUSINESS.USERS.EDIT], {queryParams: obj});
   }
 
   delete(template: TemplateRef<any>, id, name) {
     this.preDelete['name'] = name;
     this.preDelete['id'] = id;
-    this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
+    this.modalRef = this.modalService.show(template, {class: 'modal-sm modal-position'});
+  }
+
+  addRoles(template: TemplateRef<any>, id) {
+    this.https.get(Urls.ROLES.ALL).then(resp => {
+      this.allRoles = resp['root'];
+      this.https.get(Urls.USERS.DETAILS + id).then(details => {
+        this.userDetail = details['root'];
+        console.log('122121');
+        const sd = [];
+        this.allRoles.forEach(function (val) {
+          sd.push({
+            key: val['id'],
+            title: val['name'],
+            direction: 'right'
+          });
+        });
+        if (this.userDetail['roles']) {
+          this.userDetail['roles'].forEach(role => {
+            sd.forEach(function (value, index) {
+              if (value['key'] === role['id']) {
+                sd[index].direction = 'left';
+              }
+            });
+          });
+        }
+        this.list = sd;
+      });
+    });
+
+    this.modalRef = this.modalService.show(template, {class: 'modal-md modal-position'});
+  }
+
+  change(ret: any) {
+    this.updateRoleList(ret);
+  }
+
+  select() {
+
+  }
+
+  roleConfirm() {
+    console.log(this.userDetail);
+    const roleIds = [];
+    this.list.forEach(function (value, index, array) {
+      if (value['direction'] === 'left') {
+        roleIds.push(value['key']);
+      }
+    });
+    this.userDetail['roleIds'] = roleIds;
+    this.https.post(Urls.USERS.UPDATEROLES, this.userDetail).then(resp => {
+      this._notification.success('成功', resp['msg']);
+    });
+    this.modalRef.hide();
   }
 
   confirm() {
@@ -103,6 +162,19 @@ export class UserListComponent implements OnInit {
     totalPage = Math.trunc(totalPage) === totalPage ? totalPage : totalPage + 1;
     this.paginationParams.totalPage = totalPage;
     this.paginationParams.currentPage = data['pageNum'];
+  }
+
+  updateRoleList(ret: any) {
+    if (ret['list'] == null) {
+      return this.list;
+    }
+    this.list.forEach(function (item) {
+      ret['list'].forEach(function (c) {
+        if (c['key'] === item['key']) {
+          item.direction = ret['to'];
+        }
+      });
+    });
   }
 
 }

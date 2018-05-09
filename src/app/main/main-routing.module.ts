@@ -40,6 +40,9 @@ const mainRoutes: Routes =
       }, {
         path: 'roles',
         loadChildren: 'app/business/roles/roles.module#RolesModule'
+      }, {
+        path: 'flows',
+        loadChildren: 'app/business/work-flow/work-flow.module#WorkFlowModule'
       }
     ]
   }];

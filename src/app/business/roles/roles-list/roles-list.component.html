@@ -44,18 +44,26 @@
                         <td>{{role.name}}</td>
                         <td>{{role.description}}</td>
                         <td>
-                          <span class="label label-success label-mini" *ngIf="role.status == '1'">
+                          <span *ngIf="role.status == '1'">
                             <i class="fa fa-check"></i>
                           </span>
-                          <span class="label label-danger label-mini" *ngIf="role.status == '2'">
+                          <span *ngIf="role.status == '2'">
                             <i class="fa fa-lock"></i>
                           </span>
                         </td>
                         <td class="actions-hover actions-fade">
-                          <a class="operation-links" (click)='edit({"id": role.id})'><i
-                            class="fa fa-pencil fa-fw"></i></a>
-                          <a class="delete-row operation-links" (click)="delete(template, role.id, role.description)">
+                          <span class="label label-primary label-mini" tooltip="编辑角色" placement="left">
+                            <a class="operation-links a-white" (click)='edit({"id": role.id})'><i
+                              class="fa fa-pencil fa-fw"></i></a>
+                          </span>
+                          <span class="label label-danger label-mini" tooltip="删除角色" placement="top">
+                          <a class="delete-row operation-links a-white" (click)="delete(template, role.id, role.description)">
                             <i class="fa fa-trash-o fa-fw"></i></a>
+                          </span>
+                          <span class="label label-info label-mini" tooltip="点击添加菜单" placement="right">
+                          <a class="delete-row operation-links a-white" (click)="addMenus(menutemplate, role.id, role.description)">
+                            <i class="fa fa-users fa-fw"></i></a>
+                          </span>
                         </td>
                       </tr>
                       <tr class="text-center" *ngIf="!roles">
@@ -71,6 +79,20 @@
                         <p>你确定要删除 <b>{{preDelete.name}}</b> 吗？</p>
                         <button type="button" class="btn btn-primary" (click)="confirm()">是</button>
                         <button type="button" class="btn btn-default" (click)="decline()">否</button>
+                      </div>
+                    </ng-template>
+
+                    <ng-template #menutemplate>
+                      <div class="modal-body text-center">
+                        <nz-transfer
+                          [nzDataSource]="list"
+                          [nzTitles]="['已装配', '未装配']"
+                          (nzSelectChange)="select($event)"
+                          (nzChange)="change($event)">
+                        </nz-transfer>
+                        <br/>
+                        <button type="button" class="btn btn-primary" (click)="menusConfirm()">保存</button>
+                        <button type="button" class="btn btn-default" (click)="decline()">取消</button>
                       </div>
                     </ng-template>
                   </div>

@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import * as $ from 'jquery';
-import {HttpclientService} from '../../public/httpclient.service';
 
 @Component({
   selector: 'app-users',
@@ -9,7 +8,7 @@ import {HttpclientService} from '../../public/httpclient.service';
 })
 export class UsersComponent implements OnInit {
 
-  constructor(private http: HttpclientService) {
+  constructor() {
   }
 
   ngOnInit() {

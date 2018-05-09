@@ -59,8 +59,9 @@ export class UserEditComponent implements OnInit {
     this.activatedRoute.queryParams.subscribe(queryParams => {
       this.formData['id'] = queryParams['id'];
     });
+
     this.https.get(Urls.USERS.DETAILS + this.formData['id']).then(resp => {
-      const userDetails = resp['obj'];
+      const userDetails = resp['root'];
       this.formData = userDetails;
     });
   }

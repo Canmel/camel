@@ -50,18 +50,31 @@
                         <td>{{user.mobile}}</td>
                         <td>{{user.description}}</td>
                         <td>
-                          <span class="label label-success label-mini" *ngIf="user.status == '1'">
+                          <span *ngIf="user.status == '1'">
                             <i class="fa fa-check"></i>
                           </span>
-                          <span class="label label-danger label-mini" *ngIf="user.status == '2'">
+                          <span *ngIf="user.status == '2'">
                             <i class="fa fa-lock"></i>
                           </span>
                         </td>
                         <td class="actions-hover actions-fade">
-                          <a class="operation-links" (click)='edit({"id": user.id})'><i
+                          <span class="label label-primary label-mini" tooltip="修改用户" placement="left"
+                                (click)='edit({"id": user.id})'>
+                          <a class="operation-links a-white"><i
                             class="fa fa-pencil fa-fw"></i></a>
-                          <a class="delete-row operation-links" (click)="delete(template, user.id, user.nickname)">
+                          </span>
+
+                          <span class="label label-danger label-mini" tooltip="删除用户" placement="top"
+                                (click)="delete(template, user.id, user.nickname)">
+                          <a class="delete-row operation-links a-white">
                             <i class="fa fa-trash-o fa-fw"></i></a>
+                          </span>
+
+                          <span class="label label-info label-mini" tooltip="添加角色" placement="right"
+                                (click)="addRoles(roletemplate, user.id)">
+                          <a class="delete-row operation-links a-white">
+                            <i class="fa fa-users fa-fw"></i></a>
+                          </span>
                         </td>
                       </tr>
                       <tr class="text-center" *ngIf="!users">
@@ -71,6 +84,20 @@
                       </tr>
                       </tbody>
                     </table>
+
+                    <ng-template #roletemplate>
+                      <div class="modal-body text-center">
+                        <nz-transfer
+                          [nzDataSource]="list"
+                          [nzTitles]="['已装配', '未装配']"
+                          (nzSelectChange)="select($event)"
+                          (nzChange)="change($event)">
+                        </nz-transfer>
+                        <br/>
+                        <button type="button" class="btn btn-primary" (click)="roleConfirm()">保存</button>
+                        <button type="button" class="btn btn-default" (click)="decline()">取消</button>
+                      </div>
+                    </ng-template>
 
                     <ng-template #template>
                       <div class="modal-body text-center">

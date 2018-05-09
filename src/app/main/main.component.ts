@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {Properties} from '../public/properties';
 import {Router} from '@angular/router';
-import * as $ from 'jquery';
 import {Https} from '../public/https.service';
 import {Urls} from '../public/url';
 import {HttpclientService} from '../public/httpclient.service';
+declare var $: any;
 
 @Component({
   selector: 'app-main',

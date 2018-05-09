@@ -25,6 +25,12 @@ export class RolesListComponent implements OnInit {
 
   preDelete = {};
 
+  roleDetail = {};
+
+  subMenus = [];
+
+  list: any[] = [];
+
   paginationParams = {
     totalCount: 66,
     pageSize: 10,
@@ -59,10 +65,42 @@ export class RolesListComponent implements OnInit {
   }
 
   delete(template: TemplateRef<any>, id, name) {
-    console.log('');
     this.preDelete['name'] = name;
     this.preDelete['id'] = id;
     this.modalRef = this.modalService.show(template, {class: 'modal-sm modal-position'});
+  }
+
+  addMenus(template: TemplateRef<any>, id) {
+    this.https.get(Urls.MENUS.SUBS).then(resp => {
+      this.subMenus = resp['root'];
+      this.https.get(Urls.ROLES.DETAILS + id).then(details => {
+        this.roleDetail = details['root'];
+        const sd = [];
+        this.subMenus.forEach(function (val) {
+          sd.push({
+            key: val['id'],
+            title: val['name'],
+            direction: 'right'
+          });
+        });
+        if (this.roleDetail['menus']) {
+          this.roleDetail['menus'].forEach(menu => {
+            sd.forEach(function (value, index) {
+              if (value['key'] === menu['id']) {
+                sd[index].direction = 'left';
+              }
+            });
+          });
+        }
+        this.list = sd;
+      });
+    });
+
+    this.modalRef = this.modalService.show(template, {class: 'modal-md modal-position'});
+  }
+
+  change(ret: any) {
+    this.updateMenuList(ret);
   }
 
   confirm() {
@@ -75,6 +113,20 @@ export class RolesListComponent implements OnInit {
       }
       this.query();
     });
+  }
+
+  menusConfirm() {
+    const menuIds = [];
+    this.list.forEach(function (value, index, array) {
+      if (value['direction'] === 'left') {
+        menuIds.push(value['key']);
+      }
+    });
+    this.roleDetail['menuIds'] = menuIds;
+    this.https.post(Urls.ROLES.UPDATEMENUS, this.roleDetail).then(resp => {
+      this._notification.success('成功', resp['msg']);
+    });
+    this.modalRef.hide();
   }
 
   decline() {
@@ -92,5 +144,18 @@ export class RolesListComponent implements OnInit {
 
   toAddRole() {
     this.route.navigate([Urls.BUSINESS.ROLES.ADD]);
+  }
+
+  updateMenuList(ret: any) {
+    if (ret['list'] == null) {
+      return this.list;
+    }
+    this.list.forEach(function (menu) {
+      ret['list'].forEach(function (c) {
+        if (c['key'] === menu['key']) {
+          menu.direction = ret['to'];
+        }
+      });
+    });
   }
 }
