@@ -43,8 +43,7 @@
         "../src/assets/js/scripts.js",
         "../src/assets/js/echarts.js",
         "../src/assets/js/initEcharts.js",
-        "../src/assets/js/map.js",
-        "../src/assets/js/skel.min.js"
+        "../src/assets/js/map.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {
