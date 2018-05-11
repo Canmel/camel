@@ -43,5 +43,15 @@
         <li><a routerLinkActive="active" routerLink="{{menus.FLOWS.LIST}}">工作流程</a></li>
       </ul>
     </li>
+
+    <li class="sub-menu">
+      <a href="javascript:;" (click)="showOrHideMenu($event)">
+        <i class="fa fa-cog"></i>
+        <span>财务管理</span>
+      </a>
+      <ul class="sub">
+        <li><a routerLinkActive="active" routerLink="{{menus.REIMBURSEMENT.LIST}}">报销申请</a></li>
+      </ul>
+    </li>
   </ul>
 </div>

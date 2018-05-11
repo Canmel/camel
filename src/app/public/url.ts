@@ -1,3 +1,5 @@
+import {ReimbursementComponent} from '../business/reimbursement/reimbursement.component';
+
 export const Urls = {
   GetBillTypes: `/return/thumbnail`,
   PROJECTS: `/project`,
@@ -20,6 +22,13 @@ export const Urls = {
     UPDATEMENUS: `/api/roles/menus`,
     ALL: `/api/roles/all`
   },
+  REIMBURSEMENT: {
+    PAGEQUERY: `/api/reimbursement`,
+    SAVE: `/api/reimbursement`,
+    DETAILS: `/api/reimbursement/`,
+    DELETE: `/api/reimbursement/`,
+    EDIT: `/api/reimbursement/`
+  },
   MENUS: {
     PAGEQUERY: `/api/menus`,
     SAVE: `/api/menus`,
@@ -28,6 +37,13 @@ export const Urls = {
     EDIT: `/api/menus/`,
     TOPMENUS: `/api/menus/tops`,
     SUBS: `/api/menus/subs`
+  },
+  WORKFLOW: {
+    PAGEQUERY: `/api/workflow`,
+    TYPES: `/api/workflow/types`,
+    SAVE: `/api/workflow`,
+    EDIT: `/api/workflow/`,
+    DETAILS: `/api/workflow/`
   },
   OPTIONS: {
     MENUS: {
@@ -64,6 +80,16 @@ export const Urls = {
     },
     MAIN: {
       HOME: `/app/home`
+    },
+    WORKFLOW: {
+      LIST: `/app/flows`,
+      ADD: `/app/flows/add`,
+      EDIT: `/app/flows/edit`
+    },
+    REIMBURSEMENT: {
+      LIST: `/app/reimbursement`,
+      ADD: `/app/reimbursement/add`,
+      EDIT: `/app/reimbursement/edit`
     }
   }
 };

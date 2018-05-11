@@ -846,7 +846,7 @@
     }
   };
   a.init = function (x, r) {
-    var v = b(window).width(), e = b(window).height(), y = Raphael(x, v * 1.5, e * 1.5), q = {}, g = {};
+    var v = b("#flow-body").width(), e = b(window).height(), y = Raphael(x, v, e), q = {}, g = {};
     b.extend(true, a.config, r);
     b(document).keydown(function (i) {
       if (!a.config.editable) {
@@ -978,7 +978,7 @@
           i = i.substring(0, i.length - 1)
         }
         i += "}}}";
-        a.config.tools.save.onclick(i)
+        a.config.tools.save.onclick(i, 'workflowTemplate');
       });
       new a.props({}, y)
     }

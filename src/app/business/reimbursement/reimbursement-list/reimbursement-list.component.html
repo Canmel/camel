@@ -8,6 +8,9 @@
         <div class="form-group">
           <input name="name" class="form-control" id="name" placeholder="名称" [(ngModel)]="params.name">
         </div>
+        <div class="form-group">
+          <input name="description" class="form-control" id="description" placeholder="备注" [(ngModel)]="params.name">
+        </div>
         <button type="submit" (click)="query()" class="btn btn-success">查询</button>
       </form>
     </div>
@@ -22,7 +25,7 @@
           <tabset>
             <tab>
               <ng-template tabHeading>
-                <i class="fa fa-home">&nbsp;流程列表</i>
+                <i class="fa fa-home">&nbsp;报销申请列表</i>
               </ng-template>
               <div class="panel-body-min">
                 <div class="tab-content">
@@ -30,40 +33,35 @@
                     <table class="table no-margin">
                       <thead>
                       <tr>
-                        <th>名称</th>
+                        <th>描述</th>
+                        <th>金额</th>
                         <th>状态</th>
-                        <th>是否发布</th>
                         <th class="col-md-2">操作</th>
                       </tr>
                       </thead>
                       <tbody>
-                      <tr *ngFor="let flow of workFlows">
-                        <td>{{flow.name}}</td>
+                      <tr *ngFor="let item of reimbursements">
+                        <td>{{item.description}}</td>
+                        <td>{{item.amount}}</td>
                         <td>
-                          <i class="fa fa-thumbs-o-up" *ngIf="flow.isPublic == '1'"></i>
-
-                          <i class="fa fa-times-circle" *ngIf="flow.isPublic == '0'"></i></td>
-                        <td>
-                          <span *ngIf="flow.status == '1'">
+                          <span *ngIf="item.status == '1'">
                             <i class="fa fa-check"></i>
                           </span>
-                          <span *ngIf="flow.status == '2'">
+                          <span *ngIf="item.status == '0'">
                             <i class="fa fa-lock"></i>
                           </span>
                         </td>
                         <td class="actions-hover actions-fade">
-                          <span class="label label-primary label-mini" tooltip="编辑流程" placement="left">
-                            <a class="operation-links a-white" (click)='edit({"id": flow.id})'><i
+                          <span class="label label-primary label-mini" tooltip="编辑报销申请" placement="left">
+                            <a class="operation-links a-white" (click)='edit({"id": item.id})'><i
                               class="fa fa-pencil fa-fw"></i></a>
                           </span>
-                          <span class="label label-danger label-mini" tooltip="删除流程" placement="top">
-                          <a class="delete-row operation-links a-white"
-                             (click)="delete(template, flow.id, role.name)">
+                          <span class="label label-danger label-mini" tooltip="删除报销申请" placement="top">
+                          <a class="delete-row operation-links a-white" (click)="delete(template, item.id, item.desc)">
                             <i class="fa fa-trash-o fa-fw"></i></a>
                           </span>
-                          <span class="label label-info label-mini" tooltip="点击添加流程" placement="right">
-                          <a class="delete-row operation-links a-white"
-                             (click)="addMenus(menutemplate, role.id, role.description)">
+                          <span class="label label-info label-mini" tooltip="点击发起流程" placement="right">
+                          <a class="delete-row operation-links a-white" (click)="addMenus(menutemplate, item.id, item.desc)">
                             <i class="fa fa-users fa-fw"></i></a>
                           </span>
                         </td>
@@ -109,10 +107,10 @@
                 </div>
               </div>
             </tab>
-            <tab (click)="toAddRole()">
-              <div (click)="toAddRole()">
+            <tab (click)="add()">
+              <div (click)="add()">
                 <ng-template tabHeading>
-                  <a (click)="toAddFlow()"><i class=" fa fa-bars">&nbsp;新建</i></a>
+                  <a (click)="add()"><i class=" fa fa-bars">&nbsp;新建</i></a>
                 </ng-template>
               </div>
             </tab>
