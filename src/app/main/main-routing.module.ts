@@ -4,6 +4,7 @@ import {MainComponent} from './main.component';
 import {Https} from '../public/https.service';
 import {HttpclientService} from '../public/httpclient.service';
 import {MenusModule} from '../business/menus/menus.module';
+import {StatusHelper} from '../public/helper/statusHelper';
 
 /**
  * 主体路由
@@ -43,6 +44,9 @@ const mainRoutes: Routes =
       }, {
         path: 'flows',
         loadChildren: 'app/business/work-flow/work-flow.module#WorkFlowModule'
+      }, {
+        path: 'reimbursement',
+        loadChildren: 'app/business/reimbursement/reimbursement.module#ReimbursementModule'
       }
     ]
   }];
@@ -54,7 +58,7 @@ const mainRoutes: Routes =
   exports: [
     RouterModule
   ],
-  providers: [Https, HttpclientService]
+  providers: [Https, HttpclientService, StatusHelper]
 })
 export class MainRoutingModule {
 }

@@ -8,6 +8,7 @@ import {BsModalService} from 'ngx-bootstrap/modal';
 import {Role} from '../../../public/entity/role';
 import {Urls} from '../../../public/url';
 import * as $ from 'jquery';
+import {WorkFlow} from '../../../public/entity/workFlow';
 
 @Component({
   selector: 'app-work-flow-list',
@@ -17,6 +18,8 @@ import * as $ from 'jquery';
 export class WorkFlowListComponent implements OnInit {
 
   params: Map<string, any>;
+
+  workFlows: WorkFlow[];
 
   paginationParams = {
     totalCount: 66,
@@ -34,9 +37,25 @@ export class WorkFlowListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.https.get(Urls.WORKFLOW.PAGEQUERY, {}).then(data => {
+      this.configParams(data);
+    });
+  }
+
+  configParams(data) {
+    this.workFlows = data['root'];
+    this.paginationParams.totalCount = data['totalProperty'];
+    let totalPage = this.paginationParams.totalCount / this.paginationParams.pageSize;
+    totalPage = Math.trunc(totalPage) === totalPage ? totalPage : totalPage + 1;
+    this.paginationParams.totalPage = totalPage;
+    this.paginationParams.currentPage = data['pageNum'];
   }
 
   toAddFlow() {
     this.route.navigate([Urls.BUSINESS.FLOWS.ADD]);
+  }
+
+  edit(obj: Object) {
+    this.route.navigate([Urls.BUSINESS.WORKFLOW.EDIT], {queryParams: obj});
   }
 }

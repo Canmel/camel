@@ -4,6 +4,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TabsModule} from 'ngx-bootstrap';
 import {TooltipModule} from 'ngx-bootstrap';
 import {NgZorroAntdModule} from 'ng-zorro-antd';
+import {NzFormItemDirective} from 'ng-zorro-antd';
 import {PaginationModule} from 'ngx-bootstrap';
 import {NZ_NOTIFICATION_CONFIG} from 'ng-zorro-antd';
 import {ModalModule} from 'ngx-bootstrap/modal';
@@ -32,7 +33,8 @@ import {WorkFlowRoutingModule} from './work-flow-routing.module';
     WorkFlowComponent
   ],
   providers: [
-    {provide: NZ_NOTIFICATION_CONFIG, useValue: {nzTop: '10%'}}
+    {provide: NZ_NOTIFICATION_CONFIG, useValue: {nzTop: '10%'}},
+    NzFormItemDirective
   ]
 })
 export class WorkFlowModule {

@@ -7,42 +7,43 @@
   </div>
 
 
-  <div class="node" id="myflow_save"><img src="assets/images/flows/save.gif"/>&nbsp;&nbsp;保存</div>
+  <div class="node" id="myflow_save" (click)="toSave(title, content, foot)"><i class="fa fa-floppy-o"></i>&nbsp;&nbsp;保存</div>
   <div>
     <hr/>
   </div>
-  <div class="node selectable" id="pointer"><img
-    src="assets/images/flows/select16.gif"/>&nbsp;&nbsp;选择
+  <div class="node selectable" id="return" (click)="backToList()">
+    <i class="fa fa-backward"></i>&nbsp;&nbsp;返回
   </div>
-  <div class="node selectable" id="path"><img
-    src="assets/images/flows/16/flow_sequence.png"/>&nbsp;&nbsp;转换
+  <div class="node selectable" id="pointer"><i class="fa fa-hand-o-up"></i>&nbsp;&nbsp;选择
+  </div>
+  <div class="node selectable" id="path"><i class="fa fa-long-arrow-right "></i>&nbsp;&nbsp;转换
   </div>
   <div>
     <hr/>
   </div>
-  <div class="node state" id="start" type="start"><img
-    src="assets/images/flows/16/start_event_empty.png"/>&nbsp;&nbsp;开始
+  <div class="node state" id="start" type="start">
+    <i class="fa fa-circle-o" style="color: #93c561;"></i>&nbsp;&nbsp;开始
   </div>
-  <div class="node state" id="state" type="state"><img
-    src="assets/images/flows/16/task_empty.png"/>&nbsp;&nbsp;状态
+  <div class="node state" id="state" type="state">
+    <i class="fa fa-square-o" style="color: #828ff3;"></i>&nbsp;&nbsp;状态
   </div>
-  <div class="node state" id="task" type="task"><img
-    src="assets/images/flows/16/task_empty.png"/>&nbsp;&nbsp;任务
+  <div class="node state" id="task" type="task">
+    <i class="fa fa-square-o" style="color: #828ff3;"></i>&nbsp;&nbsp;任务
   </div>
-  <div class="node state" id="fork" type="fork"><img
-    src="assets/images/flows/16/gateway_parallel.png"/>&nbsp;&nbsp;分支
+  <div class="node state" id="fork" type="fork">
+    <i class="fa fa-plus-square" style="color: #9e951d;"></i>&nbsp;&nbsp;分支
   </div>
-  <div class="node state" id="join" type="join"><img
-    src="assets/images/flows/16/gateway_parallel.png"/>&nbsp;&nbsp;合并
+  <div class="node state" id="join" type="join">
+    <i class="fa fa-plus-square" style="color: #9e951d;"></i>&nbsp;&nbsp;合并
   </div>
-  <div class="node state" id="end" type="end"><img
-    src="assets/images/flows/16/end_event_terminate.png"/>&nbsp;&nbsp;结束
+  <div class="node state" id="end" type="end">
+    <i class="fa fa-dot-circle-o" style="color: rgb(255, 179, 179)"></i>&nbsp;&nbsp;结束
   </div>
-  <div class="node state" id="end-cancel" type="end-cancel"><img
-    src="assets/images/flows/16/end_event_cancel.png"/>&nbsp;&nbsp;取消
+  <div class="node state" id="end-cancel" type="end-cancel">
+    <i class="fa fa-times-circle" style="color: rgb(255, 179, 179)"></i>&nbsp;&nbsp;取消
   </div>
-  <div class="node state" id="end-error" type="end-error"><img
-    src="assets/images/flows/16/end_event_error.png"/>&nbsp;&nbsp;错误
+  <div class="node state" id="end-error" type="end-error">
+    <i class="fa fa-times-circle-o" style="color: rgb(255, 179, 179)"></i>&nbsp;&nbsp;错误
   </div>
 </div>
 
@@ -63,3 +64,60 @@
 
 <div id="myflow"></div>
 </div>
+
+<ng-template #title>
+  <span>对话框标题模板</span>
+</ng-template>
+<ng-template #content>
+  <div>
+    <form nz-form [formGroup]="validateForm" class="login-form form-center" (ngSubmit)="_submitForm()" id="addWorkFlowForm">
+      <div nz-form-item style="display: none;">
+        <div nz-form-control>
+          <nz-input formControlName="flow" [(ngModel)]="formData.flow"  [nzSize]="'large'" id="flow">
+            <ng-template #prefix>
+              <i class="anticon anticon-user"></i>
+            </ng-template>
+          </nz-input>
+        </div>
+      </div>
+      <div nz-form-item>
+        <div nz-form-control>
+          <nz-input formControlName="flowName" [(ngModel)]="formData.name" [nzPlaceHolder]="'流程名称'" [nzSize]="'large'">
+            <ng-template #prefix>
+              <i class="anticon anticon-user"></i>
+            </ng-template>
+          </nz-input>
+          <div nz-form-explain
+               *ngIf="validateForm.controls.flowName.dirty&&validateForm.controls.flowName.hasError('required')">
+            流程名称不能为空!
+          </div>
+          <div nz-form-explain
+               *ngIf="validateForm.controls.flowName.dirty&&validateForm.controls.flowName.hasError('maxlength')">
+            流程名长度在1-12个字符之间!
+          </div>
+        </div>
+      </div>
+      <nz-select formControlName="workflowType" [(ngModel)]="formData.flowType"
+                 [nzPlaceHolder]="'选择工作流类型'" nzAllowClear>
+        <nz-option
+          *ngFor="let option of workFlowType"
+          [nzLabel]="option.label"
+          [nzValue]="option.value">
+        </nz-option>
+      </nz-select>
+      <div nz-form-explain
+           *ngIf="validateForm.controls.workflowType.dirty&&validateForm.controls.workflowType.hasError('required')">
+        请选择工作流类型
+      </div>
+      <div class="btn-center" style="min-height: 50px; margin-top: 2rem;" nz-form-control>
+        <div nz-form-item style="height: 5rem;">
+          <button nz-button [nzType]="'primary'" [nzSize]="''">保存
+          </button>
+          <a class="btn btn-default btn-sm" (click)="cancel()">取消
+          </a>
+        </div>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
