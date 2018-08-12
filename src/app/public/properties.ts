@@ -6,7 +6,8 @@ export const Properties = {
       AUTHENTICATED: `AUTHENTICATED`,
       PRINCIPAL: `PRINCIPAL`,
       NAME: `NAME`,
-      NICKNAME: `NICKNAME`
+      NICKNAME: `NICKNAME`,
+      ACCESS_TOKEN: `ACCESS_TOKEN`
     }
   }
 };

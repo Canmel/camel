@@ -21,13 +21,15 @@ export class MainComponent implements OnInit {
 
   constructor(public router: Router, public http: Https, public httpClient: HttpclientService) {
     this.homeUrl = Urls.BUSINESS.MAIN.HOME;
-    if (!sessionStorage.getItem(Properties.STRING.SESSION.AUTHENTICATED)) {
+    if (!sessionStorage.getItem(Properties.STRING.SESSION.ACCESS_TOKEN)) {
       this.router.navigate(['login']);
     }
     this.currentUser.name = sessionStorage.getItem(Properties.STRING.SESSION.NAME);
-    http.get(Urls.USERS.CURRENT, null).then(data => {
-      console.log('获取用户详情', data);
-      this.currentUser.name = data['nickname'];
+    http.get(Urls.USERS.CURRENT, {}).then(data => {
+      if (!data) { // 服务器session中已经没有当前用户，重新登录以刷新服务器session
+        this.router.navigate(['login']);
+      }
+      this.currentUser.name = data['username'];
     });
 
   }
@@ -36,8 +38,7 @@ export class MainComponent implements OnInit {
   }
 
   toLogOut() {
-    this.httpClient.get(Urls.SESSION.LOGOUT, {}).then(data => {
-      console.log('ss', data);
-    });
+    sessionStorage.clear();
+    this.router.navigate(['login']);
   }
 }

@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Urls} from '../url';
+import {Https} from '../https.service';
 
 @Component({
   selector: 'app-image-code',
@@ -8,12 +9,15 @@ import {Urls} from '../url';
 })
 export class ImageCodeComponent implements OnInit {
 
-  imageCodeUrl = Urls.SESSION.QRCODE;
+  imageCodeUrl = '0000';
 
-  constructor() {
+  constructor(public https: Https) {
   }
 
   ngOnInit() {
+    this.https.get(Urls.SESSION.QRCODE).then(data => {
+      this.imageCodeUrl = data['data']['verify'];
+    });
   }
 
 }

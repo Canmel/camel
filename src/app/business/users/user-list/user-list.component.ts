@@ -81,7 +81,6 @@ export class UserListComponent implements OnInit {
       this.allRoles = resp['root'];
       this.https.get(Urls.USERS.DETAILS + id).then(details => {
         this.userDetail = details['root'];
-        console.log('122121');
         const sd = [];
         this.allRoles.forEach(function (val) {
           sd.push({
@@ -150,18 +149,19 @@ export class UserListComponent implements OnInit {
   pageChanged($event) {
     console.log($event);
     this.params['currentPage'] = $event['page'];
-    this.https.get(Urls.USERS.PAGEQUERY, this.params).then(data => {
-      this.configParams(data);
+    this.https.get(Urls.USERS.PAGEQUERY, this.params).then(resp => {
+      this.configParams(resp);
     });
   }
 
-  configParams(data) {
-    this.users = data['root'];
-    this.paginationParams.totalCount = data['totalProperty'];
-    let totalPage = this.paginationParams.totalCount / this.paginationParams.pageSize;
-    totalPage = Math.trunc(totalPage) === totalPage ? totalPage : totalPage + 1;
+  configParams(page) {
+    // const page = resp['data'];
+    this.users = page['records'];
+    this.paginationParams.totalCount = page['total'];
+    this.paginationParams.pageSize = page['size'];
+    const totalPage = Math.ceil(this.paginationParams.totalCount / this.paginationParams.pageSize);
     this.paginationParams.totalPage = totalPage;
-    this.paginationParams.currentPage = data['pageNum'];
+    this.paginationParams.currentPage = page['current'];
   }
 
   updateRoleList(ret: any) {
