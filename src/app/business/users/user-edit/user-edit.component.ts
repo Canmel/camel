@@ -61,7 +61,8 @@ export class UserEditComponent implements OnInit {
     });
 
     this.https.get(Urls.USERS.DETAILS + this.formData['id']).then(resp => {
-      const userDetails = resp['root'];
+      console.log(1212);
+      const userDetails: any = resp;
       this.formData = userDetails;
     });
   }

@@ -53,7 +53,7 @@ export const Urls = {
   },
   SESSION: {
     LOGIN: `/auth/login`,
-    QRCODE: `/code/image`,
+    QRCODE: `/code/verify`,
     LOGOUT: `/signOut`,
     REJECTED: `/anth/require`
   },

@@ -3,6 +3,7 @@ import {Observable} from 'rxjs/Observable';
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {Urls} from './url';
+import {Properties} from './properties';
 
 @Injectable()
 export class Https {
@@ -23,9 +24,16 @@ export class Https {
     const headers: HttpHeaders = new HttpHeaders();
     headers.append('Content-type', 'application/x-www-form-urlencoded; charset=utf-8');
     headers.append('x-auth-token', token);
+    if (sessionStorage.getItem(Properties.STRING.SESSION.ACCESS_TOKEN)) {
+      if (!params) {
+        params = {};
+      }
+      params['access_token'] = sessionStorage.getItem(Properties.STRING.SESSION.ACCESS_TOKEN);
+    }
     if (params) {
       url = this.objAppendToUrl(url, params);
     }
+
     return this.http.get<T>(url, {
       headers: headers
     }).toPromise()
@@ -35,7 +43,10 @@ export class Https {
         }
       })
       .then(onfulfilled => {
-        return Promise.resolve(onfulfilled);
+        if (200 === onfulfilled['httpStatus']) {
+          return Promise.resolve(onfulfilled['data']);
+        }
+        alert('请求出错');
       });
   }
 

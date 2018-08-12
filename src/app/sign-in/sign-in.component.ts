@@ -38,10 +38,12 @@ export class SignInComponent implements OnInit {
         withCredentials: true
       },
       success: function (resp) {
-        sessionStorage.setItem(Properties.STRING.SESSION.AUTHENTICATED, JSON.stringify(resp.authenticated).replace(/\"/g, ''));
-        sessionStorage.setItem(Properties.STRING.SESSION.AUTHORITIES, JSON.stringify(resp.authorities).replace(/\"/g, ''));
-        sessionStorage.setItem(Properties.STRING.SESSION.DETAILS, JSON.stringify(resp.details).replace(/\"/g, ''));
-        sessionStorage.setItem(Properties.STRING.SESSION.NAME, JSON.stringify(resp.name).replace(/\"/g, ''));
+        console.log(resp);
+        sessionStorage.setItem(Properties.STRING.SESSION.ACCESS_TOKEN, resp.access_token);
+        sessionStorage.setItem(Properties.STRING.SESSION.AUTHENTICATED, '');
+        sessionStorage.setItem(Properties.STRING.SESSION.AUTHORITIES, '');
+        sessionStorage.setItem(Properties.STRING.SESSION.DETAILS, resp.data);
+        sessionStorage.setItem(Properties.STRING.SESSION.NAME, resp.data.username);
         login.route.navigate(['app/home']);
       },
       error: function (e, s, m) {
