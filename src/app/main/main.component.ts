@@ -25,11 +25,11 @@ export class MainComponent implements OnInit {
       this.router.navigate(['login']);
     }
     this.currentUser.name = sessionStorage.getItem(Properties.STRING.SESSION.NAME);
-    http.get(Urls.USERS.CURRENT, {}).then(data => {
-      if (!data) { // 服务器session中已经没有当前用户，重新登录以刷新服务器session
+    http.get(Urls.USERS.CURRENT, {}).then(resp => {
+      if (!resp) { // 服务器session中已经没有当前用户，重新登录以刷新服务器session
         this.router.navigate(['login']);
       }
-      this.currentUser.name = data['username'];
+      this.currentUser.name = resp['data']['username'];
     });
 
   }

@@ -33,6 +33,7 @@
                     <table class="table no-margin">
                       <thead>
                       <tr>
+                        <th>序号</th>
                         <th>用户名</th>
                         <th>昵称</th>
                         <th>邮箱</th>
@@ -43,7 +44,8 @@
                       </tr>
                       </thead>
                       <tbody>
-                      <tr *ngFor="let user of users">
+                      <tr *ngFor="let user of users index as i">
+                        <td>{{(paginationParams.currentPage - 1) * paginationParams.pageSize + i + 1}}</td>
                         <td>{{user.username}}</td>
                         <td>{{user.nickname}}</td>
                         <td>{{user.email}}</td>

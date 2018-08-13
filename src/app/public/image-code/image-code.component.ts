@@ -15,8 +15,8 @@ export class ImageCodeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.https.get(Urls.SESSION.QRCODE).then(data => {
-      this.imageCodeUrl = data['data']['verify'];
+    this.https.get(Urls.SESSION.QRCODE).then(resp => {
+      this.imageCodeUrl = resp['data']['verify'];
     });
   }
 

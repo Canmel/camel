@@ -21,6 +21,10 @@
                      *ngIf="validateForm.controls.userName.dirty&&validateForm.controls.userName.hasError('maxlength')">
                   用户名长度在1-6个字符之间!
                 </div>
+                <div nz-form-explain
+                     *ngIf="validateForm.controls.userName.dirty&&validateForm.controls.userName.hasError('minlength')">
+                  用户名长度在1-6个字符之间!
+                </div>
               </div>
             </div>
             <div nz-form-item>
@@ -79,14 +83,14 @@
             </div>
             <div nz-form-item>
               <div nz-form-control>
-                <nz-input formControlName="description" [(ngModel)]="formData.description" [nzPlaceHolder]="'备注'"
+                <nz-input formControlName="remarke" [(ngModel)]="formData.remarke" [nzPlaceHolder]="'备注'"
                           [nzSize]="large">
                   <ng-template #prefix>
                     <i class="anticon anticon-trademark"></i>
                   </ng-template>
                 </nz-input>
                 <div nz-form-explain
-                     *ngIf="validateForm.controls.description.dirty&&validateForm.controls.description.hasError('maxlength')">
+                     *ngIf="validateForm.controls.remarke.dirty&&validateForm.controls.remarke.hasError('maxlength')">
                   备注过长！
                 </div>
               </div>
