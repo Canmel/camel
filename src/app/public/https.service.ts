@@ -1,6 +1,7 @@
 import {HttpClient, HttpHeaders, HttpParams, HttpResponse} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import {Injectable} from '@angular/core';
+import {NzNotificationService} from 'ng-zorro-antd';
 import {Router} from '@angular/router';
 import {Urls} from './url';
 import {Properties} from './properties';
@@ -38,13 +39,13 @@ export class Https {
       headers: headers
     }).toPromise()
       .catch(error => {
-        if (error.url.endsWith(Urls.SESSION.REJECTED)) {
-          this.router.navigate(['login']);
-        }
       })
       .then(onfulfilled => {
         if (200 === onfulfilled['httpStatus']) {
-          return Promise.resolve(onfulfilled['data']);
+          return Promise.resolve(onfulfilled);
+        }
+        if (404 === onfulfilled['httpStatus']) {
+          alert('未找到请求页面');
         }
         alert('请求出错');
       });
@@ -68,7 +69,13 @@ export class Https {
         this.router.navigate(['login']);
       }
     }).then(onfulfilled => {
-      return Promise.resolve(onfulfilled);
+      if (200 === onfulfilled['httpStatus']) {
+        return Promise.resolve(onfulfilled['data']);
+      }
+      if (404 === onfulfilled['httpStatus']) {
+        alert('未找到请求页面');
+      }
+      alert('请求出错');
     });
   }
 
@@ -83,30 +90,43 @@ export class Https {
     const headers: HttpHeaders = new HttpHeaders();
     headers.append('Content-type', 'application/x-www-form-urlencoded; charset=utf-8');
     headers.append('x-auth-token', token);
+    if (sessionStorage.getItem(Properties.STRING.SESSION.ACCESS_TOKEN)) {
+      url = url + '?access_token=' + sessionStorage.getItem(Properties.STRING.SESSION.ACCESS_TOKEN);
+    }
     return this.http.put<T>(url, params, {
       headers: headers
-    }).toPromise().catch(error => {
-      if (error.url.endsWith(Urls.SESSION.REJECTED)) {
+    }).toPromise().catch(errorResp => {
+      if (errorResp.url.endsWith(Urls.SESSION.REJECTED)) {
         this.router.navigate(['login']);
       }
+      return Promise.reject(errorResp.error);
     }).then(onfulfilled => {
-      return Promise.resolve(onfulfilled);
+      if (200 === onfulfilled['httpStatus']) {
+        return Promise.resolve(onfulfilled);
+      }
+      return Promise.reject(onfulfilled);
     });
   }
 
   delete<T>(url: string, params, token?: string): Promise<void | Object> {
     const headers: HttpHeaders = new HttpHeaders();
     headers.append('Content-type', 'application/x-www-form-urlencoded; charset=utf-8');
-    headers.append('x-auth-token', token);
+    // headers.append('x-auth-token', token);
+
+
     url = url + params;
+    if (sessionStorage.getItem(Properties.STRING.SESSION.ACCESS_TOKEN)) {
+      url = url + '?access_token=' + sessionStorage.getItem(Properties.STRING.SESSION.ACCESS_TOKEN);
+    }
     return this.http.delete(url, {
       headers: headers
-    }).toPromise().catch(error => {
-      if (error.url.endsWith(Urls.SESSION.REJECTED)) {
-        this.router.navigate(['login']);
-      }
+    }).toPromise().catch(errorResp => {
+      return Promise.reject(errorResp);
     }).then(onfulfilled => {
-      return Promise.resolve(onfulfilled);
+      if (200 === onfulfilled['httpStatus']) {
+        return Promise.resolve(onfulfilled);
+      }
+      return Promise.reject(onfulfilled);
     });
 
   }

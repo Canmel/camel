@@ -133,12 +133,10 @@ export class UserListComponent implements OnInit {
       this.modalRef.hide();
       console.log(resp['code']);
       console.log(resp['code'] !== 200);
-      if (resp['code'] !== 200) {
-        this._notification.error('提示', '删除用户 ' + this.preDelete['name'] + ' 失败！');
-      } else {
-        this._notification.success('提示', '用户 ' + this.preDelete['name'] + ' 已被删除！');
-      }
+      this._notification.success('提示', resp['msg']);
       this.query();
+    }, errorResp => {
+      this._notification.error('失败', errorResp['msg']);
     });
   }
 
@@ -154,8 +152,8 @@ export class UserListComponent implements OnInit {
     });
   }
 
-  configParams(page) {
-    // const page = resp['data'];
+  configParams(resp) {
+    const page = resp['data'];
     this.users = page['records'];
     this.paginationParams.totalCount = page['total'];
     this.paginationParams.pageSize = page['size'];
