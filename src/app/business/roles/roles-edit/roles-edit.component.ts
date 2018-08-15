@@ -56,7 +56,9 @@ export class RolesEditComponent implements OnInit {
       this.formData['id'] = queryParams['id'];
     });
     this.https.get(Urls.ROLES.DETAILS + this.formData['id']).then(resp => {
-      this.formData = resp['root'];
+      this.formData = resp['data'];
+    }, errorResp => {
+      console.log(errorResp);
     });
   }
 
@@ -77,7 +79,7 @@ export class RolesEditComponent implements OnInit {
     ).then(
       (val) => {
         this._notification.success('成功', val['msg']);
-        this.route.navigate([Urls.BUSINESS.ROLES.LIST]).then();
+        this.route.navigate([Urls.BUSINESS.ROLES.LIST]);
       },
       response => {
         this._notification.error('失败', response['msg']);

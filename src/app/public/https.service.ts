@@ -38,7 +38,8 @@ export class Https {
     return this.http.get<T>(url, {
       headers: headers
     }).toPromise()
-      .catch(error => {
+      .catch(errorResp => {
+        return Promise.reject(errorResp.error);
       })
       .then(onfulfilled => {
         if (200 === onfulfilled['httpStatus']) {
@@ -62,6 +63,9 @@ export class Https {
     const headers: HttpHeaders = new HttpHeaders();
     headers.append('Content-type', 'application/x-www-form-urlencoded; charset=utf-8');
     headers.append('x-auth-token', token);
+    if (sessionStorage.getItem(Properties.STRING.SESSION.ACCESS_TOKEN)) {
+      url = url + '?access_token=' + sessionStorage.getItem(Properties.STRING.SESSION.ACCESS_TOKEN);
+    }
     return this.http.post<T>(url, params, {
       headers: headers
     }).toPromise().catch(error => {
@@ -70,12 +74,12 @@ export class Https {
       }
     }).then(onfulfilled => {
       if (200 === onfulfilled['httpStatus']) {
-        return Promise.resolve(onfulfilled['data']);
+        return Promise.resolve(onfulfilled);
       }
       if (404 === onfulfilled['httpStatus']) {
-        alert('未找到请求页面');
+        return Promise.reject(onfulfilled);
       }
-      alert('请求出错');
+      return Promise.reject(onfulfilled);
     });
   }
 
@@ -112,8 +116,6 @@ export class Https {
     const headers: HttpHeaders = new HttpHeaders();
     headers.append('Content-type', 'application/x-www-form-urlencoded; charset=utf-8');
     // headers.append('x-auth-token', token);
-
-
     url = url + params;
     if (sessionStorage.getItem(Properties.STRING.SESSION.ACCESS_TOKEN)) {
       url = url + '?access_token=' + sessionStorage.getItem(Properties.STRING.SESSION.ACCESS_TOKEN);
@@ -121,7 +123,7 @@ export class Https {
     return this.http.delete(url, {
       headers: headers
     }).toPromise().catch(errorResp => {
-      return Promise.reject(errorResp);
+      return Promise.reject(errorResp.error);
     }).then(onfulfilled => {
       if (200 === onfulfilled['httpStatus']) {
         return Promise.resolve(onfulfilled);

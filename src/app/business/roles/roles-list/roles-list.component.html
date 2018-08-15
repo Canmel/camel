@@ -6,10 +6,10 @@
     <div class="row">
       <form class="form-inline" role="form" id="searchForm">
         <div class="form-group">
-          <input name="name" class="form-control" id="name" placeholder="名称" [(ngModel)]="params.name">
+          <input name="name" class="form-control" id="name" placeholder="名称" [(ngModel)]="params.rolename">
         </div>
         <div class="form-group">
-          <input name="description" class="form-control" id="description" placeholder="备注" [(ngModel)]="params.name">
+          <input name="description" class="form-control" id="description" placeholder="备注" [(ngModel)]="params.description">
         </div>
         <button type="submit" (click)="query()" class="btn btn-success">查询</button>
       </form>
@@ -41,7 +41,7 @@
                       </thead>
                       <tbody>
                       <tr *ngFor="let role of roles">
-                        <td>{{role.name}}</td>
+                        <td>{{role.rolename}}</td>
                         <td>{{role.description}}</td>
                         <td>
                           <span *ngIf="role.status == '1'">

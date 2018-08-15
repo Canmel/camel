@@ -65,8 +65,8 @@ export class RolesAddComponent implements OnInit {
     this.http.post(Urls.ROLES.SAVE,
       this.formData)
       .then(
-        (val) => {
-          this._notification.success('成功', val['msg']);
+        resp => {
+          this._notification.success('成功', resp['msg']);
           this.route.navigate([Urls.BUSINESS.ROLES.LIST]);
         },
         response => {

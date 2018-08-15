@@ -6,7 +6,7 @@
           <form nz-form [formGroup]="validateForm" class="login-form form-center" (ngSubmit)="_submitForm()" id="addUserForm">
             <div nz-form-item>
               <div nz-form-control>
-                <nz-input formControlName="rolename" [(ngModel)]="formData.name" [nzPlaceHolder]="'角色名'" [nzSize]="'large'">
+                <nz-input formControlName="rolename" [(ngModel)]="formData.rolename" [nzPlaceHolder]="'角色名'" [nzSize]="'large'">
                   <ng-template #prefix>
                     <i class="anticon anticon-user"></i>
                   </ng-template>
