@@ -59,6 +59,14 @@ export class RolesListComponent implements OnInit {
     });
   }
 
+  pageChanged($event) {
+    console.log($event);
+    this.params['currentPage'] = $event['page'];
+    this.https.get(Urls.ROLES.PAGEQUERY, this.params).then(resp => {
+      this.configParams(resp);
+    });
+  }
+
   edit(obj: Object) {
     console.log(obj);
     this.route.navigate([Urls.BUSINESS.ROLES.EDIT], {queryParams: obj});
@@ -105,14 +113,12 @@ export class RolesListComponent implements OnInit {
 
   confirm() {
     this.https.delete(Urls.ROLES.DELETE, this.preDelete['id']).then(resp => {
-      this.modalRef.hide();
-      if (resp['code'] !== 200) {
-        this._notification.error('提示', '删除角色 ' + this.preDelete['name'] + ' 失败！');
-      } else {
-        this._notification.success('提示', '角色 ' + this.preDelete['name'] + ' 已被删除！');
-      }
+      this._notification.success('提示', resp['msg']);
       this.query();
+    }, errorResp => {
+      this._notification.error('提示', errorResp['msg']);
     });
+    this.modalRef.hide();
   }
 
   menusConfirm() {
@@ -133,13 +139,14 @@ export class RolesListComponent implements OnInit {
     this.modalRef.hide();
   }
 
-  configParams(data) {
-    this.roles = data['root'];
-    this.paginationParams.totalCount = data['totalProperty'];
-    let totalPage = this.paginationParams.totalCount / this.paginationParams.pageSize;
-    totalPage = Math.trunc(totalPage) === totalPage ? totalPage : totalPage + 1;
+  configParams(resp) {
+    const page = resp['data'];
+    this.roles = page['records'];
+    this.paginationParams.totalCount = page['total'];
+    this.paginationParams.pageSize = page['size'];
+    const totalPage = Math.ceil(this.paginationParams.totalCount / this.paginationParams.pageSize);
     this.paginationParams.totalPage = totalPage;
-    this.paginationParams.currentPage = data['pageNum'];
+    this.paginationParams.currentPage = page['current'];
   }
 
   toAddRole() {

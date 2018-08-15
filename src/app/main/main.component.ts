@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {Https} from '../public/https.service';
 import {Urls} from '../public/url';
 import {HttpclientService} from '../public/httpclient.service';
+
 declare var $: any;
 
 @Component({
@@ -26,10 +27,14 @@ export class MainComponent implements OnInit {
     }
     this.currentUser.name = sessionStorage.getItem(Properties.STRING.SESSION.NAME);
     http.get(Urls.USERS.CURRENT, {}).then(resp => {
-      if (!resp) { // 服务器session中已经没有当前用户，重新登录以刷新服务器session
+      if (!resp || !resp['data']) { // 服务器session中已经没有当前用户，重新登录以刷新服务器session
+        // this._notification.success('提示', '登录信息已经失效');
         this.router.navigate(['login']);
       }
       this.currentUser.name = resp['data']['username'];
+    }, errorResp => {
+      // this._notification.success('提示', '登录信息已失效');
+      this.router.navigate(['login']);
     });
 
   }
