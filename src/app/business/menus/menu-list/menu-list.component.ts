@@ -79,13 +79,14 @@ export class MenuListComponent implements OnInit {
     this.modalRef.hide();
   }
 
-  configParams(data) {
-    this.menus = data['root'];
-    this.paginationParams.totalCount = data['totalProperty'];
-    let totalPage = this.paginationParams.totalCount / this.paginationParams.pageSize;
-    totalPage = Math.trunc(totalPage) === totalPage ? totalPage : totalPage + 1;
+  configParams(resp) {
+    const page = resp['data'];
+    this.menus = page['records'];
+    this.paginationParams.totalCount = page['total'];
+    this.paginationParams.pageSize = page['size'];
+    const totalPage = Math.ceil(this.paginationParams.totalCount / this.paginationParams.pageSize);
     this.paginationParams.totalPage = totalPage;
-    this.paginationParams.currentPage = data['pageNum'];
+    this.paginationParams.currentPage = page['current'];
   }
 
   toAddMenu() {

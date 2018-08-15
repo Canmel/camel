@@ -6,7 +6,7 @@
     <div class="row">
       <form class="form-inline" role="form" id="searchForm">
         <div class="form-group">
-          <input name="name" class="form-control" id="name" placeholder="名称" [(ngModel)]="params.name">
+          <input name="name" class="form-control" id="name" placeholder="名称" [(ngModel)]="params.menuname">
         </div>
         <div class="form-group">
           <input name="description" class="form-control" id="description" placeholder="备注"
@@ -43,9 +43,9 @@
                       </thead>
                       <tbody>
                       <tr *ngFor="let menu of menus">
-                        <td>{{menu.name}}</td>
+                        <td>{{menu.menuname}}</td>
                         <td>{{menu.description}}</td>
-                        <td>{{menu.target}}</td>
+                        <td>{{menu.address}}</td>
                         <td>
                           <span class="label label-success label-mini" *ngIf="menu.level == '1'">
                             一级菜单
