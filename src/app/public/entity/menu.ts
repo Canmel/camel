@@ -1,11 +1,11 @@
 export class Menu {
   id: number;
   name: string;
-  target: string;
+  address: string;
   status: number;
   description: string;
   level: number;
-  parentId: number;
+  pid: number;
   iconId: number;
   created_at: Date;
   updated_at: Date;

@@ -11,7 +11,7 @@
                            (ngModelChange) = "changeMenuLevel()">
                   <nz-option
                     *ngFor="let option of menuLevels"
-                    [nzLabel]="option.label"
+                    [nzLabel]="option.name"
                     [nzValue]="option.value">
                   </nz-option>
                 </nz-select>
@@ -23,7 +23,7 @@
             </div>
             <div nz-form-item>
               <div nz-form-control>
-                <nz-input formControlName="name" [(ngModel)]="formData.name" [nzPlaceHolder]="'名称'" [nzSize]="'large'">
+                <nz-input formControlName="name" [(ngModel)]="formData.menuname" [nzPlaceHolder]="'名称'" [nzSize]="'large'">
                   <ng-template #prefix>
                     <i class="anticon anticon-menu-fold"></i>
                   </ng-template>
@@ -40,7 +40,7 @@
             </div>
             <div nz-form-item id="menuTarget">
               <div nz-form-control>
-                <nz-input formControlName="target" [(ngModel)]="formData.target" [nzPlaceHolder]="'地址'" [nzSize]="'large'">
+                <nz-input formControlName="target" [(ngModel)]="formData.address" [nzPlaceHolder]="'地址'" [nzSize]="'large'">
                   <ng-template #prefix>
                     <i class="anticon anticon-link"></i>
                   </ng-template>
@@ -57,11 +57,11 @@
             </div>
             <div nz-form-item id="topMenu" style="display: none;">
               <div nz-form-control>
-                <nz-select formControlName="topMenu" [(ngModel)]="formData.parentId"
+                <nz-select formControlName="topMenu" [(ngModel)]="formData.pid"
                            [nzPlaceHolder]="'选择一级菜单'" nzAllowClear>
                   <nz-option
                     *ngFor="let option of tops"
-                    [nzLabel]="option.name"
+                    [nzLabel]="option.menuname"
                     [nzValue]="option.id">
                   </nz-option>
                 </nz-select>

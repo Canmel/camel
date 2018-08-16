@@ -20,8 +20,7 @@ export class MenuEditComponent implements OnInit {
 
   menuLevels: Array<any>;
 
-  tops: Array<Menu>;
-
+  tops: Array<any>;
 
   _submitForm() {
     let isValid = true;
@@ -47,12 +46,17 @@ export class MenuEditComponent implements OnInit {
               private _notification: NzNotificationService,
               public route: Router) {
     this.formData = {};
-    this.http.get(Urls.OPTIONS.MENUS.LEVEL).then(data => {
-      this.menuLevels = data['root'];
-      console.log(this.menuLevels);
+
+    this.http.get(Urls.OPTIONS.MENUS.LEVEL).then(resp => {
+      this.menuLevels = resp['data'];
+    }, errorResp => {
+      this._notification.error('错误', errorResp['msg']);
     });
+
     this.http.get(Urls.MENUS.TOPMENUS).then(resp => {
-      this.tops = resp['root'];
+      this.tops = resp['data'];
+    }, errorResp => {
+      this._notification.error('错误', errorResp['msg']);
     });
   }
 
@@ -69,7 +73,7 @@ export class MenuEditComponent implements OnInit {
       this.formData['id'] = queryParams['id'];
     });
     this.http.get(Urls.MENUS.DETAILS + this.formData['id']).then(resp => {
-      const menuDetails = resp['root'];
+      const menuDetails = resp['data'];
       this.formData = menuDetails;
       this.toShowOrHide();
     });
