@@ -51,7 +51,6 @@ export class MenuListComponent implements OnInit {
   }
 
   edit(obj: Object) {
-    console.log(obj);
     this.route.navigate([Urls.BUSINESS.MENUS.EDIT], {queryParams: obj});
   }
 
