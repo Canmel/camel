@@ -6,7 +6,7 @@
           <form nz-form [formGroup]="validateForm" class="login-form form-center" (ngSubmit)="_submitForm()" id="addUserForm">
             <div nz-form-item>
               <div nz-form-control>
-                <nz-input formControlName="name" [(ngModel)]="formData.name" [nzPlaceHolder]="'名称'" [nzSize]="'large'">
+                <nz-input formControlName="name" [(ngModel)]="formData.menuname" [nzPlaceHolder]="'名称'" [nzSize]="'large'">
                   <ng-template #prefix>
                     <i class="anticon anticon-user"></i>
                   </ng-template>
@@ -23,17 +23,17 @@
             </div>
             <div nz-form-item>
               <div nz-form-control>
-                <nz-input formControlName="target" [(ngModel)]="formData.target" [nzPlaceHolder]="'地址'" [nzSize]="'large'">
+                <nz-input formControlName="address" [(ngModel)]="formData.address" [nzPlaceHolder]="'地址'" [nzSize]="'large'">
                   <ng-template #prefix>
                     <i class="anticon anticon-user"></i>
                   </ng-template>
                 </nz-input>
                 <div nz-form-explain
-                     *ngIf="validateForm.controls.target.dirty&&validateForm.controls.target.hasError('required')">
+                     *ngIf="validateForm.controls.address.dirty&&validateForm.controls.address.hasError('required')">
                   菜单地址不能为空!
                 </div>
                 <div nz-form-explain
-                     *ngIf="validateForm.controls.target.dirty&&validateForm.controls.target.hasError('maxlength')">
+                     *ngIf="validateForm.controls.address.dirty&&validateForm.controls.address.hasError('maxlength')">
                   菜单地址长度在1-24个字符之间!
                 </div>
               </div>
@@ -45,7 +45,7 @@
                            (ngModelChange) = "changeMenuLevel()">
                   <nz-option
                     *ngFor="let option of menuLevels"
-                    [nzLabel]="option.label"
+                    [nzLabel]="option.name"
                     [nzValue]="option.value">
                   </nz-option>
                 </nz-select>
@@ -61,7 +61,7 @@
                            [nzPlaceHolder]="'选择一级菜单'" nzAllowClear>
                   <nz-option
                     *ngFor="let option of tops"
-                    [nzLabel]="option.name"
+                    [nzLabel]="option.menuname"
                     [nzValue]="option.id">
                   </nz-option>
                 </nz-select>

@@ -80,14 +80,14 @@ export class RolesListComponent implements OnInit {
 
   addMenus(template: TemplateRef<any>, id) {
     this.https.get(Urls.MENUS.SUBS).then(resp => {
-      this.subMenus = resp['root'];
+      this.subMenus = resp['data'];
       this.https.get(Urls.ROLES.DETAILS + id).then(details => {
-        this.roleDetail = details['root'];
+        this.roleDetail = details['data'];
         const sd = [];
         this.subMenus.forEach(function (val) {
           sd.push({
             key: val['id'],
-            title: val['name'],
+            title: val['menuname'],
             direction: 'right'
           });
         });
@@ -103,7 +103,6 @@ export class RolesListComponent implements OnInit {
         this.list = sd;
       });
     });
-
     this.modalRef = this.modalService.show(template, {class: 'modal-md modal-position'});
   }
 

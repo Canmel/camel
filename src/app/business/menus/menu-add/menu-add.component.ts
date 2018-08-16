@@ -46,7 +46,7 @@ export class MenuAddComponent implements OnInit {
               public route: Router) {
     this.formData = {};
     this.http.get(Urls.OPTIONS.MENUS.LEVEL).then(data => {
-      this.menuLevels = data['root'];
+      this.menuLevels = data['data'];
       console.log(this.menuLevels);
     });
   }
@@ -57,7 +57,7 @@ export class MenuAddComponent implements OnInit {
         menuLevel: [null, Validators.required],
         topMenu: [null, Validators.required],
         description: [null, [Validators.maxLength(20)]],
-        target: [null, [Validators.required, Validators.maxLength(24)]]
+        address: [null, [Validators.required, Validators.maxLength(24)]]
       }
     );
   }
@@ -75,9 +75,9 @@ export class MenuAddComponent implements OnInit {
 
   changeMenuLevel() {
     console.log(this.formData['level']);
-    if (this.formData['level'] === 0) {
+    if (this.formData['level'] === 2) {
       this.http.get(Urls.MENUS.TOPMENUS).then(resp => {
-        this.tops = resp['root'];
+        this.tops = resp['data'];
       });
       $('#topMenu').show();
       this.validateForm.setControl('topMenu', this.fb.control(null, Validators.required));
