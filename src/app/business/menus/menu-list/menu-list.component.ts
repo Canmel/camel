@@ -62,16 +62,12 @@ export class MenuListComponent implements OnInit {
 
   confirm() {
     this.https.delete(Urls.MENUS.DELETE, this.preDelete['id']).then(resp => {
-      this.modalRef.hide();
-      console.log(resp['code']);
-      console.log(resp['code'] !== 200);
-      if (resp['code'] !== 200) {
-        this._notification.error('提示', '删除用户 ' + this.preDelete['name'] + ' 失败！');
-      } else {
-        this._notification.success('提示', '用户 ' + this.preDelete['name'] + ' 已被删除！');
-      }
+      this._notification.success('提示', resp['msg']);
       this.query();
+    }, errorResp => {
+      this._notification.error('提示', errorResp['msg']);
     });
+    this.decline();
   }
 
   decline() {
