@@ -62,30 +62,26 @@ export class ReimbursementListComponent implements OnInit {
 
   confirm() {
     this.https.delete(Urls.REIMBURSEMENT.DELETE, this.preDelete['id']).then(resp => {
-      this.modalRef.hide();
-      console.log(resp['code']);
-      console.log(resp['code'] !== 200);
-      if (resp['code'] !== 200) {
-        this._notification.error('提示', '删除用户 ' + this.preDelete['name'] + ' 失败！');
-      } else {
-        this._notification.success('提示', '用户 ' + this.preDelete['name'] + ' 已被删除！');
-      }
+      this._notification.success('提示', resp['msg']);
       this.query();
+    }, errorResp => {
+      this._notification.error('提示', errorResp['msg']);
     });
+    this.decline();
   }
 
   decline() {
     this.modalRef.hide();
   }
 
-  configParams(data) {
-    this.reimbursements = data['root'];
-    console.log(this.reimbursements);
-    this.paginationParams.totalCount = data['totalProperty'];
-    let totalPage = this.paginationParams.totalCount / this.paginationParams.pageSize;
-    totalPage = Math.trunc(totalPage) === totalPage ? totalPage : totalPage + 1;
+  configParams(resp) {
+    const page = resp['data'];
+    this.reimbursements = page['records'];
+    this.paginationParams.totalCount = page['total'];
+    this.paginationParams.pageSize = page['size'];
+    const totalPage = Math.ceil(this.paginationParams.totalCount / this.paginationParams.pageSize);
     this.paginationParams.totalPage = totalPage;
-    this.paginationParams.currentPage = data['pageNum'];
+    this.paginationParams.currentPage = page['current'];
   }
 
   add() {

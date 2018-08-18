@@ -44,17 +44,18 @@ export class ReimbursementEditComponent implements OnInit {
 
   ngOnInit() {
     this.validateForm = this.fb.group({
-        name: [null, [Validators.required, Validators.maxLength(6)]],
-        description: [null, [Validators.maxLength(20)]],
-        target: [null, [Validators.required, Validators.maxLength(24)]]
+      description: [null, [Validators.required, Validators.maxLength(20)]],
+      amount: [null, [Validators.required, Validators.max(99999999)]]
       }
     );
     this.activatedRoute.queryParams.subscribe(queryParams => {
       this.formData['id'] = queryParams['id'];
     });
     this.http.get(Urls.REIMBURSEMENT.DETAILS + this.formData['id']).then(resp => {
-      const reimbursmentDetails = resp['root'];
+      const reimbursmentDetails = resp['data'];
       this.formData = reimbursmentDetails;
+    }, errorResp => {
+      this._notification.error('错误', errorResp['msg']);
     });
   }
 

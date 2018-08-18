@@ -11,21 +11,29 @@
                     <i class="anticon anticon-bulb"></i>
                   </ng-template>
                 </nz-input>
+                <div nz-form-explain
+                     *ngIf="validateForm.controls.description.dirty&&validateForm.controls.description.hasError('required')">
+                  备注不能为空!
+                </div>
+                <div nz-form-explain
+                     *ngIf="validateForm.controls.description.dirty&&validateForm.controls.description.hasError('maxlength')">
+                  备注不能超过20个字符！
+                </div>
               </div>
             </div>
             <div nz-form-item>
               <div nz-form-control>
-                <nz-input-number [(ngModel)]="demoValue" [nzPlaceHolder]="'报销金额'" style="width: 100%;" [nzSize]="'large'" [nzStep]="1">
+                <nz-input-number formControlName="amount" [(ngModel)]="formData.amount" [nzPlaceHolder]="'报销金额'" style="width: 100%;" [nzSize]="'large'" [nzStep]="1">
                   <ng-template #prefix>
                     <i class="anticon anticon-link"></i>
                   </ng-template>
                 </nz-input-number>
                 <div nz-form-explain
-                     *ngIf="validateForm.controls.name.dirty&&validateForm.controls.name.hasError('required')">
+                     *ngIf="validateForm.controls.amount.dirty&&validateForm.controls.amount.hasError('required')">
                   菜单名称不能为空!
                 </div>
                 <div nz-form-explain
-                     *ngIf="validateForm.controls.name.dirty&&validateForm.controls.name.hasError('maxlength')">
+                     *ngIf="validateForm.controls.amount.dirty&&validateForm.controls.amount.hasError('maxlength')">
                   菜单名称长度在1-6个字符之间!
                 </div>
               </div>
