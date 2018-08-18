@@ -11,6 +11,8 @@ export class StatusHelper {
   workflowType(): Promise<void | Object> {
     return this.http.get(Urls.WORKFLOW.TYPES).then(onfulfilled => {
       return Promise.resolve(onfulfilled);
+    }, errorResp => {
+      return Promise.reject(errorResp);
     });
   }
 }

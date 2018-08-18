@@ -101,7 +101,7 @@
                  [nzPlaceHolder]="'选择工作流类型'" nzAllowClear>
         <nz-option
           *ngFor="let option of workFlowType"
-          [nzLabel]="option.label"
+          [nzLabel]="option.name"
           [nzValue]="option.value">
         </nz-option>
       </nz-select>

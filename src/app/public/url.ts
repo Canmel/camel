@@ -40,8 +40,9 @@ export const Urls = {
   },
   WORKFLOW: {
     PAGEQUERY: `/api/workflow`,
-    TYPES: `/api/workflow/types`,
+    TYPES: `/api/options/workflow/typies`,
     SAVE: `/api/workflow`,
+    DELETE: `/api/workflow/`,
     EDIT: `/api/workflow/`,
     DETAILS: `/api/workflow/`
   },

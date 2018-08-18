@@ -77,19 +77,19 @@ export class UserListComponent implements OnInit {
 
   addRoles(template: TemplateRef<any>, id) {
     this.https.get(Urls.ROLES.ALL).then(resp => {
-      this.allRoles = resp['root'];
+      this.allRoles = resp['data'];
       this.https.get(Urls.USERS.DETAILS + id).then(details => {
-        this.userDetail = details['root'];
+        this.userDetail = details['data'];
         const sd = [];
         this.allRoles.forEach(function (val) {
           sd.push({
             key: val['id'],
-            title: val['name'],
+            title: val['description'],
             direction: 'right'
           });
         });
-        if (this.userDetail['roles']) {
-          this.userDetail['roles'].forEach(role => {
+        if (this.userDetail['sysRoles']) {
+          this.userDetail['sysRoles'].forEach(role => {
             sd.forEach(function (value, index) {
               if (value['key'] === role['id']) {
                 sd[index].direction = 'left';
@@ -113,7 +113,6 @@ export class UserListComponent implements OnInit {
   }
 
   roleConfirm() {
-    console.log(this.userDetail);
     const roleIds = [];
     this.list.forEach(function (value, index, array) {
       if (value['direction'] === 'left') {
