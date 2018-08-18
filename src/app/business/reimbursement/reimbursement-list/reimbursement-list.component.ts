@@ -5,6 +5,7 @@ import {Router} from '@angular/router';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {Urls} from '../../../public/url';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import {StatusHelper} from '../../../public/helper/statusHelper';
 
 @Component({
   selector: 'app-reimbursement-list',
@@ -30,7 +31,7 @@ export class ReimbursementListComponent implements OnInit {
     previousText: '上一页'
   };
 
-  constructor(public https: Https, public route: Router,
+  constructor(public https: Https, public route: Router, private statusHelper: StatusHelper,
               private _notification: NzNotificationService,
               private modalService: BsModalService) {
     this.params = new Map<string, any>();
@@ -68,6 +69,18 @@ export class ReimbursementListComponent implements OnInit {
       this._notification.error('提示', errorResp['msg']);
     });
     this.decline();
+  }
+
+  newWorkFlowInstance(template: TemplateRef<any>, id, desc) {
+    this.modalRef = this.modalService.show(template, {class: 'modal-sm modal-position'});
+    this.statusHelper.reimbursementFlows().then(
+      resp => {
+        alert(1);
+        console.log(resp);
+      }, errorResp => {
+        this._notification.error('错误', errorResp['msg']);
+      }
+    );
   }
 
   decline() {

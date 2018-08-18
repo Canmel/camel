@@ -40,16 +40,20 @@ export const Urls = {
   },
   WORKFLOW: {
     PAGEQUERY: `/api/workflow`,
-    TYPES: `/api/options/workflow/typies`,
     SAVE: `/api/workflow`,
     DELETE: `/api/workflow/`,
     EDIT: `/api/workflow/`,
-    DETAILS: `/api/workflow/`
+    DETAILS: `/api/workflow/`,
+    PUBLISH: `/api/workflow/publish/`
   },
   OPTIONS: {
     MENUS: {
       STATUS: `/api/options/menus/statuses`,
       LEVEL: `/api/options/menus/levels`
+    },
+    WORKFLOW: {
+      TYPES: `/api/options/workflow/typies`,
+      TYPE: `/api/options/workflow`
     }
   },
   SESSION: {

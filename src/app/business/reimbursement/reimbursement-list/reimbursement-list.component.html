@@ -61,7 +61,7 @@
                             <i class="fa fa-trash-o fa-fw"></i></a>
                           </span>
                           <span class="label label-info label-mini" tooltip="点击发起流程" placement="right">
-                          <a class="delete-row operation-links a-white" (click)="addMenus(menutemplate, item.id, item.desc)">
+                          <a class="delete-row operation-links a-white" (click)="newWorkFlowInstance(workFlowTemplate, item.id, item.desc)">
                             <i class="fa fa-rocket fa-fw"></i></a>
                           </span>
                         </td>
@@ -82,14 +82,9 @@
                       </div>
                     </ng-template>
 
-                    <ng-template #menutemplate>
+                    <ng-template #workFlowTemplate>
                       <div class="modal-body text-center">
-                        <nz-transfer
-                          [nzDataSource]="list"
-                          [nzTitles]="['已装配', '未装配']"
-                          (nzSelectChange)="select($event)"
-                          (nzChange)="change($event)">
-                        </nz-transfer>
+                        <h2>sqwdd</h2>
                         <br/>
                         <button type="button" class="btn btn-primary" (click)="menusConfirm()">保存</button>
                         <button type="button" class="btn btn-default" (click)="decline()">取消</button>
