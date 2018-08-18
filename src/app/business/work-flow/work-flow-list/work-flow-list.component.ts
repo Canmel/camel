@@ -21,6 +21,10 @@ export class WorkFlowListComponent implements OnInit {
 
   workFlows: WorkFlow[];
 
+  preDelete = {};
+
+  modalRef: BsModalRef;
+
   paginationParams = {
     totalCount: 66,
     pageSize: 10,
@@ -39,16 +43,28 @@ export class WorkFlowListComponent implements OnInit {
   ngOnInit() {
     this.https.get(Urls.WORKFLOW.PAGEQUERY, {}).then(data => {
       this.configParams(data);
+    }, errorResp => {
+      this._notification.error('错误', errorResp['msg']);
     });
   }
 
-  configParams(data) {
-    this.workFlows = data['root'];
-    this.paginationParams.totalCount = data['totalProperty'];
-    let totalPage = this.paginationParams.totalCount / this.paginationParams.pageSize;
-    totalPage = Math.trunc(totalPage) === totalPage ? totalPage : totalPage + 1;
+  configParams(resp) {
+    const page = resp['data'];
+    this.workFlows = page['records'];
+    this.paginationParams.totalCount = page['total'];
+    this.paginationParams.pageSize = page['size'];
+    const totalPage = Math.ceil(this.paginationParams.totalCount / this.paginationParams.pageSize);
     this.paginationParams.totalPage = totalPage;
-    this.paginationParams.currentPage = data['pageNum'];
+    this.paginationParams.currentPage = page['current'];
+  }
+
+  query() {
+    this.params['currentPage'] = 1;
+    this.https.get(Urls.WORKFLOW.PAGEQUERY, this.params).then(resp => {
+      this.configParams(resp);
+    }, errorResp => {
+      this._notification.error('错误', errorResp['msg']);
+    });
   }
 
   toAddFlow() {
@@ -57,5 +73,25 @@ export class WorkFlowListComponent implements OnInit {
 
   edit(obj: Object) {
     this.route.navigate([Urls.BUSINESS.WORKFLOW.EDIT], {queryParams: obj});
+  }
+
+  delete(template: TemplateRef<any>, id, name) {
+    this.preDelete['name'] = name;
+    this.preDelete['id'] = id;
+    this.modalRef = this.modalService.show(template, {class: 'modal-sm modal-position'});
+  }
+
+  confirm() {
+    this.https.delete(Urls.WORKFLOW.DELETE, this.preDelete['id']).then(resp => {
+      this._notification.success('提示', resp['msg']);
+      this.query();
+    }, errorResp => {
+      this._notification.error('提示', errorResp['msg']);
+    });
+    this.decline();
+  }
+
+  decline() {
+    this.modalRef.hide();
   }
 }

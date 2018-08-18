@@ -29,8 +29,8 @@ export class WorkFlowEditComponent implements OnInit {
     this.formData = {};
 
     this.statusHelper.workflowType().then(onfulfilled => {
-      console.log('helper', onfulfilled['root']);
-      this.workFlowType = onfulfilled['root'];
+      console.log('helper', onfulfilled['data']);
+      this.workFlowType = onfulfilled['data'];
     });
   }
 
@@ -40,7 +40,7 @@ export class WorkFlowEditComponent implements OnInit {
     });
 
     this.validateForm = this.fb.group({
-        flowName: [null, [Validators.required, Validators.maxLength(6)]],
+        flowName: [null, [Validators.required, Validators.maxLength(12)]],
         flow: [null, []],
         workflowType: [null, [Validators.required]]
       }
@@ -49,9 +49,10 @@ export class WorkFlowEditComponent implements OnInit {
     const ms = this.modalService;
 
     this.http.get(Urls.WORKFLOW.DETAILS + this.formData['id']).then(onfulfilled => {
-      console.log('ss0s0s0s', onfulfilled);
-      this.formData = onfulfilled['root'];
+      this.formData = onfulfilled['data'];
       this.initFlow();
+    }, errorResp => {
+      this._notification.error('错误', errorResp['msg']);
     });
 
 
@@ -110,7 +111,8 @@ export class WorkFlowEditComponent implements OnInit {
   }
 
   doSubmit() {
-    this.http.post(Urls.WORKFLOW.SAVE, this.formData).then(
+    console.log(this.formData);
+    this.http.put(Urls.WORKFLOW.EDIT + this.formData['id'], this.formData).then(
       (val) => {
         this._notification.success('成功', val['msg']);
         this.currentModal.destroy();

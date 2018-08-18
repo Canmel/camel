@@ -29,8 +29,9 @@ export class WorkFlowAddComponent implements OnInit {
     this.formData = {};
 
     this.statusHelper.workflowType().then(onfulfilled => {
-      console.log('helper', onfulfilled['root']);
-      this.workFlowType = onfulfilled['root'];
+      this.workFlowType = onfulfilled['data'];
+    }, errorResp => {
+      this._notification.error('错误', errorResp['msg']);
     });
   }
 
@@ -98,13 +99,14 @@ export class WorkFlowAddComponent implements OnInit {
 
   doSubmit() {
     this.http.post(Urls.WORKFLOW.SAVE, this.formData).then(
-      (val) => {
-        this._notification.success('成功', val['msg']);
+      resp => {
+        this._notification.success('成功', resp['msg']);
         this.currentModal.destroy();
         this.route.navigate([Urls.BUSINESS.WORKFLOW.LIST]);
       },
-      response => {
-        this._notification.error('失败', response['msg']);
+      errorResp => {
+        console.log(errorResp);
+        this._notification.error('失败', errorResp['msg']);
       }
     );
   }

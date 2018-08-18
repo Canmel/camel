@@ -69,9 +69,10 @@ export class Https {
     return this.http.post<T>(url, params, {
       headers: headers
     }).toPromise().catch(error => {
-      if (error.url.endsWith(Urls.SESSION.REJECTED)) {
+      if (error['status'] === 401) {
         this.router.navigate(['login']);
       }
+      return Promise.reject(error['error']);
     }).then(onfulfilled => {
       if (200 === onfulfilled['httpStatus']) {
         return Promise.resolve(onfulfilled);

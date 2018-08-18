@@ -32,6 +32,7 @@
                       <tr>
                         <th>名称</th>
                         <th>状态</th>
+                        <th>创建时间</th>
                         <th>是否发布</th>
                         <th class="col-md-2">操作</th>
                       </tr>
@@ -44,10 +45,13 @@
 
                           <i class="fa fa-times-circle" *ngIf="flow.isPublic == '0'"></i></td>
                         <td>
-                          <span *ngIf="flow.status == '1'">
+                          <span>{{flow.createdAt | date:'yyyy-MM-dd'}}</span>
+                        </td>
+                        <td>
+                          <span *ngIf="flow.isPublic == '1'">
                             <i class="fa fa-check"></i>
                           </span>
-                          <span *ngIf="flow.status == '2'">
+                          <span *ngIf="flow.isPublic == '0'">
                             <i class="fa fa-lock"></i>
                           </span>
                         </td>
@@ -58,7 +62,7 @@
                           </span>
                           <span class="label label-danger label-mini" tooltip="删除流程" placement="top">
                           <a class="delete-row operation-links a-white"
-                             (click)="delete(template, flow.id, role.name)">
+                             (click)="delete(template, flow.id, flow.name)">
                             <i class="fa fa-trash-o fa-fw"></i></a>
                           </span>
                           <span class="label label-info label-mini" tooltip="点击添加流程" placement="right">
@@ -68,7 +72,7 @@
                           </span>
                         </td>
                       </tr>
-                      <tr class="text-center" *ngIf="!roles">
+                      <tr class="text-center" *ngIf="!workFlows">
                         <td colspan="4">
                           <p class="error-tip-color">暂无数据</p>
                         </td>
