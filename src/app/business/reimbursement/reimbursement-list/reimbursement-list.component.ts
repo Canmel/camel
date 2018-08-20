@@ -1,5 +1,6 @@
 import {Component, OnInit, TemplateRef} from '@angular/core';
 import {NzNotificationService} from 'ng-zorro-antd';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Https} from '../../../public/https.service';
 import {Router} from '@angular/router';
 import {BsModalService} from 'ngx-bootstrap/modal';
@@ -20,7 +21,19 @@ export class ReimbursementListComponent implements OnInit {
 
   modalRef: BsModalRef;
 
+  validateForm: FormGroup;
+
   preDelete = {};
+
+  formData = {};
+
+  reimbursementFlows = [];
+
+  isSyncVisible = false;
+
+  isVisible = false;
+
+  isConfirmLoading = false;
 
   paginationParams = {
     totalCount: 66,
@@ -32,7 +45,7 @@ export class ReimbursementListComponent implements OnInit {
   };
 
   constructor(public https: Https, public route: Router, private statusHelper: StatusHelper,
-              private _notification: NzNotificationService,
+              private _notification: NzNotificationService, private fb: FormBuilder,
               private modalService: BsModalService) {
     this.params = new Map<string, any>();
   }
@@ -41,6 +54,12 @@ export class ReimbursementListComponent implements OnInit {
     this.https.get(Urls.REIMBURSEMENT.PAGEQUERY, {}).then(data => {
       this.configParams(data);
     });
+
+    this.validateForm = this.fb.group({
+        reimbursementFlows: [null, [Validators.required, Validators.maxLength(6)]],
+        description: [null, [Validators.required, Validators.maxLength(20)]]
+      }
+    );
   }
 
   query() {
@@ -72,20 +91,30 @@ export class ReimbursementListComponent implements OnInit {
   }
 
   newWorkFlowInstance(template: TemplateRef<any>, id, desc) {
-    this.modalRef = this.modalService.show(template, {class: 'modal-sm modal-position'});
+    this.isSyncVisible = true;
     this.statusHelper.reimbursementFlows().then(
       resp => {
-        alert(1);
         console.log(resp);
+        this.reimbursementFlows = resp['data'];
       }, errorResp => {
         this._notification.error('错误', errorResp['msg']);
       }
     );
+    // 设为只读
+    $('.form-disabled').find('input').attr('readonly', true);
+    this.formData['businessId'] = id;
+    this.formData['description'] = desc;
   }
 
   decline() {
     this.modalRef.hide();
   }
+
+  nzOnCancel() {
+    this.isVisible = false;
+    this.isSyncVisible = false;
+  }
+
 
   configParams(resp) {
     const page = resp['data'];
@@ -107,5 +136,37 @@ export class ReimbursementListComponent implements OnInit {
     this.https.get(Urls.REIMBURSEMENT.PAGEQUERY, this.params).then(data => {
       this.configParams(data);
     });
+  }
+
+  _submitForm() {
+    let isValid = true;
+    for (const i in this.validateForm.controls) {
+      if (this.validateForm.controls[i]) {
+        if (this.validateForm.status === 'INVALID') {
+          this.validateForm.controls[i].markAsDirty();
+          isValid = false;
+        }
+      }
+    }
+    if (!isValid) {
+      this._notification.error('表单验证错误', '表单信息错误，请检查表单');
+      return isValid;
+    } else {
+      this.doSubmit();
+    }
+  }
+
+  doSubmit() {
+    this.isVisible = false;
+    this.isSyncVisible = false;
+    this.https.post(Urls.WORKFLOW.INSTANCE.SAVE, this.formData).then(
+      resp => {
+        this._notification.success('成功', resp['msg']);
+        console.log(resp);
+      }, errorResp => {
+        console.log(errorResp);
+        this._notification.error('错误', errorResp['msg']);
+      }
+    );
   }
 }

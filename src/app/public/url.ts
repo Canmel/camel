@@ -44,7 +44,10 @@ export const Urls = {
     DELETE: `/api/workflow/`,
     EDIT: `/api/workflow/`,
     DETAILS: `/api/workflow/`,
-    PUBLISH: `/api/workflow/publish/`
+    PUBLISH: `/api/workflow/publish/`,
+    INSTANCE: {
+      SAVE: `/api/workflow/instance`
+    }
   },
   OPTIONS: {
     MENUS: {
