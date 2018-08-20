@@ -923,18 +923,18 @@
             var optType = $(this).attr("type");
             var cx = event.pageX - $(".nav-collapse").width() - $(this).width();
             var cy = event.pageY - $(".header").height() - $(this).height() - 100;
-            var ctext = $(this).text().trim()
+            var ctext = $(this).text().trim();
             var d = new a.rect(b.extend(true, {}, a.config.tools.states[optType], {
               attr: {x: cx, y: cy},
               text: {text: ctext},
               props: {text: {value: ctext}},
-              type: "start"
+              type: optType
             }), y);
             d.restore({
               attr: {x: cx, y: cy},
               text: {text: ctext},
               props: {text: {value: ctext}},
-              type: "start"
+              type: optType
             });
 
             q[d.getId()] = d

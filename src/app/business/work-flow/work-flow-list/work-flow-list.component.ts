@@ -23,6 +23,8 @@ export class WorkFlowListComponent implements OnInit {
 
   preDelete = {};
 
+  prePublish = {};
+
   modalRef: BsModalRef;
 
   paginationParams = {
@@ -83,6 +85,22 @@ export class WorkFlowListComponent implements OnInit {
 
   confirm() {
     this.https.delete(Urls.WORKFLOW.DELETE, this.preDelete['id']).then(resp => {
+      this._notification.success('提示', resp['msg']);
+      this.query();
+    }, errorResp => {
+      this._notification.error('提示', errorResp['msg']);
+    });
+    this.decline();
+  }
+
+  toPublish(template: TemplateRef<any>, id, name) {
+    this.prePublish['name'] = name;
+    this.prePublish['id'] = id;
+    this.modalRef = this.modalService.show(template, {class: 'modal-sm modal-position'});
+  }
+
+  publish() {
+    this.https.get(Urls.WORKFLOW.PUBLISH + this.prePublish['id']).then(resp => {
       this._notification.success('提示', resp['msg']);
       this.query();
     }, errorResp => {

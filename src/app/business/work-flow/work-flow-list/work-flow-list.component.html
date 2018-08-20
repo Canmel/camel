@@ -41,9 +41,9 @@
                       <tr *ngFor="let flow of workFlows">
                         <td>{{flow.name}}</td>
                         <td>
-                          <i class="fa fa-thumbs-o-up" *ngIf="flow.isPublic == '1'"></i>
+                          <i class="fa fa-thumbs-o-up" *ngIf="flow.status == '1'"></i>
 
-                          <i class="fa fa-times-circle" *ngIf="flow.isPublic == '0'"></i></td>
+                          <i class="fa fa-times-circle" *ngIf="flow.status == '0'"></i></td>
                         <td>
                           <span>{{flow.createdAt | date:'yyyy-MM-dd'}}</span>
                         </td>
@@ -65,10 +65,10 @@
                              (click)="delete(template, flow.id, flow.name)">
                             <i class="fa fa-trash-o fa-fw"></i></a>
                           </span>
-                          <span class="label label-info label-mini" tooltip="点击添加流程" placement="right">
+                          <span class="label label-info label-mini" tooltip="点击发布流程" placement="right">
                           <a class="delete-row operation-links a-white"
-                             (click)="addMenus(menutemplate, role.id, role.description)">
-                            <i class="fa fa-users fa-fw"></i></a>
+                             (click)="toPublish(publishTemplate, flow.id, flow.name)">
+                            <i class="fa fa-gavel fa-fw"></i></a>
                           </span>
                         </td>
                       </tr>
@@ -88,17 +88,11 @@
                       </div>
                     </ng-template>
 
-                    <ng-template #menutemplate>
+                    <ng-template #publishTemplate>
                       <div class="modal-body text-center">
-                        <nz-transfer
-                          [nzDataSource]="list"
-                          [nzTitles]="['已装配', '未装配']"
-                          (nzSelectChange)="select($event)"
-                          (nzChange)="change($event)">
-                        </nz-transfer>
-                        <br/>
-                        <button type="button" class="btn btn-primary" (click)="menusConfirm()">保存</button>
-                        <button type="button" class="btn btn-default" (click)="decline()">取消</button>
+                        <p>你确定要发布 <b>{{prePublish.name}}</b> 吗？</p>
+                        <button type="button" class="btn btn-primary" (click)="publish()">是</button>
+                        <button type="button" class="btn btn-default" (click)="decline()">否</button>
                       </div>
                     </ng-template>
                   </div>

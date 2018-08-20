@@ -6,10 +6,8 @@
     <div class="row">
       <form class="form-inline" role="form" id="searchForm">
         <div class="form-group">
-          <input name="name" class="form-control" id="name" placeholder="名称" [(ngModel)]="params.name">
-        </div>
-        <div class="form-group">
-          <input name="description" class="form-control" id="description" placeholder="备注" [(ngModel)]="params.name">
+          <input name="description" class="form-control" id="description" placeholder="描述"
+                 [(ngModel)]="params.description">
         </div>
         <button type="submit" (click)="query()" class="btn btn-success">查询</button>
       </form>
@@ -57,16 +55,18 @@
                               class="fa fa-pencil fa-fw"></i></a>
                           </span>
                           <span class="label label-danger label-mini" tooltip="删除报销申请" placement="top">
-                          <a class="delete-row operation-links a-white" (click)="delete(template, item.id, item.desc)">
+                          <a class="delete-row operation-links a-white"
+                             (click)="delete(template, item.id, item.description)">
                             <i class="fa fa-trash-o fa-fw"></i></a>
                           </span>
                           <span class="label label-info label-mini" tooltip="点击发起流程" placement="right">
-                          <a class="delete-row operation-links a-white" (click)="addMenus(menutemplate, item.id, item.desc)">
+                          <a class="delete-row operation-links a-white"
+                             (click)="newWorkFlowInstance(modalContent, item.id, item.description)">
                             <i class="fa fa-rocket fa-fw"></i></a>
                           </span>
                         </td>
                       </tr>
-                      <tr class="text-center" *ngIf="!roles">
+                      <tr class="text-center" *ngIf="!reimbursements">
                         <td colspan="4">
                           <p class="error-tip-color">暂无数据</p>
                         </td>
@@ -82,19 +82,51 @@
                       </div>
                     </ng-template>
 
-                    <ng-template #menutemplate>
-                      <div class="modal-body text-center">
-                        <nz-transfer
-                          [nzDataSource]="list"
-                          [nzTitles]="['已装配', '未装配']"
-                          (nzSelectChange)="select($event)"
-                          (nzChange)="change($event)">
-                        </nz-transfer>
-                        <br/>
-                        <button type="button" class="btn btn-primary" (click)="menusConfirm()">保存</button>
-                        <button type="button" class="btn btn-default" (click)="decline()">取消</button>
-                      </div>
-                    </ng-template>
+                    <nz-modal
+                      [nzVisible]="isSyncVisible"
+                      [nzTitle]="'显示异步关闭'"
+                      [nzContent]="modalContent"
+                      (nzOnCancel)="nzOnCancel($event)"
+                      (nzOnOk)="doSubmit($event)"
+                      [nzConfirmLoading]="isConfirmLoading">
+                      <ng-template #modalContent>
+                        <div class="modal-body text-left" style="height: 15rem;">
+                          <form nz-form [formGroup]="validateForm" class="login-form form-center"
+                                (ngSubmit)="_submitForm()" id="addUserForm">
+                            <div nz-form-item>
+                              <div nz-form-control class="form-disabled">
+                                <nz-input formControlName="description" [(ngModel)]="formData.description" readonly
+                                          [nzSize]="'large'" disabled>
+                                  <ng-template #prefix>
+                                    <i class="anticon anticon-user"></i>
+                                  </ng-template>
+                                </nz-input>
+                                <div nz-form-explain
+                                     *ngIf="validateForm.controls.description.dirty&&validateForm.controls.description.hasError('required')">
+                                  申请名不能为空!
+                                </div>
+                              </div>
+                            </div>
+                            <div nz-form-item>
+                              <div nz-form-control>
+                                <nz-select formControlName="reimbursementFlows" [(ngModel)]="formData.workFlowId"
+                                           [nzPlaceHolder]="'选择工作流程'" nzAllowClear>
+                                  <nz-option
+                                    *ngFor="let option of reimbursementFlows"
+                                    [nzLabel]="option.name"
+                                    [nzValue]="option.id">
+                                  </nz-option>
+                                </nz-select>
+                                <div nz-form-explain
+                                     *ngIf="validateForm.controls.reimbursementFlows.dirty&&validateForm.controls.reimbursementFlows.hasError('required')">
+                                  请选择申请流程
+                                </div>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                      </ng-template>
+                    </nz-modal>
                   </div>
                 </div>
                 <div style="text-align: center">
