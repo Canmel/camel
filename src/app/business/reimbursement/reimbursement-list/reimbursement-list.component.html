@@ -34,6 +34,7 @@
                         <th>描述</th>
                         <th>金额</th>
                         <th>状态</th>
+                        <th>流程</th>
                         <th class="col-md-2">操作</th>
                       </tr>
                       </thead>
@@ -49,6 +50,16 @@
                             <i class="fa fa-lock"></i>
                           </span>
                         </td>
+                        <td>
+                          <div *ngIf="item.workFlowInstance">
+                            <span *ngIf="item.workFlowInstance.status == 1">未发起</span>
+                          </div>
+
+                          <div *ngIf="!item.workFlowInstance">
+                            <span>未添加</span>
+                          </div>
+
+                        </td>
                         <td class="actions-hover actions-fade">
                           <span class="label label-primary label-mini" tooltip="编辑报销申请" placement="left">
                             <a class="operation-links a-white" (click)='edit({"id": item.id})'><i
@@ -59,9 +70,14 @@
                              (click)="delete(template, item.id, item.description)">
                             <i class="fa fa-trash-o fa-fw"></i></a>
                           </span>
-                          <span class="label label-info label-mini" tooltip="点击发起流程" placement="right">
+                          <span class="label label-info label-mini" tooltip="点击添加流程" placement="right" *ngIf="!item.workFlowInstance">
                           <a class="delete-row operation-links a-white"
                              (click)="newWorkFlowInstance(modalContent, item.id, item.description)">
+                            <i class="fa fa-code-fork fa-fw"></i></a>
+                          </span>
+                          <span class="label label-success label-mini" tooltip="点击发起流程" placement="right" *ngIf="item.workFlowInstance">
+                          <a class="delete-row operation-links a-white"
+                             (click)="launch(launchTemplate, item.id, item.description)">
                             <i class="fa fa-rocket fa-fw"></i></a>
                           </span>
                         </td>
@@ -78,6 +94,14 @@
                       <div class="modal-body text-center">
                         <p>你确定要删除 <b>{{preDelete.name}}</b> 吗？</p>
                         <button type="button" class="btn btn-primary" (click)="confirm()">是</button>
+                        <button type="button" class="btn btn-default" (click)="decline()">否</button>
+                      </div>
+                    </ng-template>
+
+                    <ng-template #launchTemplate>
+                      <div class="modal-body text-center">
+                        <p>你确定要发起 <b>{{preLaunch.name}}</b> 吗？</p>
+                        <button type="button" class="btn btn-primary" (click)="launchConfirm()">是</button>
                         <button type="button" class="btn btn-default" (click)="decline()">否</button>
                       </div>
                     </ng-template>

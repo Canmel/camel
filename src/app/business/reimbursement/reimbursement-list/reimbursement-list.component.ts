@@ -25,6 +25,8 @@ export class ReimbursementListComponent implements OnInit {
 
   preDelete = {};
 
+  preLaunch = {};
+
   formData = {};
 
   reimbursementFlows = [];
@@ -34,6 +36,7 @@ export class ReimbursementListComponent implements OnInit {
   isVisible = false;
 
   isConfirmLoading = false;
+
 
   paginationParams = {
     totalCount: 66,
@@ -168,5 +171,15 @@ export class ReimbursementListComponent implements OnInit {
         this._notification.error('错误', errorResp['msg']);
       }
     );
+  }
+
+  launch(template: TemplateRef<any>, id, name) {
+    this.preLaunch['name'] = name;
+    this.preLaunch['id'] = id;
+    this.modalRef = this.modalService.show(template, {class: 'modal-sm modal-position'});
+  }
+
+  launchConfirm() {
+    alert('22');
   }
 }
