@@ -6,6 +6,8 @@ import {StatusHelper} from '../../../public/helper/statusHelper';
 import {Https} from '../../../public/https.service';
 import {Router} from '@angular/router';
 import {Urls} from '../../../public/url';
+import BpmnModeler from 'bpmn-js/lib/Modeler';
+import {DomSanitizer} from '@angular/platform-browser';
 
 declare var $: any;
 
@@ -24,43 +26,83 @@ export class WorkFlowAddComponent implements OnInit {
 
   workFlowType: Array<any>;
 
-  constructor(private fb: FormBuilder, private modalService: NzModalService, private _notification: NzNotificationService,
-              private statusHelper: StatusHelper, private http: Https, private route: Router) {
-    this.formData = {};
+  contentHeight = 500;
 
-    this.statusHelper.workflowType().then(onfulfilled => {
-      this.workFlowType = onfulfilled['data'];
-    }, errorResp => {
-      this._notification.error('错误', errorResp['msg']);
-    });
+  public saveHref;
+
+  public saveName = '';
+
+  private readonly newDiagram = 'assets/bpmn/diagram.xml';
+
+  private modeler;
+
+  constructor(private fb: FormBuilder, private modalService: NzModalService, private _notification: NzNotificationService,
+              private statusHelper: StatusHelper, private http: Https, private route: Router, private sanitizer: DomSanitizer) {
+    this.formData = {};
   }
 
   ngOnInit() {
-    const fdate = this.formData;
+    this.contentHeight = $('body').height() - $('header').height() - $('footer').height() - 136;
+    $('.with-diagram').height(this.contentHeight);
+    this.initBpmn();
+  }
 
-    this.validateForm = this.fb.group({
-        flowName: [null, [Validators.required, Validators.maxLength(12)]],
-        flow: [null, []],
-        workflowType: [null, [Validators.required]]
-      }
-    );
+  initBpmn() {
+    this.modeler = new BpmnModeler({
+      container: '#js-canvas'
+    });
+    this.createDiagram();
+  }
 
-    const ms = this.modalService;
-    // this.modalService.show('workflowTemplate', {class: 'modal-sm modal-position'});
+  createDiagram() {
+    this.importDiagram(this.newDiagram);
+  }
 
-    $('#myflow').myflow(
-      {
-        basePath: '',
-        tools: {
-          save: {
-            onclick: function (data) {
-              fdate['flow'] = data;
-              $('#flow').val(data);
-            }
-          }
+
+  importDiagram(xml) {
+    this.http.get(xml).then(rep => {
+      const xmlContent = rep['text'];
+      this.modeler.importXML(xmlContent, function (err) {
+        if (err) {
+          console.error(err);
         }
       });
+    });
   }
+
+  saveDiagram(e) {
+    this.modeler.saveXML({format: true}, (err, xml) => {
+      if (err) {
+        console.error(err);
+      } else {
+        this.setEncoded(xml, 'bpmn.xml');
+      }
+    });
+    e.preventDefault();
+    e.stopPropagation();
+  }
+
+  saveSVG(e) {
+    this.modeler.saveSVG((err, svg) => {
+      if (err) {
+        console.error(err);
+      } else {
+        this.setEncoded(svg, 'bpmn.svg');
+      }
+    });
+    e.preventDefault();
+    e.stopPropagation();
+  }
+
+  setEncoded(data, name) {
+    const encodedData = encodeURIComponent(data);
+
+    if (data) {
+      this.saveHref = this.sanitizer.bypassSecurityTrustResourceUrl('data:application/bpmn20-xml;charset=UTF-8,' + encodedData);
+      this.saveName = name;
+    }
+  }
+
 
   toSave(titleTpl, contentTpl) {
     this.currentModal = this.modalService.open({

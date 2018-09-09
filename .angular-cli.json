@@ -26,7 +26,10 @@
         "../src/assets/css/style.css",
         "../src/assets/css/morris.css",
         "../src/assets/css/clndr.css",
-        "../src/assets/css/style-responsive.css"
+        "../src/assets/css/style-responsive.css",
+        "../src/assets/css/diagram-js.css",
+        "../src/assets/css/bpmn-font/css/bpmn-embedded.css",
+        "../node_modules/bpmn-js/dist/assets/bpmn-font/css/bpmn-embedded.css"
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.js",
@@ -43,7 +46,8 @@
         "../src/assets/js/scripts.js",
         "../src/assets/js/echarts.js",
         "../src/assets/js/initEcharts.js",
-        "../src/assets/js/map.js"
+        "../src/assets/js/map.js",
+        "../src/assets/js/bpmn-modeler.min.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

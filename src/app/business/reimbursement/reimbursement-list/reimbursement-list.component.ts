@@ -179,6 +179,9 @@ export class ReimbursementListComponent implements OnInit {
     this.modalRef = this.modalService.show(template, {class: 'modal-sm modal-position'});
   }
 
+  /**
+   * 发布流程
+   */
   launchConfirm() {
     alert('22');
   }
