@@ -39,6 +39,9 @@ export class Https {
       headers: headers
     }).toPromise()
       .catch(errorResp => {
+        if (errorResp.status === 200) {
+          return Promise.resolve({text: errorResp.error.text, httpStatus: 200});
+        }
         return Promise.reject(errorResp.error);
       })
       .then(onfulfilled => {
