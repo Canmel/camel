@@ -1,79 +1,13 @@
-<div id="flow-body">
-  <div id="myflow_tools"
-       style="position: absolute; top: 10; left: 10; background-color: #fff; width: 70px; cursor: default; padding: 3px;"
-       class="ui-widget-content">
-    <div id="myflow_tools_handle" style="text-align: center;"
-         class="ui-widget-header">工具集
-    </div>
-
-
-    <div class="node" id="myflow_save" (click)="toSave(title, content, foot)"><i class="fa fa-floppy-o"></i>&nbsp;&nbsp;保存</div>
-    <div>
-      <hr/>
-    </div>
-    <div class="node selectable" id="return" (click)="backToList()">
-      <i class="fa fa-backward"></i>&nbsp;&nbsp;返回
-    </div>
-    <div class="node selectable" id="pointer"><i class="fa fa-hand-o-up"></i>&nbsp;&nbsp;选择
-    </div>
-    <div class="node selectable" id="path"><i class="fa fa-long-arrow-right "></i>&nbsp;&nbsp;转换
-    </div>
-    <div>
-      <hr/>
-    </div>
-    <div class="node state" id="start" type="start">
-      <i class="fa fa-circle-o" style="color: #93c561;"></i>&nbsp;&nbsp;开始
-    </div>
-    <div class="node state" id="state" type="state">
-      <i class="fa fa-square-o" style="color: #828ff3;"></i>&nbsp;&nbsp;状态
-    </div>
-    <div class="node state" id="task" type="task">
-      <i class="fa fa-square-o" style="color: #828ff3;"></i>&nbsp;&nbsp;任务
-    </div>
-    <div class="node state" id="fork" type="fork">
-      <i class="fa fa-plus-square" style="color: #9e951d;"></i>&nbsp;&nbsp;分支
-    </div>
-    <div class="node state" id="join" type="join">
-      <i class="fa fa-plus-square" style="color: #9e951d;"></i>&nbsp;&nbsp;合并
-    </div>
-    <div class="node state" id="end" type="end">
-      <i class="fa fa-dot-circle-o" style="color: rgb(255, 179, 179)"></i>&nbsp;&nbsp;结束
-    </div>
-    <div class="node state" id="end-cancel" type="end-cancel">
-      <i class="fa fa-times-circle" style="color: rgb(255, 179, 179)"></i>&nbsp;&nbsp;取消
-    </div>
-    <div class="node state" id="end-error" type="end-error">
-      <i class="fa fa-times-circle-o" style="color: rgb(255, 179, 179)"></i>&nbsp;&nbsp;错误
-    </div>
-  </div>
-
-  <div id="myflow_props"
-       style="position: absolute; top: 30; right: 50; background-color: #fff; width: 220px; padding: 3px;"
-       class="ui-widget-content">
-    <div id="myflow_props_handle" class="ui-widget-header">属性</div>
-    <table border="1" width="100%" cellpadding="0" cellspacing="0">
-      <tr>
-        <td>aaa</td>
-      </tr>
-      <tr>
-        <td>aaa</td>
-      </tr>
-    </table>
-    <div>&nbsp;</div>
-  </div>
-
-  <div id="myflow"></div>
-</div>
-
 <ng-template #title>
-  <span>对话框标题模板</span>
+  <span>保存流程</span>
 </ng-template>
 <ng-template #content>
   <div>
-    <form nz-form [formGroup]="validateForm" class="login-form form-center" (ngSubmit)="_submitForm()" id="addWorkFlowForm">
+    <form nz-form [formGroup]="validateForm" class="login-form form-center" (ngSubmit)="_submitForm()"
+          id="addWorkFlowForm">
       <div nz-form-item style="display: none;">
         <div nz-form-control>
-          <nz-input formControlName="flow" [(ngModel)]="formData.flow"  [nzSize]="'large'" id="flow">
+          <nz-input formControlName="flow" [(ngModel)]="formData.flow" [nzSize]="'large'" id="flow">
             <ng-template #prefix>
               <i class="anticon anticon-user"></i>
             </ng-template>
@@ -121,3 +55,28 @@
   </div>
 </ng-template>
 
+
+<div class="content with-diagram" id="js-drop-zone">
+  <div class="canvas" id="js-canvas"></div>
+</div>
+
+<button id="save-button">保存</button>
+
+<ul class="buttons">
+  <li>
+    <a id="js-download-diagram" href title="下载 BPMN 文件" class="active" (click)="saveDiagram($event, title, content)">
+      保存 BPMN 流程
+    </a>
+  </li>
+  <li>
+    <a id="js-download-svg" href title="下载 SVG 图片" class="active" (click)="saveSVG($event)">
+      下载 SVG 图片
+    </a>
+  </li>
+  <li *ngIf="saveHref">
+    <a id="download" [href]="saveHref" [download]="saveName" class="active ">下载</a>
+  </li>
+</ul>
+
+
+<script type="application/javascript" src="/assets/js/modeler.js"></script>

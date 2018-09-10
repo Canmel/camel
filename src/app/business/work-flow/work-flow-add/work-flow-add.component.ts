@@ -78,6 +78,7 @@ export class WorkFlowAddComponent implements OnInit {
         console.error(err);
       } else {
         this.setEncoded(xml, 'bpmn.xml');
+        this.formData['flow'] = xml;
         this.toSave(titleTpl, contentTpl);
       }
     });
