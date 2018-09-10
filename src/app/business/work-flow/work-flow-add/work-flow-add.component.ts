@@ -1,12 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {NzModalService} from 'ng-zorro-antd';
+import {NzModalService, NzNotificationService} from 'ng-zorro-antd';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {NzNotificationService} from 'ng-zorro-antd';
 import {StatusHelper} from '../../../public/helper/statusHelper';
 import {Https} from '../../../public/https.service';
 import {Router} from '@angular/router';
 import {Urls} from '../../../public/url';
-import BpmnModeler from 'bpmn-js/lib/Modeler';
 import {DomSanitizer} from '@angular/platform-browser';
 
 declare var $: any;
@@ -39,18 +37,25 @@ export class WorkFlowAddComponent implements OnInit {
   constructor(private fb: FormBuilder, private modalService: NzModalService, private _notification: NzNotificationService,
               private statusHelper: StatusHelper, private http: Https, private route: Router, private sanitizer: DomSanitizer) {
     this.formData = {};
+    this.statusHelper.workflowType().then(onfulfilled => {
+      console.log('helper', onfulfilled['data']);
+      this.workFlowType = onfulfilled['data'];
+    });
   }
 
   ngOnInit() {
+    this.validateForm = this.fb.group({
+        flowName: [null, [Validators.required, Validators.maxLength(12)]],
+        flow: [null, []],
+        workflowType: [null, [Validators.required]]
+      }
+    );
     this.contentHeight = $('body').height() - $('header').height() - $('footer').height() - 136;
     $('.with-diagram').height(this.contentHeight);
     this.initBpmn();
   }
 
   initBpmn() {
-    this.modeler = new BpmnModeler({
-      container: '#js-canvas'
-    });
     this.createDiagram();
   }
 
@@ -62,20 +67,18 @@ export class WorkFlowAddComponent implements OnInit {
   importDiagram(xml) {
     this.http.get(xml).then(rep => {
       const xmlContent = rep['text'];
-      this.modeler.importXML(xmlContent, function (err) {
-        if (err) {
-          console.error(err);
-        }
-      });
+      this.modeler = initScript.initBpmn();
+      this.modeler.importXML(xmlContent);
     });
   }
 
-  saveDiagram(e) {
+  saveDiagram(e, titleTpl, contentTpl) {
     this.modeler.saveXML({format: true}, (err, xml) => {
       if (err) {
         console.error(err);
       } else {
         this.setEncoded(xml, 'bpmn.xml');
+        this.toSave(titleTpl, contentTpl);
       }
     });
     e.preventDefault();
@@ -121,7 +124,6 @@ export class WorkFlowAddComponent implements OnInit {
   }
 
   _submitForm() {
-    console.log('这是我的提交数据', this.formData);
     let isValid = true;
     for (const i in this.validateForm.controls) {
       if (this.validateForm.controls[i]) {
