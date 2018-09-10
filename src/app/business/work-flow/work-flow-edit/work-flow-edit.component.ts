@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {NzModalService} from 'ng-zorro-antd';
+import {NzModalService, NzNotificationService} from 'ng-zorro-antd';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {NzNotificationService} from 'ng-zorro-antd';
 import {StatusHelper} from '../../../public/helper/statusHelper';
 import {Https} from '../../../public/https.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Urls} from '../../../public/url';
+import {DomSanitizer} from '@angular/platform-browser';
 
 declare var $: any;
 
@@ -24,8 +24,19 @@ export class WorkFlowEditComponent implements OnInit {
 
   workFlowType: Array<any>;
 
+  contentHeight = 500;
+
+  public saveHref;
+
+  public saveName = '';
+
+  private readonly newDiagram = 'assets/bpmn/diagram.xml';
+
+  private modeler;
+
   constructor(private fb: FormBuilder, private modalService: NzModalService, private _notification: NzNotificationService,
-              private statusHelper: StatusHelper, private http: Https, private route: Router, private activatedRoute: ActivatedRoute) {
+              private statusHelper: StatusHelper, private http: Https, private route: Router, private activatedRoute: ActivatedRoute,
+              private sanitizer: DomSanitizer) {
     this.formData = {};
 
     this.statusHelper.workflowType().then(onfulfilled => {
@@ -38,41 +49,82 @@ export class WorkFlowEditComponent implements OnInit {
     this.activatedRoute.queryParams.subscribe(queryParams => {
       this.formData['id'] = queryParams['id'];
     });
-
+    this.initContentHeight();
+    $('.with-diagram').height(this.contentHeight);
     this.validateForm = this.fb.group({
         flowName: [null, [Validators.required, Validators.maxLength(12)]],
         flow: [null, []],
         workflowType: [null, [Validators.required]]
       }
     );
-
     const ms = this.modalService;
 
     this.http.get(Urls.WORKFLOW.DETAILS + this.formData['id']).then(onfulfilled => {
       this.formData = onfulfilled['data'];
-      this.initFlow();
+      console.log(this.formData);
+      this.initBpmn();
     }, errorResp => {
       this._notification.error('错误', errorResp['msg']);
     });
 
-
   }
 
-  initFlow() {
-    const fdate = this.formData;
-    $('#myflow').myflow(
-      {
-        basePath: '',
-        restore: eval('(' + this.formData['flow'] + ')'),
-        tools: {
-          save: {
-            onclick: function (data) {
-              fdate['flow'] = data;
-              $('#flow').val(data);
-            }
-          }
-        }
-      });
+  initContentHeight() {
+    this.contentHeight = $('body').height() - $('header').height() - $('footer').height() - 136;
+  }
+
+  initBpmn() {
+    this.createDiagram();
+  }
+
+  createDiagram() {
+    this.importDiagram(this.newDiagram);
+  }
+
+
+  importDiagram(xml) {
+    this.modeler = initScript.initBpmn();
+    this.modeler.importXML(this.formData['flow']);
+  }
+
+  saveDiagram(e, titleTpl, contentTpl) {
+    this.modeler.saveXML({format: true}, (err, xml) => {
+      if (err) {
+        console.error(err);
+      } else {
+        this.setEncoded(xml, 'bpmn.xml');
+        this.formData['flow'] = xml;
+        this.toSave(titleTpl, contentTpl);
+      }
+    });
+    e.preventDefault();
+    e.stopPropagation();
+  }
+
+  // initFlow() {
+  //   const fdate = this.formData;
+  //   $('#myflow').myflow(
+  //     {
+  //       basePath: '',
+  //       restore: eval('(' + this.formData['flow'] + ')'),
+  //       tools: {
+  //         save: {
+  //           onclick: function (data) {
+  //             fdate['flow'] = data;
+  //             $('#flow').val(data);
+  //           }
+  //         }
+  //       }
+  //     });
+  // }
+
+  setEncoded(data, name) {
+    const encodedData = encodeURIComponent(data);
+
+    if (data) {
+      this.saveHref = this.sanitizer.bypassSecurityTrustResourceUrl('data:application/bpmn20-xml;charset=UTF-8,' + encodedData);
+      this.saveName = name;
+    }
   }
 
   toSave(titleTpl, contentTpl) {
