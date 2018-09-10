@@ -91,77 +91,79 @@
   <!--</ul>-->
 <!--</div>-->
 
-<!--<ng-template #title>-->
-  <!--<span>保存流程</span>-->
-<!--</ng-template>-->
-<!--<ng-template #content>-->
-  <!--<div>-->
-    <!--<form nz-form [formGroup]="validateForm" class="login-form form-center" (ngSubmit)="_submitForm()"-->
-          <!--id="addWorkFlowForm">-->
-      <!--<div nz-form-item style="display: none;">-->
-        <!--<div nz-form-control>-->
-          <!--<nz-input formControlName="flow" [(ngModel)]="formData.flow" [nzSize]="'large'" id="flow">-->
-            <!--<ng-template #prefix>-->
-              <!--<i class="anticon anticon-user"></i>-->
-            <!--</ng-template>-->
-          <!--</nz-input>-->
-        <!--</div>-->
-      <!--</div>-->
-      <!--<div nz-form-item>-->
-        <!--<div nz-form-control>-->
-          <!--<nz-input formControlName="flowName" [(ngModel)]="formData.name" [nzPlaceHolder]="'流程名称'" [nzSize]="'large'">-->
-            <!--<ng-template #prefix>-->
-              <!--<i class="anticon anticon-user"></i>-->
-            <!--</ng-template>-->
-          <!--</nz-input>-->
-          <!--<div nz-form-explain-->
-               <!--*ngIf="validateForm.controls.flowName.dirty&&validateForm.controls.flowName.hasError('required')">-->
-            <!--流程名称不能为空!-->
-          <!--</div>-->
-          <!--<div nz-form-explain-->
-               <!--*ngIf="validateForm.controls.flowName.dirty&&validateForm.controls.flowName.hasError('maxlength')">-->
-            <!--流程名长度在1-12个字符之间!-->
-          <!--</div>-->
-        <!--</div>-->
-      <!--</div>-->
-      <!--<nz-select formControlName="workflowType" [(ngModel)]="formData.flowType"-->
-                 <!--[nzPlaceHolder]="'选择工作流类型'" nzAllowClear>-->
-        <!--<nz-option-->
-          <!--*ngFor="let option of workFlowType"-->
-          <!--[nzLabel]="option.name"-->
-          <!--[nzValue]="option.value">-->
-        <!--</nz-option>-->
-      <!--</nz-select>-->
-      <!--<div nz-form-explain-->
-           <!--*ngIf="validateForm.controls.workflowType.dirty&&validateForm.controls.workflowType.hasError('required')">-->
-        <!--请选择工作流类型-->
-      <!--</div>-->
-      <!--<div class="btn-center" style="min-height: 50px; margin-top: 2rem;" nz-form-control>-->
-        <!--<div nz-form-item style="height: 5rem;">-->
-          <!--<button nz-button [nzType]="'primary'" [nzSize]="''">保存-->
-          <!--</button>-->
-          <!--<a class="btn btn-default btn-sm" (click)="cancel()">取消-->
-          <!--</a>-->
-        <!--</div>-->
-      <!--</div>-->
-    <!--</form>-->
-  <!--</div>-->
-<!--</ng-template>-->
+<ng-template #title>
+  <span>保存流程</span>
+</ng-template>
+<ng-template #content>
+  <div>
+    <form nz-form [formGroup]="validateForm" class="login-form form-center" (ngSubmit)="_submitForm()"
+          id="addWorkFlowForm">
+      <div nz-form-item style="display: none;">
+        <div nz-form-control>
+          <nz-input formControlName="flow" [(ngModel)]="formData.flow" [nzSize]="'large'" id="flow">
+            <ng-template #prefix>
+              <i class="anticon anticon-user"></i>
+            </ng-template>
+          </nz-input>
+        </div>
+      </div>
+      <div nz-form-item>
+        <div nz-form-control>
+          <nz-input formControlName="flowName" [(ngModel)]="formData.name" [nzPlaceHolder]="'流程名称'" [nzSize]="'large'">
+            <ng-template #prefix>
+              <i class="anticon anticon-user"></i>
+            </ng-template>
+          </nz-input>
+          <div nz-form-explain
+               *ngIf="validateForm.controls.flowName.dirty&&validateForm.controls.flowName.hasError('required')">
+            流程名称不能为空!
+          </div>
+          <div nz-form-explain
+               *ngIf="validateForm.controls.flowName.dirty&&validateForm.controls.flowName.hasError('maxlength')">
+            流程名长度在1-12个字符之间!
+          </div>
+        </div>
+      </div>
+      <nz-select formControlName="workflowType" [(ngModel)]="formData.flowType"
+                 [nzPlaceHolder]="'选择工作流类型'" nzAllowClear>
+        <nz-option
+          *ngFor="let option of workFlowType"
+          [nzLabel]="option.name"
+          [nzValue]="option.value">
+        </nz-option>
+      </nz-select>
+      <div nz-form-explain
+           *ngIf="validateForm.controls.workflowType.dirty&&validateForm.controls.workflowType.hasError('required')">
+        请选择工作流类型
+      </div>
+      <div class="btn-center" style="min-height: 50px; margin-top: 2rem;" nz-form-control>
+        <div nz-form-item style="height: 5rem;">
+          <button nz-button [nzType]="'primary'" [nzSize]="''">保存
+          </button>
+          <a class="btn btn-default btn-sm" (click)="cancel()">取消
+          </a>
+        </div>
+      </div>
+    </form>
+  </div>
+</ng-template>
 
 
 <div class="content with-diagram" id="js-drop-zone">
   <div class="canvas" id="js-canvas"></div>
 </div>
 
+<button id="save-button">保存</button>
+
 <ul class="buttons">
   <li>
-    <a id="js-download-diagram" href title="download BPMN diagram" class="active" (click)="saveDiagram($event)">
-      BPMN diagram
+    <a id="js-download-diagram" href title="下载 BPMN 文件" class="active" (click)="saveDiagram($event, title, content)">
+      保存 BPMN 流程
     </a>
   </li>
   <li>
-    <a id="js-download-svg" href title="download as SVG image" class="active" (click)="saveSVG($event)">
-      SVG image
+    <a id="js-download-svg" href title="下载 SVG 图片" class="active" (click)="saveSVG($event)">
+      下载 SVG 图片
     </a>
   </li>
   <li *ngIf="saveHref">
@@ -170,3 +172,4 @@
 </ul>
 
 
+<script type="application/javascript" src="/assets/js/modeler.js"></script>

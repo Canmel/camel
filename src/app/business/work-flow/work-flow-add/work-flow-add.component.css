@@ -147,3 +147,12 @@ a:link {
 .buttons a.active {
   opacity: 1.0;
 }
+
+
+#save-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+
+  border: solid 5px green;
+}

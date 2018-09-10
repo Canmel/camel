@@ -1,4 +1,18 @@
 var initScript = {
+  initBpmn: function () {
+    var bpmnModeler;
+    (function (BpmnModeler, $) {
+
+      // create modeler
+      bpmnModeler = new BpmnModeler({
+        container: '#js-canvas'
+      });
+
+
+
+    })(window.BpmnJS, window.jQuery);
+    return bpmnModeler;
+  },
   successMsg: function (title, msg) {
     toastr.success(title, msg);
   },
