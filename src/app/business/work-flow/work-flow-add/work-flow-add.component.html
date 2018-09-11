@@ -153,9 +153,12 @@
   <div class="canvas" id="js-canvas"></div>
 </div>
 
-<button id="save-button">保存</button>
-
 <ul class="buttons">
+  <li>
+    <a id="js-back" title="返回列表" class="active" (click)="backToList()">
+      返回列表
+    </a>
+  </li>
   <li>
     <a id="js-download-diagram" href title="下载 BPMN 文件" class="active" (click)="saveDiagram($event, title, content)">
       保存 BPMN 流程
