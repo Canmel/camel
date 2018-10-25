@@ -1,0 +1,87 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "project": {
+    "name": "canmel"
+  },
+  "apps": [
+    {
+      "root": "src",
+      "outDir": "dist",
+      "assets": [
+        "assets",
+        "favicon.ico"
+      ],
+      "index": "index.html",
+      "main": "main.ts",
+      "polyfills": "polyfills.ts",
+      "test": "test.ts",
+      "tsconfig": "tsconfig.app.json",
+      "testTsconfig": "tsconfig.spec.json",
+      "prefix": "app",
+      "styles": [
+        "styles.css",
+        "../node_modules/_bootstrap@3.3.7@bootstrap/dist/css/bootstrap.css",
+        "../src/assets/css/bootstrap-reset.css",
+        "../src/assets/css/font-awesome.min.css",
+        "../src/assets/css/style.css",
+        "../src/assets/css/morris.css",
+        "../src/assets/css/clndr.css",
+        "../src/assets/css/style-responsive.css",
+        "../src/assets/css/diagram-js.css",
+        "../src/assets/css/bpmn-font/css/bpmn-embedded.css",
+        "../node_modules/bpmn-js/dist/assets/bpmn-font/css/bpmn-embedded.css"
+      ],
+      "scripts": [
+        "../node_modules/jquery/dist/jquery.js",
+        "../src/assets/js/jquery-migrate-1.2.1.js",
+        "../node_modules/_bootstrap@3.3.7@bootstrap/dist/js/bootstrap.js",
+        "../src/assets/js/esl.js",
+        "../src/assets/js/jquery.knob.js",
+        "../src/assets/js/toastr.min.js",
+        "../src/assets/js/raphael-min.js",
+        "../src/assets/js/jquery-ui-1.8.4.custom.min.js",
+        "../src/assets/js/myflow.js",
+        "../src/assets/js/myflow.jpdl4.js",
+        "../src/assets/js/myflow.editors.js",
+        "../src/assets/js/scripts.js",
+        "../src/assets/js/echarts.js",
+        "../src/assets/js/initEcharts.js",
+        "../src/assets/js/map.js",
+        "../src/assets/js/bpmn-modeler.min.js"
+      ],
+      "environmentSource": "environments/environment.ts",
+      "environments": {
+        "dev": "environments/environment.ts",
+        "prod": "environments/environment.prod.ts"
+      }
+    }
+  ],
+  "e2e": {
+    "protractor": {
+      "config": "./protractor.conf.js"
+    }
+  },
+  "lint": [
+    {
+      "project": "src/tsconfig.app.json",
+      "exclude": "**/node_modules/**"
+    },
+    {
+      "project": "src/tsconfig.spec.json",
+      "exclude": "**/node_modules/**"
+    },
+    {
+      "project": "e2e/tsconfig.e2e.json",
+      "exclude": "**/node_modules/**"
+    }
+  ],
+  "test": {
+    "karma": {
+      "config": "./karma.conf.js"
+    }
+  },
+  "defaults": {
+    "styleExt": "css",
+    "component": {}
+  }
+}

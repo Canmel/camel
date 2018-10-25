@@ -23,9 +23,37 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/bootstrap/dist/css/bootstrap.css",
+              "src/assets/css/bootstrap-reset.css",
+              "src/assets/css/font-awesome.min.css",
+              "src/assets/css/style.css",
+              "src/assets/css/morris.css",
+              "src/assets/css/clndr.css",
+              "src/assets/css/style-responsive.css",
+              "src/assets/css/diagram-js.css",
+              "src/assets/css/bpmn-font/css/bpmn-embedded.css",
+              "node_modules/bpmn-js/dist/assets/bpmn-font/css/bpmn-embedded.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.js",
+              "src/assets/js/jquery-migrate-1.2.1.js",
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.js",
+              "node_modules/bootstrap/dist/js/bootstrap.js",
+              "src/assets/js/esl.js",
+              "src/assets/js/jquery.knob.js",
+              "src/assets/js/toastr.min.js",
+              "src/assets/js/raphael-min.js",
+              "src/assets/js/jquery-ui-1.8.4.custom.min.js",
+              "src/assets/js/myflow.js",
+              "src/assets/js/myflow.jpdl4.js",
+              "src/assets/js/myflow.editors.js",
+              "src/assets/js/scripts.js",
+              "src/assets/js/echarts.js",
+              "src/assets/js/initEcharts.js",
+              "src/assets/js/map.js",
+              "src/assets/js/bpmn-modeler.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -79,7 +107,8 @@
             "tsConfig": "src/tsconfig.spec.json",
             "karmaConfig": "src/karma.conf.js",
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "src/assets/css/"
             ],
             "scripts": [],
             "assets": [
