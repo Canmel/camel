@@ -1,0 +1,178 @@
+<section class="panel">
+  <div class="panel-body bio-graph-info">
+    <h1>
+      <i class="fa fa-search fa-1x fa-fw"></i>查询
+    </h1>
+    <div class="row">
+      <form class="form-inline" role="form" id="searchForm">
+        <div class="form-group">
+          <input name="description" class="form-control" id="description" placeholder="描述"
+                 [(ngModel)]="params.description">
+        </div>
+        <button type="submit" (click)="query()" class="btn btn-success">查询</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="panel with-nav-tabs panel-primary panel-square panel-no-border">
+        <div>
+          <tabset>
+            <tab>
+              <ng-template tabHeading>
+                <i class="fa fa-home">&nbsp;报销申请列表</i>
+              </ng-template>
+              <div class="panel-body-min">
+                <div class="tab-content">
+                  <div class="panel-body-min no-padding">
+                    <table class="table no-margin">
+                      <thead>
+                      <tr>
+                        <th>描述</th>
+                        <th>金额</th>
+                        <th>状态</th>
+                        <th>流程</th>
+                        <th class="col-md-2">操作</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr *ngFor="let item of reimbursements">
+                        <td>{{item.description}}</td>
+                        <td>{{item.amount}}</td>
+                        <td>
+                          <span *ngIf="item.status == '1'">
+                            <i class="fa fa-check"></i>
+                          </span>
+                          <span *ngIf="item.status == '0'">
+                            <i class="fa fa-lock"></i>
+                          </span>
+                        </td>
+                        <td>
+                          <div *ngIf="item.workFlowInstance">
+                            <span *ngIf="item.workFlowInstance.status == 1">未发起</span>
+                          </div>
+
+                          <div *ngIf="!item.workFlowInstance">
+                            <span>未添加</span>
+                          </div>
+
+                        </td>
+                        <td class="actions-hover actions-fade">
+                          <span class="label label-primary label-mini" tooltip="编辑报销申请" placement="left">
+                            <a class="operation-links a-white" (click)='edit({"id": item.id})'><i
+                              class="fa fa-pencil fa-fw"></i></a>
+                          </span>
+                          <span class="label label-danger label-mini" tooltip="删除报销申请" placement="top">
+                          <a class="delete-row operation-links a-white"
+                             (click)="delete(template, item.id, item.description)">
+                            <i class="fa fa-trash-o fa-fw"></i></a>
+                          </span>
+                          <span class="label label-info label-mini" tooltip="点击添加流程" placement="right" *ngIf="!item.workFlowInstance">
+                          <a class="delete-row operation-links a-white"
+                             (click)="newWorkFlowInstance(modalContent, item.id, item.description)">
+                            <i class="fa fa-code-fork fa-fw"></i></a>
+                          </span>
+                          <span class="label label-success label-mini" tooltip="点击发起流程" placement="right" *ngIf="item.workFlowInstance">
+                          <a class="delete-row operation-links a-white"
+                             (click)="launch(launchTemplate, item.id, item.description)">
+                            <i class="fa fa-rocket fa-fw"></i></a>
+                          </span>
+                        </td>
+                      </tr>
+                      <tr class="text-center" *ngIf="!reimbursements">
+                        <td colspan="4">
+                          <p class="error-tip-color">暂无数据</p>
+                        </td>
+                      </tr>
+                      </tbody>
+                    </table>
+
+                    <ng-template #template>
+                      <div class="modal-body text-center">
+                        <p>你确定要删除 <b>{{preDelete.name}}</b> 吗？</p>
+                        <button type="button" class="btn btn-primary" (click)="confirm()">是</button>
+                        <button type="button" class="btn btn-default" (click)="decline()">否</button>
+                      </div>
+                    </ng-template>
+
+                    <ng-template #launchTemplate>
+                      <div class="modal-body text-center">
+                        <p>你确定要发起 <b>{{preLaunch.name}}</b> 吗？</p>
+                        <button type="button" class="btn btn-primary" (click)="launchConfirm()">是</button>
+                        <button type="button" class="btn btn-default" (click)="decline()">否</button>
+                      </div>
+                    </ng-template>
+
+                    <nz-modal
+                      [nzVisible]="isSyncVisible"
+                      [nzTitle]="'显示异步关闭'"
+                      [nzContent]="modalContent"
+                      (nzOnCancel)="nzOnCancel($event)"
+                      (nzOnOk)="doSubmit($event)"
+                      [nzConfirmLoading]="isConfirmLoading">
+                      <ng-template #modalContent>
+                        <div class="modal-body text-left" style="height: 15rem;">
+                          <form nz-form [formGroup]="validateForm" class="login-form form-center"
+                                (ngSubmit)="_submitForm()" id="addUserForm">
+                            <div nz-form-item>
+                              <div nz-form-control class="form-disabled">
+                                <nz-input formControlName="description" [(ngModel)]="formData.description" readonly
+                                          [nzSize]="'large'" disabled>
+                                  <ng-template #prefix>
+                                    <i class="anticon anticon-user"></i>
+                                  </ng-template>
+                                </nz-input>
+                                <div nz-form-explain
+                                     *ngIf="validateForm.controls.description.dirty&&validateForm.controls.description.hasError('required')">
+                                  申请名不能为空!
+                                </div>
+                              </div>
+                            </div>
+                            <div nz-form-item>
+                              <div nz-form-control>
+                                <nz-select formControlName="reimbursementFlows" [(ngModel)]="formData.workFlowId"
+                                           [nzPlaceHolder]="'选择工作流程'" nzAllowClear>
+                                  <nz-option
+                                    *ngFor="let option of reimbursementFlows"
+                                    [nzLabel]="option.name"
+                                    [nzValue]="option.id">
+                                  </nz-option>
+                                </nz-select>
+                                <div nz-form-explain
+                                     *ngIf="validateForm.controls.reimbursementFlows.dirty&&validateForm.controls.reimbursementFlows.hasError('required')">
+                                  请选择申请流程
+                                </div>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                      </ng-template>
+                    </nz-modal>
+                  </div>
+                </div>
+                <div style="text-align: center">
+                  <pagination
+                    [totalItems]="paginationParams.totalCount"
+                    [nextText]="paginationParams.nextText"
+                    [previousText]="paginationParams.previousText"
+                    [(ngModel)]="paginationParams.currentPage"
+                    (pageChanged)="pageChanged($event)"></pagination>
+                </div>
+              </div>
+            </tab>
+            <tab (click)="add()">
+              <div (click)="add()">
+                <ng-template tabHeading>
+                  <a (click)="add()"><i class=" fa fa-bars">&nbsp;新建</i></a>
+                </ng-template>
+              </div>
+            </tab>
+          </tabset>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

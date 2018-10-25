@@ -1,0 +1,98 @@
+<div class="panel">
+  <div class="panel-body">
+    <div class="profile-desk">
+      <h1>
+        BootStrap Pagination
+      </h1>
+      <span class="designation">BootStrap 分页</span>
+      <p class="bio-graph-heading">
+        <code>Pagination</code> - provide pagination links for your site or app with the multi-page pagination
+        component, or the simpler pager alternative.
+      </p>
+      <p class="bio-graph-heading">
+        <code>Pager</code> - quick previous and next links for simple pagination implementations with light markup and
+        styles. It's great for simple sites like blogs or magazines.
+      </p>
+    </div>
+  </div>
+</div>
+
+<section class="panel">
+  <div class="panel-body bio-graph-info">
+    <h1>
+      BootStrap分页
+    </h1>
+    <div class="row">
+      <div class="bio-row">
+        <p><span>名称</span>
+          : BootStrap分页
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="panel with-nav-tabs panel-primary panel-square panel-no-border">
+        <div>
+          <tabset>
+            <tab>
+              <ng-template tabHeading>
+                <i class="fa fa-home">BootStrap 分页组件</i>
+              </ng-template>
+              <div class="panel-body">
+                <div class="tab-content">
+                  <pagination [totalItems]="63" [(ngModel)]="currentPage"
+                              (pageChanged)="pageChanged($event)"></pagination>
+                  <pre class="card card-block card-header mb-3">
+                    Page changed to: {{page}}
+                  </pre>
+                </div>
+              </div>
+            </tab>
+            <tab>
+              <ng-template tabHeading>
+                <i class="fa fa-bars">使用</i>
+              </ng-template>
+              <div class="tab-content">
+                <div class="panel">
+                  <div class="panel-body">
+                    <ul><h4>BootStrap 分页组件</h4>
+
+                      <li>1. 在需要分页组件的模块<code>module.ts</code>文件中，导入<code>PaginationModule</code></li>
+                      <li>
+                        <div class="well">
+                          import &#123; PaginationModule &#125; from 'ngx-bootstrap/pagination';<br/>
+
+                          ...<br/>
+                          imports: [PaginationModule.forRoot(),...] <br/>
+                        </div>
+                      </li>
+                      <li>2. 在<code>template</code>中定义<code>pagination</code>渲染分页组件, 并在Component定义回调方法<code>pageChanged</code></li>
+                      <li>
+                        <div class="well">
+                          &#60;pagination<br/>
+                          &nbsp;&nbsp;[totalItems]="63"<br/>
+                          &nbsp;&nbsp;[(ngModel)]="currentPage"<br/>
+                          &nbsp;&nbsp;(pageChanged)="pageChanged($event)"&#62;&#60;/pagination&#62;<br/>
+                        </div>
+                      </li>
+                      <li>3. 其他配置</li>
+                      <li>
+                        <div class="well">
+                          详细配置 <code>https://valor-software.com/ngx-bootstrap/#/pagination</code>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </tab>
+          </tabset>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

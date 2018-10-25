@@ -1,0 +1,276 @@
+<div class="panel">
+  <div class="panel-body">
+    <div class="profile-desk">
+      <h1>BootStrap Table</h1>
+      <span class="designation">BootStrap自定义表格</span>
+      <p class="bio-graph-heading">
+        一个服务于企业级产品的设计体系。基于『确定』和『自然』的设计价值观，通过模块化的解决方案，让设计者专注于更好的用户体验。
+      </p>
+    </div>
+  </div>
+</div>
+
+<section class="panel">
+  <div class="panel-body bio-graph-info">
+    <h1>
+      Ant Design ...
+    </h1>
+    <div class="row">
+      <div class="bio-row">
+        <p><span>名称</span>
+          : Ant Design Table
+        </p>
+      </div>
+      <div class="bio-row">
+        <p><span>Ant Design Angular</span>
+          : <code>https://ng.ant.design/</code>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="panel with-nav-tabs panel-primary panel-square panel-no-border">
+        <div>
+          <tabset>
+            <tab>
+              <ng-template tabHeading>
+                <i class="fa fa-home">Ant Design</i>
+              </ng-template>
+              <div class="panel-body">
+                <div class="panel">
+                  <div class="panel-body">
+                    <ul style="list-style-type: disc"><h4>NG ZORRO 致力于提供给 Angular 开发者愉悦的开发体验。</h4>
+                      <li>这里是 <code>Ant Design</code> 的 <code>Angular^5.0.0</code> 实现，开发和服务于企业级后台产品。</li>
+                      <li>如果要您使用的是 <code>Angular 4.x</code> 版本，请使用 <code>0.5.x</code> 版本的 <code>NG-ZORRO</code></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </tab>
+            <tab>
+              <ng-template tabHeading>
+                <i class="fa fa-bars">预备</i>
+              </ng-template>
+              <div class="tab-content">
+                <div class="panel">
+                  <div class="panel-body">
+                    <ul style="list-style-type: disc"><h5>预备使用</h5>
+                      <li>1. 安装<code>ng-zorro-antd</code>, 如果你的网络环境不佳，推荐使用 <code>cnpm</code>。</li>
+                      <li>
+                        <div class="well">npm install ng-zorro-antd --save</div>
+                      </li>
+                      <li>2. 在所需的<code>Module</code>中导入<code>import &#123; NgZorroAntdModule &#125; from
+                        'ng-zorro-antd';</code>,和<code>import</code>
+                      </li>
+                      <li>
+                        <div class="well">
+                          imports: [<br/>
+                          ...<br/>
+                          NgZorroAntdModule.forRoot()<br/>
+                          ],
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </tab>
+          </tabset>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="panel with-nav-tabs panel-primary panel-square panel-no-border">
+        <div>
+          <tabset>
+            <tab>
+              <ng-template tabHeading>
+                <i class="fa fa-home">固定表头</i>
+              </ng-template>
+              <div class="panel-body">
+                <nz-table #nzTable [nzDataSource]="data" [nzIsPagination]="false" [nzScroll]="{ x: 1920, y: 240 }">
+                  <ng-template #nzFixedHeader>
+                    <thead nz-thead>
+                    <tr>
+                      <th nz-th [nzWidth]="'150px'"><span>Name</span></th>
+                      <th nz-th [nzWidth]="'150px'"><span>Age</span></th>
+                      <th nz-th><span>Address</span></th>
+                    </tr>
+                    </thead>
+                  </ng-template>
+                  <tbody nz-tbody>
+                  <tr nz-tbody-tr *ngFor="let data of nzTable.data">
+                    <td nz-td>{{data.name}}</td>
+                    <td nz-td>{{data.age}}</td>
+                    <td nz-td>{{data.address}}</td>
+                  </tr>
+                  </tbody>
+                </nz-table>
+              </div>
+            </tab>
+            <tab>
+              <ng-template tabHeading>
+                <i class="fa fa-bars">使用</i>
+              </ng-template>
+              <div class="tab-content">
+                <div class="panel">
+                  <div class="panel-body">
+                    <ul style="list-style-type: disc">固定表头:
+                      <p>使用 需要指定 <code>column</code> 的 <code>width</code> 属性，否则列头和内容可能不对齐。</p>
+                      <li>1. 在组件ts中定义数据数组</li>
+                      <li>
+                        <div class="well">
+                          // component.ts<br/>
+                          data = [];<br/>
+                          <br/>
+                          ngOnInit() &#123;<br/>
+                          &nbsp;for (let i = 0; i < 100; i++) &#123;<br/>
+                          &nbsp;this.data.push(&#123;<br/>
+                          &nbsp;name : `Edward King $&#123;i&#125;`,<br/>
+                          &nbsp;age : 32,<br/>
+                          &nbsp;address: `London, Park Lane no. $&#123;i&#125;`,<br/>
+                          &#125;);<br/>
+                          &#125;<br/>
+                          &#125;<br/>
+                        </div>
+                      </li>
+                      <li>2. 在<code>html</code>中定义标签<code>&#60;nz-table&#62;</code></li>
+                      <li>3. <code>nz-table</code>组件属性列表:</li>
+                      <li>
+                        <div class="well">
+                          <code>nzDataSource</code> : 表格数据<br/>
+                          <code>nzIsPagination</code> : 是否分页<br/>
+                          <code>nzScroll</code> : 表格的宽高<br/>
+                        </div>
+                      </li>
+                      <li>
+                        4. 在<code>nz-table</code>标签中定义标签<code>ng-template</code>，定义表头
+                      </li>
+                      <li>
+                        <div class="well">
+                          &#60;ng-template #nzFixedHeader&#62;<br/>
+                          &#60;thead nz-thead&#62;<br/>
+                          &nbsp;&#60;tr&#62;<br/>
+                          &nbsp;&nbsp;&#60;th nz-th [nzWidth]="'150px'"&#62;&#60;span&#62;Name&#60;/span&#62;&#60;/th&#62;<br/>
+                          &nbsp;&nbsp;&#60;th nz-th [nzWidth]="'150px'"&#62;&#60;span&#62;Age&#60;/span&#62;&#60;/th&#62;<br/>
+                          &nbsp;&nbsp;&#60;th nz-th&#62;&#60;span&#62;Address&#60;/span&#62;&#60;/th&#62;<br/>
+                          &nbsp;&#60;/tr&#62;<br/>
+                          &#60;/thead&#62;<br/>
+                          &#60;/ng-template&#62;<br/>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </tab>
+          </tabset>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="panel with-nav-tabs panel-primary panel-square panel-no-border">
+        <div>
+          <tabset>
+            <tab>
+              <ng-template tabHeading>
+                <i class="fa fa-home">表格展开</i>
+              </ng-template>
+              <div class="panel-body">
+                <nz-table #nzExpandTable [nzDataSource]="expand_data" [nzIsPagination]="false">
+                  <thead nz-thead>
+                  <tr>
+                    <th nz-th [nzWidth]="'40%'"><span>Name</span></th>
+                    <th nz-th [nzWidth]="'30%'"><span>Age</span></th>
+                    <th nz-th><span>Address</span></th>
+                  </tr>
+                  </thead>
+                  <tbody nz-tbody>
+                  <ng-template ngFor let-data [ngForOf]="nzExpandTable.data">
+                    <ng-template ngFor let-item [ngForOf]="expandDataCache[data.key]">
+                      <tr nz-tbody-tr *ngIf="(item.parent&&item.parent.expand)||!(item.parent)">
+                        <td nz-td>
+                          <nz-row-indent [nzIndentSize]="item.level"></nz-row-indent>
+                          <nz-row-expand-icon [(nzExpand)]="item.expand"
+                                              (nzExpandChange)="collapse(expandDataCache[data.key],item,$event)"
+                                              [nzShowExpand]="!!item.children"></nz-row-expand-icon>
+                          {{item.name}}
+                        </td>
+                        <td nz-td>{{item.age}}</td>
+                        <td nz-td>{{item.address}}</td>
+                      </tr>
+                    </ng-template>
+                  </ng-template>
+                  </tbody>
+                </nz-table>
+              </div>
+            </tab>
+            <tab>
+              <ng-template tabHeading>
+                <i class="fa fa-bars">使用</i>
+              </ng-template>
+              <div class="tab-content">
+                <div class="panel">
+                  <div class="panel-body">
+                    <ul style="list-style-type: disc"><h4>表格展开:</h4>
+                      <li>1. 使用<code>nz-table</code><code>ng-template</code>标签在页面渲染</li>
+                      <li>2. 使用<code>nz-row-indent</code><code>nz-row-expand-icon</code>标签渲染表格层级关系</li>
+                      <li>3. 在表格层级图表设置点击事件<code>nzExpandChange</code><code>nzShowExpand</code></li>
+                      <li>
+                        <div class="well">
+                          &#60;nz-table #nzExpandTable [nzDataSource]="expand_data" [nzIsPagination]="false"&#62;<br/>
+                          &#60;thead nz-thead&#62;<br/>
+                          &#60;tr&#62;<br/>
+                          &#60;th nz-th [nzWidth]="40%"&#62;&#60;span&#62;Name&#60;/span&#62;&#60;/th&#62;<br/>
+                          &#60;th nz-th [nzWidth]="30%"&#62;&#60;span&#62;Age&#60;/span&#62;&#60;/th&#62;<br/>
+                          &#60;th nz-th&#62;&#60;span&#62;Address&#60;/span&#62;&#60;/th&#62;<br/>
+                          &#60;/tr&#62;<br/>
+                          &#60;/thead&#62;<br/>
+
+                          &#60;tbody nz-tbody&#62;<br/>
+                          &#60;ng-template ngFor let-data [ngForOf]="nzExpandTable.data"&#62;<br/>
+                          &#60;ng-template ngFor let-item [ngForOf]="expandDataCache[data.key]"&#62;<br/>
+                          &#60;tr nz-tbody-tr *ngIf="(item.parent&&item.parent.expand)||!(item.parent)"&#62;<br/>
+                          &#60;td nz-td&#62;<br/>
+                          &#60;nz-row-indent [nzIndentSize]="item.level"&#62;&#60;/nz-row-indent&#62;<br/>
+                          &#60;nz-row-expand-icon [(nzExpand)]="item.expand"
+                          (nzExpandChange)="collapse(expandDataCache[data.key],item,$event)"
+                          [nzShowExpand]="!!item.children"&#62;<br/>
+                          &#60;/nz-row-expand-icon&#62;<br/>
+                          &#123; &#123;item.name&#125; &#125;<br/>
+                          &#60;/td&#62;<br/>
+                          &#60;td nz-td&#62;&#123; &#123;item.age&#125; &#125;&#60;/td&#62;<br/>
+                          &#60;td nz-td&#62;&#123; &#123;item.address&#125; &#125;&#60;/td&#62;<br/>
+                          &#60;/tr&#62;<br/>
+                          &#60;/ng-template&#62;<br/>
+                          &#60;/ng-template&#62;<br/>
+                          &#60;/tbody&#62;<br/>
+
+                          &#60;/nz-table&#62;
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </tab>
+          </tabset>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

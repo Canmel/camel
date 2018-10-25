@@ -1,0 +1,57 @@
+<div id="sidebar" class="nav-collapse" style="z-index: 1000">
+  <ul class="sidebar-menu" id="nav-accordion">
+    <li>
+      <a routerLinkActive="active" routerLink="/app/home">
+        <i class="fa fa-dashboard">
+        </i>
+        <span>首页</span>
+      </a>
+    </li>
+    <li class="sub-menu">
+      <a href="javascript:;" (click)="showOrHideMenu($event)">
+        <i class="fa fa-laptop"></i>
+        <span>布局组件</span>
+      </a>
+      <ul class="sub">
+        <li><a routerLinkActive="active" routerLink="/app/charts/funsionchart">图表</a></li>
+        <li><a routerLinkActive="active" routerLink="/app/tables/easy">表格</a></li>
+        <li><a routerLinkActive="active" routerLink="/app/pagination/custom">分页</a></li>
+        <li><a routerLinkActive="active" routerLink="/app/prompt/modal">弹出&nbsp;&nbsp;提示</a></li>
+        <li><a routerLinkActive="active" routerLink="/app/validate">表单&nbsp;&nbsp;验证</a></li>
+      </ul>
+    </li>
+
+    <li class="sub-menu">
+      <a href="javascript:;" (click)="showOrHideMenu($event)">
+        <i class="fa fa-cog"></i>
+        <span>系统管理</span>
+      </a>
+      <ul class="sub">
+        <li><a routerLinkActive="active" routerLink="{{menus.USERS.LIST}}">用户管理</a></li>
+        <li><a routerLinkActive="active" routerLink="{{menus.ROLES.LIST}}">角色管理</a></li>
+        <li><a routerLinkActive="active" routerLink="{{menus.MENUS.LIST}}">菜单管理</a></li>
+        <li><a routerLinkActive="active" routerLink="/app/prompt/modal">图标</a></li>
+      </ul>
+    </li>
+
+    <li class="sub-menu">
+      <a href="javascript:;" (click)="showOrHideMenu($event)">
+        <i class="fa fa-cog"></i>
+        <span>工作流</span>
+      </a>
+      <ul class="sub">
+        <li><a routerLinkActive="active" routerLink="{{menus.FLOWS.LIST}}">工作流程</a></li>
+      </ul>
+    </li>
+
+    <li class="sub-menu">
+      <a href="javascript:;" (click)="showOrHideMenu($event)">
+        <i class="fa fa-cog"></i>
+        <span>财务管理</span>
+      </a>
+      <ul class="sub">
+        <li><a routerLinkActive="active" routerLink="{{menus.REIMBURSEMENT.LIST}}">报销申请</a></li>
+      </ul>
+    </li>
+  </ul>
+</div>

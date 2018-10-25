@@ -1,0 +1,52 @@
+<section>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="panel with-nav-tabs panel-primary panel-square panel-no-border">
+        <div>
+          <form nz-form [formGroup]="validateForm" class="login-form form-center" (ngSubmit)="_submitForm()" id="addUserForm">
+            <div nz-form-item>
+              <div nz-form-control>
+                <nz-input formControlName="rolename" [(ngModel)]="formData.rolename" [nzPlaceHolder]="'角色名'" [nzSize]="'large'">
+                  <ng-template #prefix>
+                    <i class="anticon anticon-user"></i>
+                  </ng-template>
+                </nz-input>
+                <div nz-form-explain
+                     *ngIf="validateForm.controls.rolename.dirty&&validateForm.controls.rolename.hasError('required')">
+                  角色名不能为空!
+                </div>
+                <div nz-form-explain
+                     *ngIf="validateForm.controls.rolename.dirty&&validateForm.controls.rolename.hasError('maxlength')">
+                  角色名长度在1-6个字符之间!
+                </div>
+              </div>
+            </div>
+            <div nz-form-item>
+              <div nz-form-control>
+                <nz-input formControlName="description" [(ngModel)]="formData.description" [nzPlaceHolder]="'备注'" [nzSize]="large">
+                  <ng-template #prefix>
+                    <i class="anticon anticon-trademark"></i>
+                  </ng-template>
+                </nz-input>
+                <div nz-form-explain
+                     *ngIf="validateForm.controls.description.dirty&&validateForm.controls.description.hasError('maxlength')">
+                  备注过长！
+                </div>
+              </div>
+            </div>
+
+            <div class="btn-center" nz-form-control>
+              <div nz-form-item>
+                <button nz-button [nzType]="'primary'" [nzSize]="''">保存
+                </button>
+
+                <a class="btn btn-default btn-sm" (click)="backToList()">返回
+                </a>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

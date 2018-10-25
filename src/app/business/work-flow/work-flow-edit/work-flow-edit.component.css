@@ -1,0 +1,161 @@
+#flow-body {
+  margin: 0;
+  pading: 0;
+  text-align: left;
+  font-family: Arial, sans-serif, Helvetica, Tahoma;
+  font-size: 12px;
+  line-height: 1.5;
+  color: black;
+  background-image: url(../../../../assets/images/flows/bg.png);
+}
+
+.node {
+  width: 70px;
+  text-align: center;
+  vertical-align: middle;
+  border: 1px solid #fff;
+}
+
+.mover {
+  border: 1px solid #ddd;
+  background-color: #ddd;
+}
+
+.selected {
+  background-color: #ddd;
+}
+
+.state {
+
+}
+
+#myflow_props table {
+
+}
+
+#myflow_props th {
+  letter-spacing: 2px;
+  text-align: left;
+  padding: 6px;
+  background: #ddd;
+}
+
+#myflow_props td {
+  background: #fff;
+  padding: 6px;
+}
+
+#pointer {
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#path {
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#task {
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#state {
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#myflow > svg {
+  width: 100%;
+}
+
+
+/*workFlow*/
+
+a:link {
+  text-decoration: none;
+}
+
+.content,
+.content>div {
+  width: 100%;
+  height: 100%;
+}
+
+.content>.message {
+  text-align: center;
+  display: table;
+  font-size: 16px;
+  color: #111;
+}
+
+.content>.message .note {
+  vertical-align: middle;
+  text-align: center;
+  display: table-cell;
+}
+
+.content .error .details {
+  max-width: 500px;
+  font-size: 12px;
+  margin: 20px auto;
+  text-align: left;
+}
+
+.content .error pre {
+  border: solid 1px #CCC;
+  background: #EEE;
+  padding: 10px;
+}
+
+.content:not(.with-error) .error,
+.content.with-error .intro,
+.content.with-diagram .intro {
+  display: none;
+}
+
+.content .canvas,
+.content.with-error .canvas {
+  visibility: hidden;
+}
+
+.content.with-diagram .canvas {
+  visibility: visible;
+}
+
+.buttons {
+  bottom: 20px;
+  left: 20px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.buttons>li {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.buttons>li>a {
+  background: #DDD;
+  border: solid 1px #666;
+  display: inline-block;
+  padding: 5px;
+}
+
+.buttons a {
+  opacity: 0.3;
+}
+
+.buttons a.active {
+  opacity: 1.0;
+}
+
+
+#save-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+
+  border: solid 5px green;
+}

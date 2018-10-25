@@ -1,0 +1,283 @@
+<div class="panel">
+  <div class="panel-body">
+    <div class="profile-desk">
+      <h1>
+        Funsionchart
+      </h1>
+      <span class="designation">
+                      复合图表-柱状  &amp; 折现 &amp;区域
+                    </span>
+      <p class="bio-graph-heading">
+        he most comprehensive JavaScript charting library, with over 90+ charts and 1000+ maps.
+        Loved by 27,000 customers in 118 countries.<br>
+      </p>
+      <p class="bio-graph-heading">The Angular4-FusionCharts component is a simple and lightweight binding for the
+        FusionCharts charting library
+        that lets you add rich and interactive charts to your Angular projects.</p>
+    </div>
+  </div>
+</div>
+
+<section class="panel">
+  <div class="panel-body bio-graph-info">
+    <h1>
+      FunsionCharts Info...
+    </h1>
+    <div class="row">
+      <div class="bio-row">
+        <p><span>名称</span>
+          : Funsionchart
+        </p>
+      </div>
+      <div class="bio-row">
+        <p><span>官网</span>
+          : <code>http://www.fusioncharts.com</code>
+        </p>
+      </div>
+      <div class="bio-row">
+        <p><span>开源</span>
+          : 是
+        </p>
+      </div>
+      <div class="bio-row">
+        <p><span>收费</span>
+          : 个人免费，团体收费
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="panel with-nav-tabs panel-primary panel-square panel-no-border">
+        <div>
+          <tabset>
+            <tab>
+              <ng-template tabHeading>
+                <i class="fa fa-home">样例</i>
+              </ng-template>
+              <div class="panel-body">
+                <div class="tab-content">
+                  <fusioncharts
+                    [id]="funsionchartCompositeOption.id"
+                    [width]="funsionchartCompositeOption.width"
+                    [height]="funsionchartCompositeOption.height"
+                    [type]="funsionchartCompositeOption.type"
+                    [dataFormat]="funsionchartCompositeOption.dataFormat"
+                    [dataSource]="funsionchartCompositeOption.dataSource"
+                  ></fusioncharts>
+                </div>
+              </div>
+            </tab>
+            <tab>
+              <ng-template tabHeading>
+                <i class="fa fa-bars">使用</i>
+              </ng-template>
+              <div class="tab-content">
+                <div class="panel">
+                  <div class="panel-body">
+                    <ul>Prominent features of this component include:
+
+                      <li>1. Adding a chart using only a single Angular component</li>
+                      <li>2. Auto-updating the chart object when component properties are modified</li>
+                      <li>3. Adding a chart by fetching data from a JSON or XML URL or by using the component props
+                        binding
+                      </li>
+                      <li>4. Enabling interactivity between JavaScript charts</li>
+                      <li>5. Offering advanced control by giving access to the complete FusionCharts object that
+                        contains the chart configuration
+                      </li>
+                    </ul>
+
+                    <ul style="list-style-type: disc">
+                      <p>使用</p>
+                      <li>1. 安装<code>FunsionChart</code></li>
+                      <li>
+                        <div class="well">sudo cnpm install fusioncharts --save</div>
+                      </li>
+                      <li>2. 安装<code>angular4-fusioncharts</code></li>
+                      <li>
+                        <div class="well">sudo cnpm install fusioncharts --save</div>
+                      </li>
+                      <li>## 或者使用下面的命令执行上面两条</li>
+                      <li>
+                        <div class="well">npm install fusioncharts angular4-fusioncharts --save</div>
+                      </li>
+                      <li>3. 在需要加载funsioncharts的模块import <code>angular4-funsioncharts</code></li>
+                      <li>
+                        <div class="well">
+                          // Module<br/>
+                          import * as FusionCharts from 'fusioncharts';<br/>
+                          import * as Charts from 'fusioncharts/fusioncharts.charts';<br/>
+                          import * as FintTheme from 'fusioncharts/themes/fusioncharts.theme.fint';<br/>
+                          <br/>
+                          mport &#123; FusionChartsModule &#125; from 'angular4-fusioncharts';<br/>
+                          <br/>
+                          @NgModule(&#123;<br/>
+                          ...<br/>
+                          imports: [<br/>
+                          ...<br/>
+                            FusionChartsModule.forRoot(FusionCharts, Charts, FintTheme)<br/>
+                          ],<br/>
+                          ...<br/>
+                          &#125;)
+                        </div>
+                      </li>
+                      <li>4. 在<code>Component中添加图表的属性配置</code></li>
+                      <li>
+                        <div class="well">
+                          export class AppComponent &#123;<br/>
+                            width = 600;<br/>
+                            height = 400;<br/>
+                            type = 'mscombi2d';<br/>
+                            dataFormat = 'json';<br/>
+                            dataSource;<br/>
+                          constructor() &#123;<br/>
+                          &nbsp;&nbsp;this.dataSource = &#123;<br/>
+                          &nbsp;&nbsp;&nbsp;&nbsp;... // 数据源的配置可以在Api中查询<br/>
+                          &#125;<br/>
+                          &#125;<br/>
+                        </div>
+                      </li>
+                      <li>5. 在html中使用标签<code>&#60;fusioncharts&#62;</code>渲染图表</li>
+                      <li>
+                        <div class="well">
+                          &#60;fusioncharts<br />
+                            [width]="width"<br />
+                            [height]="height"<br />
+                            [type]="type"<br />
+                            [dataFormat]="dataFormat"<br />
+                            [dataSource]="dataSource"<br />
+                          &#62;&#60;/fusioncharts&#62;
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </tab>
+          </tabset>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="panel with-nav-tabs panel-primary panel-square panel-no-border">
+        <div>
+          <tabset>
+            <tab>
+              <ng-template tabHeading>
+                <i class="fa fa-home">样例</i>
+              </ng-template>
+              <div class="panel-body">
+                <div class="tab-content">
+                  <fusioncharts
+                    [id]="funsionchartHistogramOption.id"
+                    [width]="funsionchartHistogramOption.width"
+                    [height]="funsionchartHistogramOption.height"
+                    [type]="funsionchartHistogramOption.type"
+                    [dataFormat]="funsionchartHistogramOption.dataFormat"
+                    [dataSource]="funsionchartHistogramOption.dataSource"
+                  ></fusioncharts>
+                </div>
+              </div>
+            </tab>
+            <tab>
+              <ng-template tabHeading>
+                <i class="fa fa-bars">使用</i>
+              </ng-template>
+              <div class="tab-content">
+                <div class="panel">
+                  <div class="panel-body">
+                    <ul>Prominent features of this component include:
+
+                      <li>1. Adding a chart using only a single Angular component</li>
+                      <li>2. Auto-updating the chart object when component properties are modified</li>
+                      <li>3. Adding a chart by fetching data from a JSON or XML URL or by using the component props
+                        binding
+                      </li>
+                      <li>4. Enabling interactivity between JavaScript charts</li>
+                      <li>5. Offering advanced control by giving access to the complete FusionCharts object that
+                        contains the chart configuration
+                      </li>
+                    </ul>
+
+                    <ul style="list-style-type: disc">
+                      <p>使用</p>
+                      <li>1. 安装<code>FunsionChart</code></li>
+                      <li>
+                        <div class="well">sudo cnpm install fusioncharts --save</div>
+                      </li>
+                      <li>2. 安装<code>angular4-fusioncharts</code></li>
+                      <li>
+                        <div class="well">sudo cnpm install fusioncharts --save</div>
+                      </li>
+                      <li>## 或者使用下面的命令执行上面两条</li>
+                      <li>
+                        <div class="well">npm install fusioncharts angular4-fusioncharts --save</div>
+                      </li>
+                      <li>3. 在需要加载funsioncharts的模块import <code>angular4-funsioncharts</code></li>
+                      <li>
+                        <div class="well">
+                          // Module<br/>
+                          import * as FusionCharts from 'fusioncharts';<br/>
+                          import * as Charts from 'fusioncharts/fusioncharts.charts';<br/>
+                          import * as FintTheme from 'fusioncharts/themes/fusioncharts.theme.fint';<br/>
+                          <br/>
+                          mport &#123; FusionChartsModule &#125; from 'angular4-fusioncharts';<br/>
+                          <br/>
+                          @NgModule(&#123;<br/>
+                          ...<br/>
+                          imports: [<br/>
+                          ...<br/>
+                          FusionChartsModule.forRoot(FusionCharts, Charts, FintTheme)<br/>
+                          ],<br/>
+                          ...<br/>
+                          &#125;)
+                        </div>
+                      </li>
+                      <li>4. 在<code>Component中添加图表的属性配置</code></li>
+                      <li>
+                        <div class="well">
+                          export class AppComponent &#123;<br/>
+                          width = 600;<br/>
+                          height = 400;<br/>
+                          type = 'column2d';<br/>
+                          dataFormat = 'json';<br/>
+                          dataSource;<br/>
+                          constructor() &#123;<br/>
+                          &nbsp;&nbsp;this.dataSource = &#123;<br/>
+                          &nbsp;&nbsp;&nbsp;&nbsp;... // 数据源的配置可以在Api中查询<br/>
+                          &#125;<br/>
+                          &#125;<br/>
+                        </div>
+                      </li>
+                      <li>5. 在html中使用标签<code>&#60;fusioncharts&#62;</code>渲染图表</li>
+                      <li>
+                        <div class="well">
+                          &#60;fusioncharts<br />
+                          [width]="width"<br />
+                          [height]="height"<br />
+                          [type]="type"<br />
+                          [dataFormat]="dataFormat"<br />
+                          [dataSource]="dataSource"<br />
+                          &#62;&#60;/fusioncharts&#62;
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </tab>
+          </tabset>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
